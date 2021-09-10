@@ -1,5 +1,5 @@
-import 'package:flutter_test_app/models/art_object/art_object.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rijks_api/models/art_object/art_object.dart';
 part 'art_object_pack.g.dart';
 
 @JsonSerializable()
