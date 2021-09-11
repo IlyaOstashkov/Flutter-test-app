@@ -11,18 +11,27 @@ class ArtObjectDetailRequestException implements Exception {}
 
 class ArtObjectDetailMappingException implements Exception {}
 
-class RijksApiClient {
+abstract class IRijksApiClient {
+  Future<List<ArtObject>> getArtObjectList({
+    required int offset,
+    required int limit,
+  });
+
+  Future<ArtObject> getArtObject({required String objectNumber});
+}
+
+class RijksApiClient implements IRijksApiClient {
   RijksApiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = 'www.rijksmuseum.nl/api/en';
+  static const _baseUrl = 'www.rijksmuseum.nl';
   static const _apiKey = '0fiuZFh4';
   final http.Client _httpClient;
 
-  Future<List<ArtObject>> getArtObjectList(
-    int offset,
-    int limit,
-  ) async {
+  Future<List<ArtObject>> getArtObjectList({
+    required int offset,
+    required int limit,
+  }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'key': _apiKey,
       'p': offset,
@@ -30,7 +39,7 @@ class RijksApiClient {
     };
     final Uri request = Uri.https(
       _baseUrl,
-      '/collection',
+      '/api/en/collection',
       params,
     );
     final Map<String, dynamic> json = await _getJson(
@@ -42,12 +51,12 @@ class RijksApiClient {
     return pack.artObjects;
   }
 
-  Future<ArtObject> getArtObject(String objectNumber) async {
+  Future<ArtObject> getArtObject({required String objectNumber}) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'key': _apiKey,
       'objectNumber': objectNumber,
     };
-    final path = '/collection/$objectNumber';
+    final path = '/api/en/collection/$objectNumber';
     final Uri request = Uri.https(
       _baseUrl,
       path,
