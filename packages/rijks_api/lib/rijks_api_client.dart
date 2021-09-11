@@ -34,8 +34,8 @@ class RijksApiClient implements IRijksApiClient {
   }) async {
     final Map<String, dynamic> params = <String, dynamic>{
       'key': _apiKey,
-      'p': offset,
-      'ps': limit,
+      'p': offset.toString(),
+      'ps': limit.toString(),
     };
     final Uri request = Uri.https(
       _baseUrl,

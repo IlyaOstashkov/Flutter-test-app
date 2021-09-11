@@ -1,5 +1,3 @@
-# The purpose of this file is to handle discrepancies between naming 
-# conventions in the json_serializable field names.
 
 targets:
   $default:
@@ -8,8 +6,3 @@ targets:
         options:
           ignore_for_file:
             - implicit_dynamic_parameter
-      json_serializable:
-        options:
-          field_rename: snake
-          create_to_json: false
-          checked: true

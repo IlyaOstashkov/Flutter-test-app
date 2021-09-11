@@ -8,14 +8,12 @@ part of 'web_image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WebImage _$WebImageFromJson(Map<String, dynamic> json) => $checkedCreate(
-      'WebImage',
-      json,
-      ($checkedConvert) {
-        final val = WebImage(
-          guid: $checkedConvert('guid', (v) => v as String),
-          url: $checkedConvert('url', (v) => v as String),
-        );
-        return val;
-      },
+WebImage _$WebImageFromJson(Map<String, dynamic> json) => WebImage(
+      guid: json['guid'] as String,
+      url: json['url'] as String,
     );
+
+Map<String, dynamic> _$WebImageToJson(WebImage instance) => <String, dynamic>{
+      'guid': instance.guid,
+      'url': instance.url,
+    };

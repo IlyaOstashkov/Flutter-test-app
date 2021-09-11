@@ -9,18 +9,13 @@ part of 'art_object_detail.dart';
 // **************************************************************************
 
 ArtObjectDetail _$ArtObjectDetailFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'ArtObjectDetail',
-      json,
-      ($checkedConvert) {
-        final val = ArtObjectDetail(
-          artObject: $checkedConvert(
-              'art_object',
-              (v) => v == null
-                  ? null
-                  : ArtObject.fromJson(v as Map<String, dynamic>)),
-        );
-        return val;
-      },
-      fieldKeyMap: const {'artObject': 'art_object'},
+    ArtObjectDetail(
+      artObject: json['artObject'] == null
+          ? null
+          : ArtObject.fromJson(json['artObject'] as Map<String, dynamic>),
     );
+
+Map<String, dynamic> _$ArtObjectDetailToJson(ArtObjectDetail instance) =>
+    <String, dynamic>{
+      'artObject': instance.artObject,
+    };

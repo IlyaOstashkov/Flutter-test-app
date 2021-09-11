@@ -9,15 +9,11 @@ part of 'art_object_dating.dart';
 // **************************************************************************
 
 ArtObjectDating _$ArtObjectDatingFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'ArtObjectDating',
-      json,
-      ($checkedConvert) {
-        final val = ArtObjectDating(
-          presentingDate:
-              $checkedConvert('presenting_date', (v) => v as String?),
-        );
-        return val;
-      },
-      fieldKeyMap: const {'presentingDate': 'presenting_date'},
+    ArtObjectDating(
+      presentingDate: json['presentingDate'] as String?,
     );
+
+Map<String, dynamic> _$ArtObjectDatingToJson(ArtObjectDating instance) =>
+    <String, dynamic>{
+      'presentingDate': instance.presentingDate,
+    };
