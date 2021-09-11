@@ -33,13 +33,12 @@ class RijksApiClient {
       '/collection',
       params,
     );
-    final json = await _getJson(
+    final Map<String, dynamic> json = await _getJson(
       request,
       ArtObjectListRequestException(),
       ArtObjectListMappingException(),
     );
-    final ArtObjectPack pack =
-        ArtObjectPack.fromJson(json.first as Map<String, dynamic>);
+    final ArtObjectPack pack = ArtObjectPack.fromJson(json);
     return pack.artObjects;
   }
 
@@ -54,17 +53,19 @@ class RijksApiClient {
       path,
       params,
     );
-    final json = await _getJson(
+    final Map<String, dynamic> json = await _getJson(
       request,
       ArtObjectDetailRequestException(),
       ArtObjectDetailMappingException(),
     );
-    final ArtObjectDetail detail =
-        ArtObjectDetail.fromJson(json.first as Map<String, dynamic>);
-    return detail.artObject;
+    final ArtObjectDetail detail = ArtObjectDetail.fromJson(json);
+    if (detail.artObject == null) {
+      throw ArtObjectDetailMappingException();
+    }
+    return detail.artObject!;
   }
 
-  Future<List<dynamic>> _getJson(
+  Future<Map<String, dynamic>> _getJson(
     Uri request,
     Exception statusException,
     Exception emptyJsonException,
@@ -75,7 +76,7 @@ class RijksApiClient {
     }
     final json = jsonDecode(
       response.body,
-    ) as List;
+    ) as Map<String, dynamic>;
     if (json.isEmpty) {
       throw emptyJsonException;
     }

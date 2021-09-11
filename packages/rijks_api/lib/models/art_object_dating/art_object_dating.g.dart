@@ -15,7 +15,7 @@ ArtObjectDating _$ArtObjectDatingFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = ArtObjectDating(
           presentingDate:
-              $checkedConvert('presenting_date', (v) => v as String),
+              $checkedConvert('presenting_date', (v) => v as String?),
         );
         return val;
       },

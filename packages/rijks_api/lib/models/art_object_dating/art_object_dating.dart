@@ -7,7 +7,7 @@ class ArtObjectDating {
     required this.presentingDate,
   });
 
-  final String presentingDate;
+  final String? presentingDate;
 
   factory ArtObjectDating.fromJson(Map<String, dynamic> json) =>
       _$ArtObjectDatingFromJson(json);

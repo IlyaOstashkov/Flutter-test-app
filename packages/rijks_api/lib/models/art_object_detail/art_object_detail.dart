@@ -5,12 +5,10 @@ part 'art_object_detail.g.dart';
 @JsonSerializable()
 class ArtObjectDetail {
   const ArtObjectDetail({
-    required this.elapsedMilliseconds,
     required this.artObject,
   });
 
-  final int elapsedMilliseconds;
-  final ArtObject artObject;
+  final ArtObject? artObject;
 
   factory ArtObjectDetail.fromJson(Map<String, dynamic> json) =>
       _$ArtObjectDetailFromJson(json);

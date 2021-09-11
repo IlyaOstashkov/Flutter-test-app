@@ -13,16 +13,21 @@ ArtObject _$ArtObjectFromJson(Map<String, dynamic> json) => $checkedCreate(
       json,
       ($checkedConvert) {
         final val = ArtObject(
-          id: $checkedConvert('id', (v) => v as String),
           objectNumber: $checkedConvert('object_number', (v) => v as String),
-          title: $checkedConvert('title', (v) => v as String),
+          title: $checkedConvert('title', (v) => v as String?),
           webImage: $checkedConvert(
-              'web_image', (v) => WebImage.fromJson(v as Map<String, dynamic>)),
-          description: $checkedConvert('description', (v) => v as String),
+              'web_image',
+              (v) => v == null
+                  ? null
+                  : WebImage.fromJson(v as Map<String, dynamic>)),
+          description: $checkedConvert('description', (v) => v as String?),
           principalOrFirstMaker:
-              $checkedConvert('principal_or_first_maker', (v) => v as String),
-          dating: $checkedConvert('dating',
-              (v) => ArtObjectDating.fromJson(v as Map<String, dynamic>)),
+              $checkedConvert('principal_or_first_maker', (v) => v as String?),
+          dating: $checkedConvert(
+              'dating',
+              (v) => v == null
+                  ? null
+                  : ArtObjectDating.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },

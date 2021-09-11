@@ -5,12 +5,10 @@ part 'art_object_pack.g.dart';
 @JsonSerializable()
 class ArtObjectPack {
   const ArtObjectPack({
-    required this.elapsedMilliseconds,
     required this.count,
     required this.artObjects,
   });
 
-  final int elapsedMilliseconds;
   final int count;
   final List<ArtObject> artObjects;
 

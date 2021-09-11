@@ -14,8 +14,6 @@ ArtObjectPack _$ArtObjectPackFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = ArtObjectPack(
-          elapsedMilliseconds:
-              $checkedConvert('elapsed_milliseconds', (v) => v as int),
           count: $checkedConvert('count', (v) => v as int),
           artObjects: $checkedConvert(
               'art_objects',
@@ -25,8 +23,5 @@ ArtObjectPack _$ArtObjectPackFromJson(Map<String, dynamic> json) =>
         );
         return val;
       },
-      fieldKeyMap: const {
-        'elapsedMilliseconds': 'elapsed_milliseconds',
-        'artObjects': 'art_objects'
-      },
+      fieldKeyMap: const {'artObjects': 'art_objects'},
     );

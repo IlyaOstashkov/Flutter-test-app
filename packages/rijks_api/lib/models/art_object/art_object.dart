@@ -6,7 +6,6 @@ part 'art_object.g.dart';
 @JsonSerializable()
 class ArtObject {
   const ArtObject({
-    required this.id,
     required this.objectNumber,
     required this.title,
     required this.webImage,
@@ -15,13 +14,12 @@ class ArtObject {
     required this.dating,
   });
 
-  final String id;
   final String objectNumber;
-  final String title;
-  final WebImage webImage;
-  final String description;
-  final String principalOrFirstMaker;
-  final ArtObjectDating dating;
+  final String? title;
+  final WebImage? webImage;
+  final String? description;
+  final String? principalOrFirstMaker;
+  final ArtObjectDating? dating;
 
   factory ArtObject.fromJson(Map<String, dynamic> json) =>
       _$ArtObjectFromJson(json);
