@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:rijks_api/rijks_api.dart';
 
-class ArtObjectListRequestException implements Exception {}
+class ArtObjectRequestException implements Exception {}
 
-class ArtObjectListMappingException implements Exception {}
-
-class ArtObjectDetailRequestException implements Exception {}
-
-class ArtObjectDetailMappingException implements Exception {}
+class ArtObjectEmptyResponseException implements Exception {}
 
 abstract class IRijksApiClient {
   Future<List<ArtObject>> getArtObjectList({
@@ -42,11 +38,7 @@ class RijksApiClient implements IRijksApiClient {
       '/api/en/collection',
       params,
     );
-    final Map<String, dynamic> json = await _getJson(
-      request,
-      ArtObjectListRequestException(),
-      ArtObjectListMappingException(),
-    );
+    final Map<String, dynamic> json = await _getJson(request);
     final ArtObjectPack pack = ArtObjectPack.fromJson(json);
     return pack.artObjects;
   }
@@ -62,32 +54,24 @@ class RijksApiClient implements IRijksApiClient {
       path,
       params,
     );
-    final Map<String, dynamic> json = await _getJson(
-      request,
-      ArtObjectDetailRequestException(),
-      ArtObjectDetailMappingException(),
-    );
+    final Map<String, dynamic> json = await _getJson(request);
     final ArtObjectDetail detail = ArtObjectDetail.fromJson(json);
     if (detail.artObject == null) {
-      throw ArtObjectDetailMappingException();
+      throw ArtObjectEmptyResponseException();
     }
     return detail.artObject!;
   }
 
-  Future<Map<String, dynamic>> _getJson(
-    Uri request,
-    Exception statusException,
-    Exception emptyJsonException,
-  ) async {
+  Future<Map<String, dynamic>> _getJson(Uri request) async {
     final http.Response response = await _httpClient.get(request);
     if (response.statusCode != 200) {
-      throw statusException;
+      throw ArtObjectRequestException();
     }
     final json = jsonDecode(
       response.body,
     ) as Map<String, dynamic>;
     if (json.isEmpty) {
-      throw emptyJsonException;
+      throw ArtObjectEmptyResponseException();
     }
     return json;
   }

@@ -6,3 +6,4 @@ targets:
         options:
           ignore_for_file:
             - implicit_dynamic_parameter
+            - unused_element
