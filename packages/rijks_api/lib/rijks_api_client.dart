@@ -28,7 +28,7 @@ class RijksApiClient implements IRijksApiClient {
     required int offset,
     required int limit,
   }) async {
-    final Map<String, dynamic> params = <String, dynamic>{
+    final params = <String, String>{
       'key': _apiKey,
       'p': offset.toString(),
       'ps': limit.toString(),
@@ -44,9 +44,8 @@ class RijksApiClient implements IRijksApiClient {
   }
 
   Future<ArtObject> getArtObject({required String objectNumber}) async {
-    final Map<String, dynamic> params = <String, dynamic>{
+    final params = <String, String>{
       'key': _apiKey,
-      'objectNumber': objectNumber,
     };
     final path = '/api/en/collection/$objectNumber';
     final Uri request = Uri.https(
@@ -56,10 +55,7 @@ class RijksApiClient implements IRijksApiClient {
     );
     final Map<String, dynamic> json = await _getJson(request);
     final ArtObjectDetail detail = ArtObjectDetail.fromJson(json);
-    if (detail.artObject == null) {
-      throw ArtObjectEmptyResponseException();
-    }
-    return detail.artObject!;
+    return detail.artObject;
   }
 
   Future<Map<String, dynamic>> _getJson(Uri request) async {

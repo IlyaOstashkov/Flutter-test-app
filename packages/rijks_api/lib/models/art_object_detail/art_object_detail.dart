@@ -8,7 +8,7 @@ class ArtObjectDetail {
     required this.artObject,
   });
 
-  final ArtObject? artObject;
+  final ArtObject artObject;
 
   factory ArtObjectDetail.fromJson(Map<String, dynamic> json) =>
       _$ArtObjectDetailFromJson(json);

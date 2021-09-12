@@ -10,9 +10,7 @@ part of 'art_object_detail.dart';
 
 ArtObjectDetail _$ArtObjectDetailFromJson(Map<String, dynamic> json) =>
     ArtObjectDetail(
-      artObject: json['artObject'] == null
-          ? null
-          : ArtObject.fromJson(json['artObject'] as Map<String, dynamic>),
+      artObject: ArtObject.fromJson(json['artObject'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ArtObjectDetailToJson(ArtObjectDetail instance) =>
