@@ -43,7 +43,7 @@ class RijksApiClient implements IRijksApiClient {
       '/api/en/collection',
       params,
     );
-    final Map<String, dynamic> json = await _getJson(request);
+    final Map<String, dynamic> json = await _getRequest(request);
     final ArtObjectPack pack = ArtObjectPack.fromJson(json);
     return pack.artObjects;
   }
@@ -58,12 +58,12 @@ class RijksApiClient implements IRijksApiClient {
       path,
       params,
     );
-    final Map<String, dynamic> json = await _getJson(request);
+    final Map<String, dynamic> json = await _getRequest(request);
     final ArtObjectDetail detail = ArtObjectDetail.fromJson(json);
     return detail.artObject;
   }
 
-  Future<Map<String, dynamic>> _getJson(Uri request) async {
+  Future<Map<String, dynamic>> _getRequest(Uri request) async {
     final http.Response response = await _httpClient.get(request);
     if (response.statusCode != 200) {
       throw ArtObjectRequestException();

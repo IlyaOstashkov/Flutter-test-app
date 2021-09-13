@@ -15,6 +15,7 @@ class ArtObjectListItem extends StatelessWidget {
     return Material(
       child: ListTile(
         title: Text(title),
+        subtitle: Text(title),
         isThreeLine: true,
         dense: true,
       ),

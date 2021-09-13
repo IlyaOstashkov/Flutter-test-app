@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/pages/pages_fabric.dart';
+import 'pages/art_object_list/view/art_object_list_page.dart';
 
 class App extends MaterialApp {
-  App({Key? key})
+  const App({Key? key})
       : super(
           key: key,
-          home: PagesFabric.artObjectListPage(),
+          home: const ArtObjectListPage(),
         );
 }
