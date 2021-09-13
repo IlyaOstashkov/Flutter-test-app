@@ -26,28 +26,31 @@ class _ArtObjectListView extends State<ArtObjectListView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case ArtObjectListStatus.failure:
-            return _ErrorPlaceholderWidget(errorMessage: state.errorMessage);
-          case ArtObjectListStatus.success:
-            if (state.artObjects.isEmpty) {
-              return const _NoArtObjectsPlaceholderWidget();
-            }
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return index >= state.artObjects.length
-                    ? const _CenterLoader()
-                    : _buildListItem(state.artObjects[index]);
-              },
-              itemCount: _itemCount(state),
-              controller: _scrollController,
-            );
-          default:
-            return const _CenterLoader();
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(title: const Text('Art objects')),
+      body: BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
+        builder: (context, state) {
+          switch (state.status) {
+            case ArtObjectListStatus.failure:
+              return _ErrorPlaceholderWidget(errorMessage: state.errorMessage);
+            case ArtObjectListStatus.success:
+              if (state.artObjects.isEmpty) {
+                return const _NoArtObjectsPlaceholderWidget();
+              }
+              return ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  return index >= state.artObjects.length
+                      ? const _CenterLoader()
+                      : _buildListItem(state.artObjects[index]);
+                },
+                itemCount: _itemCount(state),
+                controller: _scrollController,
+              );
+            default:
+              return const _CenterLoader();
+          }
+        },
+      ),
     );
   }
 
