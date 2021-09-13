@@ -31,8 +31,9 @@ void main() {
     });
 
     group('getArtObjectList', () {
-      const int offset = 0;
+      const int page = 1;
       const int limit = 10;
+      const int century = 21;
       test('makes correct https request', () async {
         final MockResponse response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
@@ -40,8 +41,9 @@ void main() {
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         try {
           await rijksApiClient.getArtObjectList(
-            offset: offset,
+            page: page,
             limit: limit,
+            century: century,
           );
         } catch (_) {}
         verify(
@@ -51,8 +53,10 @@ void main() {
               '/api/en/collection',
               <String, String>{
                 'key': apiKey,
-                'p': '0',
+                'p': '1',
                 'ps': '10',
+                'technique': 'painting',
+                'f.dating.period': '21',
               },
             ),
           ),
@@ -65,8 +69,9 @@ void main() {
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
           () async => await rijksApiClient.getArtObjectList(
-            offset: offset,
+            page: page,
             limit: limit,
+            century: century,
           ),
           throwsA(isA<ArtObjectRequestException>()),
         );
@@ -80,8 +85,9 @@ void main() {
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
           () async => await rijksApiClient.getArtObjectList(
-            offset: offset,
+            page: page,
             limit: limit,
+            century: century,
           ),
           throwsA(isA<ArtObjectEmptyResponseException>()),
         );
@@ -135,8 +141,9 @@ void main() {
         ''');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         final List<ArtObject> list = await rijksApiClient.getArtObjectList(
-          offset: offset,
+          page: page,
           limit: limit,
+          century: century,
         );
         expect(
           list,

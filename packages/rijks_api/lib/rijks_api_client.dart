@@ -9,8 +9,9 @@ class ArtObjectEmptyResponseException implements Exception {}
 
 abstract class IRijksApiClient {
   Future<List<ArtObject>> getArtObjectList({
-    required int offset,
+    required int page,
     required int limit,
+    required int century,
   });
 
   Future<ArtObject> getArtObject({required String objectNumber});
@@ -22,16 +23,20 @@ class RijksApiClient implements IRijksApiClient {
 
   static const _baseUrl = 'www.rijksmuseum.nl';
   static const _apiKey = '0fiuZFh4';
+  static const _technique = 'painting';
   final http.Client _httpClient;
 
   Future<List<ArtObject>> getArtObjectList({
-    required int offset,
+    required int page,
     required int limit,
+    required int century,
   }) async {
     final params = <String, String>{
       'key': _apiKey,
-      'p': offset.toString(),
+      'p': page.toString(),
       'ps': limit.toString(),
+      'technique': _technique,
+      'f.dating.period': century.toString(),
     };
     final Uri request = Uri.https(
       _baseUrl,

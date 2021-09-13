@@ -6,8 +6,9 @@ class ArtObjectException implements Exception {}
 
 abstract class IArtObjectRepository {
   Future<List<ArtObject>> getArtObjectList({
-    required int offset,
+    required int page,
     required int limit,
+    required int century,
   });
 
   Future<ArtObject> getArtObject({required String objectNumber});
@@ -20,13 +21,15 @@ class ArtObjectRepository implements IArtObjectRepository {
   final api.IRijksApiClient _apiClient;
 
   Future<List<ArtObject>> getArtObjectList({
-    required int offset,
+    required int page,
     required int limit,
+    required int century,
   }) async {
     try {
       final List<api.ArtObject> response = await _apiClient.getArtObjectList(
-        offset: offset,
+        page: page,
         limit: limit,
+        century: century,
       );
       final List<ArtObject> artObjectList =
           response.map((e) => _mapArtObject(response: e)).toList();
