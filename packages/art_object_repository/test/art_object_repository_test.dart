@@ -1,4 +1,4 @@
-import 'package:art_object_repository/art_object_repository.dart';
+import 'package:art_object_repository/repository/art_object_repository.dart';
 import 'package:art_object_repository/models/art_object.dart';
 import 'package:rijks_api/rijks_api.dart' as api;
 import 'package:mocktail/mocktail.dart';
