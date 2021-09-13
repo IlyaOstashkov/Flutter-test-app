@@ -41,7 +41,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     if (state.hasReachedMax) return state;
     final int nextPage = _nextPage(state);
     try {
-      final nextPageList = await repository.getArtObjectList(
+      final List<ArtObject> nextPageList = await repository.getArtObjectList(
         page: nextPage,
         limit: _limit,
         century: 21,
