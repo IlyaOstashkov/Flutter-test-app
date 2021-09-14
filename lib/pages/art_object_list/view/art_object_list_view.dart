@@ -8,6 +8,7 @@ import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_it
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
 import 'package:flutter_test_app/widgets/app_bar_factory.dart';
+import 'package:flutter_test_app/widgets/simple_loader.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({Key? key}) : super(key: key);
@@ -46,14 +47,14 @@ class _ArtObjectListView extends State<ArtObjectListView> {
               return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return index >= state.listItems.length
-                      ? const _CenterLoader()
+                      ? _Loader()
                       : _buildListItem(state.listItems[index], index);
                 },
                 itemCount: _itemCount(state),
                 controller: _scrollController,
               );
             default:
-              return const _CenterLoader();
+              return _Loader();
           }
         },
       ),
@@ -101,14 +102,22 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   }
 }
 
-class _CenterLoader extends StatelessWidget {
-  const _CenterLoader({
+class _Loader extends StatelessWidget {
+  const _Loader({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator());
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SimpleLoader(),
+        ],
+      ),
+    );
   }
 }
 
