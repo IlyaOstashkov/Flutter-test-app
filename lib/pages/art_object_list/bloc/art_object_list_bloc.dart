@@ -133,7 +133,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   ArtObjectListItem _headerItem(int century) {
     return ArtObjectListItem(
       isHeader: true,
-      headerTitle: century.toString(),
+      headerTitle: century.toString() + ' century',
     );
   }
 }

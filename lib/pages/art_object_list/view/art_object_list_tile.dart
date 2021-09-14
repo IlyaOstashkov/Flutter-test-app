@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ArtObjectListWidget extends StatelessWidget {
-  const ArtObjectListWidget({
+class ArtObjectListTile extends StatelessWidget {
+  const ArtObjectListTile({
     Key? key,
     required this.title,
     required this.imageUrl,
@@ -12,13 +12,11 @@ class ArtObjectListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: ListTile(
-        title: Text(title),
-        subtitle: Text(title),
-        isThreeLine: true,
-        dense: true,
-      ),
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(title),
+      isThreeLine: true,
+      dense: true,
     );
   }
 }

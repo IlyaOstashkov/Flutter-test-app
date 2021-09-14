@@ -5,7 +5,9 @@ import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_stat
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
-import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_widget.dart';
+import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
+import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
+import 'package:flutter_test_app/widgets/app_bar_factory.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({Key? key}) : super(key: key);
@@ -28,7 +30,10 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Art objects')),
+      appBar: AppBarFabric.simpleAppBar(
+        context: context,
+        title: 'Art objects',
+      ),
       body: BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
         builder: (context, state) {
           switch (state.status) {
@@ -66,20 +71,20 @@ class _ArtObjectListView extends State<ArtObjectListView> {
     return state.hasReachedMax ? length : length + 1;
   }
 
-  String _titleForListItem(ArtObjectListItem listItem, int index) {
+  Widget _buildListItem(
+    ArtObjectListItem listItem,
+    int index,
+  ) {
     if (listItem.isHeader) {
-      return listItem.headerTitle;
+      return ArtObjectListHeader(title: listItem.headerTitle);
     }
     final ArtObject? artObject = listItem.artObject;
+    String title = '';
     if (artObject != null) {
-      return index.toString() + ' - ' + artObject.title;
+      title = index.toString() + ' - ' + artObject.title;
     }
-    return '';
-  }
-
-  Widget _buildListItem(ArtObjectListItem listItem, int index) {
-    return ArtObjectListWidget(
-      title: _titleForListItem(listItem, index),
+    return ArtObjectListTile(
+      title: title,
       imageUrl: listItem.artObject?.imageUrl,
     );
   }
