@@ -164,11 +164,8 @@ void main() {
         );
         expect(
           firstElement.webImage,
-          isA<WebImage>()
-              .having((p0) => p0.guid, 'guid',
-                  'fb490c6f-638a-44a8-81d3-ea27a04eae46')
-              .having((p0) => p0.url, 'url',
-                  'https://lh3.ggpht.com/5sc-SGzzgobkHnmnykUi4B1PqMtadoFqXOhYLQmsAI0Mcs_FeCoXT6loaiAUhr_zKvp2iyXntDxVhCzeVwjFulsjzRE=s0'),
+          isA<WebImage>().having((p0) => p0.url, 'url',
+              'https://lh3.ggpht.com/5sc-SGzzgobkHnmnykUi4B1PqMtadoFqXOhYLQmsAI0Mcs_FeCoXT6loaiAUhr_zKvp2iyXntDxVhCzeVwjFulsjzRE=s0'),
         );
       });
     });
@@ -411,11 +408,8 @@ void main() {
         );
         expect(
           artObject.webImage,
-          isA<WebImage>()
-              .having((p0) => p0.guid, 'guid',
-                  '3134064e-2449-4b00-97a3-3bb7471e8b69')
-              .having((p0) => p0.url, 'url',
-                  'https://lh3.googleusercontent.com/tGI4dOAfJLBbewwspzXpUnSZxEKFACv9Y3FHqAxQUtN2p4AXt2MS9oFv6eJyIBtr7gvzmv58vSitMFVeHY0TGsfOfDN2=s0'),
+          isA<WebImage>().having((p0) => p0.url, 'url',
+              'https://lh3.googleusercontent.com/tGI4dOAfJLBbewwspzXpUnSZxEKFACv9Y3FHqAxQUtN2p4AXt2MS9oFv6eJyIBtr7gvzmv58vSitMFVeHY0TGsfOfDN2=s0'),
         );
         expect(
           artObject.dating,

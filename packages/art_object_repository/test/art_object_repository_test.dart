@@ -17,7 +17,6 @@ void main() {
     const someDescription = 'some-description';
     const someObjectNumber = 'RP-L-489';
     const someMaker = 'Framing Sisters';
-    const someGuid = '1d321143-e5e8-4452-a0e9-fc13f6a4ae32';
     const someUrl =
         'https://lh3.googleusercontent.com/8Zuq2V0qH_gxlcJ9BDu6HOcRGqWn7kxZyfYbFVWU4mlEXYM8mnWD_rbBTi7la88ZPgJl4m74kWHIWgSFoLytlqbikmk=s0';
 
@@ -30,7 +29,6 @@ void main() {
       when(() => mockArtObject.principalOrFirstMaker).thenReturn(someMaker);
       when(() => mockArtObject.title).thenReturn(someTitle);
       when(() => mockArtObject.webImage).thenReturn(api.WebImage(
-        guid: someGuid,
         url: someUrl,
       ));
       return mockArtObject;
