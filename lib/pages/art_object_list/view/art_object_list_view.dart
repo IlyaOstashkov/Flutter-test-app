@@ -31,6 +31,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBarFabric.simpleAppBar(
         context: context,
         title: 'Art objects',
@@ -87,6 +88,9 @@ class _ArtObjectListView extends State<ArtObjectListView> {
     return ArtObjectListTile(
       title: title,
       imageUrl: listItem.artObject?.imageUrl,
+      onTap: () {
+        // TODO: navigation
+      },
     );
   }
 
