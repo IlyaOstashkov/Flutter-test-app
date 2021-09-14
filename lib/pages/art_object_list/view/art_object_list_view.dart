@@ -4,7 +4,8 @@ import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_item.dart';
+import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
+import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_widget.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({Key? key}) : super(key: key);
@@ -34,14 +35,14 @@ class _ArtObjectListView extends State<ArtObjectListView> {
             case ArtObjectListStatus.failure:
               return _ErrorPlaceholderWidget(errorMessage: state.errorMessage);
             case ArtObjectListStatus.success:
-              if (state.artObjects.isEmpty) {
+              if (state.listItems.isEmpty) {
                 return const _NoArtObjectsPlaceholderWidget();
               }
               return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  return index >= state.artObjects.length
+                  return index >= state.listItems.length
                       ? const _CenterLoader()
-                      : _buildListItem(state.artObjects[index]);
+                      : _buildListItem(state.listItems[index], index);
                 },
                 itemCount: _itemCount(state),
                 controller: _scrollController,
@@ -61,15 +62,25 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   }
 
   int _itemCount(ArtObjectListState state) {
-    return state.hasReachedMax
-        ? state.artObjects.length
-        : state.artObjects.length + 1;
+    final int length = state.listItems.length;
+    return state.hasReachedMax ? length : length + 1;
   }
 
-  Widget _buildListItem(ArtObject artObject) {
-    return ArtObjectListItem(
-      title: artObject.title,
-      imageUrl: artObject.imageUrl,
+  String _titleForListItem(ArtObjectListItem listItem, int index) {
+    if (listItem.isHeader) {
+      return listItem.headerTitle;
+    }
+    final ArtObject? artObject = listItem.artObject;
+    if (artObject != null) {
+      return index.toString() + ' - ' + artObject.title;
+    }
+    return '';
+  }
+
+  Widget _buildListItem(ArtObjectListItem listItem, int index) {
+    return ArtObjectListWidget(
+      title: _titleForListItem(listItem, index),
+      imageUrl: listItem.artObject?.imageUrl,
     );
   }
 

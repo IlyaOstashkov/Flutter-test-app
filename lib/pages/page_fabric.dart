@@ -7,15 +7,13 @@ import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_view
 
 class PageFabric {
   static Widget artObjectListPage() {
-    return Builder(builder: (BuildContext context) {
-      return BlocProvider(
-        create: (context) {
-          final IArtObjectRepository repository = ArtObjectRepository();
-          return ArtObjectListBloc(repository: repository)
-            ..add(ArtObjectListFetchedEvent());
-        },
-        child: const ArtObjectListView(),
-      );
-    });
+    return BlocProvider(
+      create: (context) {
+        final IArtObjectRepository repository = ArtObjectRepository();
+        return ArtObjectListBloc(repository: repository)
+          ..add(ArtObjectListFetchedEvent());
+      },
+      child: const ArtObjectListView(),
+    );
   }
 }

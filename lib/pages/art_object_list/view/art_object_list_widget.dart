@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ArtObjectListItem extends StatelessWidget {
-  const ArtObjectListItem({
+class ArtObjectListWidget extends StatelessWidget {
+  const ArtObjectListWidget({
     Key? key,
     required this.title,
     required this.imageUrl,

@@ -4,6 +4,7 @@ import 'package:art_object_repository/art_object_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test_app/constants/fetch_constants.dart';
+import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'art_object_list_event.dart';
@@ -17,6 +18,9 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
 
   static const _limit = 10;
   static const _throttleMilliseconds = 500;
+  static const _startCentury = 21;
+  static const _endCentury = 19;
+  static const _startFetchPage = 1;
 
   @override
   Stream<Transition<ArtObjectListEvent, ArtObjectListState>> transformEvents(
@@ -39,27 +43,70 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   Future<ArtObjectListState> _mapArtObjectListFetchedEventToState(
       ArtObjectListState state) async {
     if (state.hasReachedMax) return state;
-    final int nextPage = _nextPage(state);
     try {
-      final List<ArtObject> nextPageList = await repository.getArtObjectList(
-        page: nextPage,
-        limit: _limit,
-        century: 21,
-      );
+      // initial loading
       if (state.status == ArtObjectListStatus.initialLoading) {
+        final List<ArtObject> nextPageArtObjects =
+            await repository.getArtObjectList(
+          page: _startFetchPage,
+          limit: _limit,
+          century: _startCentury,
+        );
+        final List<ArtObjectListItem> nextPageListItems = nextPageArtObjects
+            .map((e) => ArtObjectListItem(artObject: e))
+            .toList();
+        final List<ArtObjectListItem> listItems = [
+          _headerItem(_startCentury),
+        ]..addAll(nextPageListItems);
         return state.copyWith(
           status: ArtObjectListStatus.success,
-          artObjects: nextPageList,
+          listItems: listItems,
           hasReachedMax: false,
+          century: _startCentury,
+          fetchPage: _startFetchPage,
         );
       }
-      return nextPageList.isEmpty
-          ? state.copyWith(hasReachedMax: true)
-          : state.copyWith(
-              status: ArtObjectListStatus.success,
-              artObjects: List.of(state.artObjects)..addAll(nextPageList),
-              hasReachedMax: false,
-            );
+      final int nextFetchPage = state.fetchPage + 1;
+      // fetch art objects for current century
+      final List<ArtObject> nextPageArtObjects =
+          await repository.getArtObjectList(
+        page: nextFetchPage,
+        limit: _limit,
+        century: state.century,
+      );
+      // all items loaded
+      if (nextPageArtObjects.isEmpty) {
+        // all items loaded for all centuries
+        if (state.century == _endCentury) {
+          return state.copyWith(
+            hasReachedMax: true,
+            fetchPage: nextFetchPage,
+          );
+        }
+        // all items loaded for current century
+        final int nextCentury = state.century - 1;
+        final ArtObjectListItem nextCenturyHeaderItem =
+            _headerItem(nextCentury);
+        // plan to fetch art objects for next century
+        Future.delayed(Duration(milliseconds: 500), () {
+          add(ArtObjectListFetchedEvent());
+        });
+        return state.copyWith(
+          century: nextCentury,
+          listItems: List.of(state.listItems)..add(nextCenturyHeaderItem),
+          fetchPage: 0,
+        );
+      }
+      // not all items in century loaded
+      final List<ArtObjectListItem> nextPageListItems = nextPageArtObjects
+          .map((e) => ArtObjectListItem(artObject: e))
+          .toList();
+      return state.copyWith(
+        status: ArtObjectListStatus.success,
+        listItems: List.of(state.listItems)..addAll(nextPageListItems),
+        hasReachedMax: false,
+        fetchPage: nextFetchPage,
+      );
     } on ArtObjectException {
       return state.copyWith(
         status: ArtObjectListStatus.failure,
@@ -83,14 +130,10 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     }
   }
 
-  int _currentPage(ArtObjectListState state) {
-    final int count = state.artObjects.length;
-    final int page = count ~/ _limit;
-    final int remainder = count % _limit;
-    return remainder == 0 ? page : page + 1;
-  }
-
-  int _nextPage(ArtObjectListState state) {
-    return _currentPage(state) + 1;
+  ArtObjectListItem _headerItem(int century) {
+    return ArtObjectListItem(
+      isHeader: true,
+      headerTitle: century.toString(),
+    );
   }
 }
