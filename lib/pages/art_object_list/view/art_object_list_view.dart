@@ -62,22 +62,45 @@ class _ArtObjectListView extends State<ArtObjectListView> {
               case ArtObjectListStatus.failure:
               case ArtObjectListStatus.success:
                 if (state.listItems.isEmpty) {
-                  return const _NoArtObjectsPlaceholderWidget();
+                  return _buildRefreshIndicator(
+                    state: state,
+                    child: const _NoArtObjectsPlaceholderWidget(),
+                  );
                 }
-                return ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return index >= state.listItems.length
-                        ? _Loader()
-                        : _buildListItem(state.listItems[index], index);
-                  },
-                  itemCount: _itemCount(state),
-                  controller: _scrollController,
-                );
+                return _buildListView(state);
               default:
-                return _Loader();
+                return const _Loader();
             }
           },
         ),
+      ),
+    );
+  }
+
+  Widget _buildRefreshIndicator({
+    required ArtObjectListState state,
+    required Widget child,
+  }) {
+    return RefreshIndicator(
+      color: Colors.black12,
+      child: child,
+      onRefresh: () async {
+        _bloc.add(ArtObjectListFullReloadEvent());
+      },
+    );
+  }
+
+  Widget _buildListView(ArtObjectListState state) {
+    return _buildRefreshIndicator(
+      state: state,
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return index >= state.listItems.length
+              ? _Loader()
+              : _buildListItem(state.listItems[index]);
+        },
+        itemCount: _itemCount(state),
+        controller: _scrollController,
       ),
     );
   }
@@ -93,18 +116,12 @@ class _ArtObjectListView extends State<ArtObjectListView> {
     return state.hasReachedMax ? length : length + 1;
   }
 
-  Widget _buildListItem(
-    ArtObjectListItem listItem,
-    int index,
-  ) {
+  Widget _buildListItem(ArtObjectListItem listItem) {
     if (listItem.isHeader) {
       return ArtObjectListHeader(title: listItem.headerTitle);
     }
     final ArtObject? artObject = listItem.artObject;
-    String title = '';
-    if (artObject != null) {
-      title = index.toString() + ' - ' + artObject.title;
-    }
+    final String title = artObject != null ? artObject.title : '';
     return ArtObjectListTile(
       title: title,
       imageUrl: listItem.artObject?.imageUrl,
@@ -152,19 +169,23 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: [
-          const OffsetSpace.horizontal(),
-          SimpleText(
-            'Couldn\'t get any art objects. Please try again later',
-            maxLines: 3,
-            isFlexible: true,
-            textAlign: TextAlign.center,
-          ),
-          const OffsetSpace.horizontal(),
-        ],
-      ),
+    return ListView(
+      children: [
+        OffsetSpace.vertical(),
+        Row(
+          children: [
+            const OffsetSpace.horizontal(),
+            SimpleText(
+              'Couldn\'t get any art objects. Please try again later',
+              maxLines: 3,
+              isFlexible: true,
+              textAlign: TextAlign.center,
+            ),
+            const OffsetSpace.horizontal(),
+          ],
+        ),
+        OffsetSpace.vertical(),
+      ],
     );
   }
 }

@@ -6,3 +6,5 @@ abstract class ArtObjectListEvent extends Equatable {
 }
 
 class ArtObjectListFetchedEvent extends ArtObjectListEvent {}
+
+class ArtObjectListFullReloadEvent extends ArtObjectListEvent {}

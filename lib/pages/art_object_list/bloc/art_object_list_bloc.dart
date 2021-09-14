@@ -37,12 +37,21 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   @override
   Stream<ArtObjectListState> mapEventToState(ArtObjectListEvent event) async* {
     if (event is ArtObjectListFetchedEvent) {
-      yield await _mapArtObjectListFetchedEventToState(state);
+      yield await _mapArtObjectListFetchedEventToState();
+    } else if (event is ArtObjectListFullReloadEvent) {
+      yield await _mapArtObjectListReloadEventToState();
     }
   }
 
-  Future<ArtObjectListState> _mapArtObjectListFetchedEventToState(
-      ArtObjectListState state) async {
+  Future<ArtObjectListState> _mapArtObjectListReloadEventToState() async {
+    // plan to fetch art objects
+    Future.delayed(Duration(milliseconds: 500), () {
+      add(ArtObjectListFetchedEvent());
+    });
+    return const ArtObjectListState();
+  }
+
+  Future<ArtObjectListState> _mapArtObjectListFetchedEventToState() async {
     if (state.hasReachedMax) return state;
     try {
       // initial loading
