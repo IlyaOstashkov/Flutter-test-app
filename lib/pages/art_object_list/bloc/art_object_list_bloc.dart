@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:art_object_repository/art_object_repository.dart';
@@ -122,7 +123,13 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         status: ArtObjectListStatus.failure,
         errorMessage: FetchErrorConstants.noInternetConnection,
       );
-    } on Exception {
+    } on TimeoutException {
+      return state.copyWith(
+        status: ArtObjectListStatus.failure,
+        errorMessage: FetchErrorConstants.timeout,
+      );
+    } catch (e) {
+      print(e);
       return state.copyWith(
         status: ArtObjectListStatus.failure,
         errorMessage: FetchErrorConstants.undefinedError,

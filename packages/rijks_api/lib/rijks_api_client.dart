@@ -21,10 +21,12 @@ class RijksApiClient implements IRijksApiClient {
   RijksApiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
+  final http.Client _httpClient;
+
   static const _baseUrl = 'www.rijksmuseum.nl';
   static const _apiKey = '0fiuZFh4';
   static const _technique = 'painting';
-  final http.Client _httpClient;
+  static const _timeoutSeconds = 3;
 
   Future<List<ArtObject>> getArtObjectList({
     required int page,
@@ -64,7 +66,9 @@ class RijksApiClient implements IRijksApiClient {
   }
 
   Future<Map<String, dynamic>> _getRequest(Uri request) async {
-    final http.Response response = await _httpClient.get(request);
+    final http.Response response = await _httpClient.get(request).timeout(
+          const Duration(seconds: _timeoutSeconds),
+        );
     if (response.statusCode != 200) {
       throw ArtObjectRequestException();
     }

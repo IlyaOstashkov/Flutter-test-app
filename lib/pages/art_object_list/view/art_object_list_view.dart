@@ -1,5 +1,6 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
@@ -8,10 +9,17 @@ import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_it
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
 import 'package:flutter_test_app/widgets/app_bar_factory.dart';
+import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
+import 'package:flutter_test_app/widgets/simple_text.dart';
 
 class ArtObjectListView extends StatefulWidget {
-  const ArtObjectListView({Key? key}) : super(key: key);
+  const ArtObjectListView({
+    Key? key,
+    required this.notificationManager,
+  }) : super(key: key);
+
+  final INotificationManager notificationManager;
 
   @override
   _ArtObjectListView createState() => _ArtObjectListView();
@@ -36,28 +44,40 @@ class _ArtObjectListView extends State<ArtObjectListView> {
         context: context,
         title: 'Art objects',
       ),
-      body: BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
-        builder: (context, state) {
-          switch (state.status) {
-            case ArtObjectListStatus.failure:
-              return _ErrorPlaceholderWidget(errorMessage: state.errorMessage);
-            case ArtObjectListStatus.success:
-              if (state.listItems.isEmpty) {
-                return const _NoArtObjectsPlaceholderWidget();
-              }
-              return ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return index >= state.listItems.length
-                      ? _Loader()
-                      : _buildListItem(state.listItems[index], index);
-                },
-                itemCount: _itemCount(state),
-                controller: _scrollController,
-              );
-            default:
-              return _Loader();
+      body: BlocListener<ArtObjectListBloc, ArtObjectListState>(
+        listener: (context, state) {
+          if (state.status == ArtObjectListStatus.failure) {
+            final String message = state.errorMessage.isNotEmpty
+                ? state.errorMessage
+                : 'Failed to fetch art objects';
+            widget.notificationManager.show(
+              context,
+              message,
+            );
           }
         },
+        child: BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
+          builder: (context, state) {
+            switch (state.status) {
+              case ArtObjectListStatus.failure:
+              case ArtObjectListStatus.success:
+                if (state.listItems.isEmpty) {
+                  return const _NoArtObjectsPlaceholderWidget();
+                }
+                return ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    return index >= state.listItems.length
+                        ? _Loader()
+                        : _buildListItem(state.listItems[index], index);
+                  },
+                  itemCount: _itemCount(state),
+                  controller: _scrollController,
+                );
+              default:
+                return _Loader();
+            }
+          },
+        ),
       ),
     );
   }
@@ -125,24 +145,6 @@ class _Loader extends StatelessWidget {
   }
 }
 
-class _ErrorPlaceholderWidget extends StatelessWidget {
-  const _ErrorPlaceholderWidget({
-    required this.errorMessage,
-    Key? key,
-  }) : super(key: key);
-
-  final String errorMessage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        errorMessage.isNotEmpty ? errorMessage : 'Failed to fetch art objects',
-      ),
-    );
-  }
-}
-
 class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
   const _NoArtObjectsPlaceholderWidget({
     Key? key,
@@ -150,8 +152,19 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('No posts'),
+    return Center(
+      child: Row(
+        children: [
+          const OffsetSpace.horizontal(),
+          SimpleText(
+            'Couldn\'t get any art objects. Please try again later',
+            maxLines: 3,
+            isFlexible: true,
+            textAlign: TextAlign.center,
+          ),
+          const OffsetSpace.horizontal(),
+        ],
+      ),
     );
   }
 }

@@ -20,7 +20,10 @@ class LoadableImage extends StatelessWidget {
         fit: BoxFit.cover,
         imageUrl: imageUrl,
         placeholder: (context, url) => SimpleLoader(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        errorWidget: (context, url, error) => Icon(
+          Icons.error,
+          color: Colors.red,
+        ),
       ),
     );
   }
