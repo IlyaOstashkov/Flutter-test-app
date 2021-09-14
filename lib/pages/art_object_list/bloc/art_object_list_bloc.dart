@@ -44,7 +44,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   }
 
   Future<ArtObjectListState> _mapArtObjectListReloadEventToState() async {
-    // plan to fetch art objects
+    // plan to fetch art objects after state will be changed
     Future.delayed(Duration(milliseconds: 500), () {
       add(ArtObjectListFetchedEvent());
     });
@@ -97,10 +97,6 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         final int nextCentury = state.century - 1;
         final ArtObjectListItem nextCenturyHeaderItem =
             _headerItem(nextCentury);
-        // plan to fetch art objects for next century
-        Future.delayed(Duration(milliseconds: 500), () {
-          add(ArtObjectListFetchedEvent());
-        });
         return state.copyWith(
           century: nextCentury,
           listItems: List.of(state.listItems)..add(nextCenturyHeaderItem),
