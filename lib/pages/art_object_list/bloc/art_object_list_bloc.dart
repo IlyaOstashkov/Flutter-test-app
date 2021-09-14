@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_test_app/constants/fetch_constants.dart';
+import 'package:flutter_test_app/constants/fetch_error_constants.dart';
 import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
 import 'package:rxdart/rxdart.dart';
 
