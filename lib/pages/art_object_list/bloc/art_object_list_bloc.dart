@@ -18,7 +18,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   final IArtObjectRepository repository;
 
   static const _limit = 10;
-  static const _throttleMilliseconds = 500;
+  static const _throttleTimeout = 500;
   static const _startCentury = 21;
   static const _endCentury = 19;
   static const _startFetchPage = 1;
@@ -29,7 +29,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     TransitionFunction<ArtObjectListEvent, ArtObjectListState> transitionFn,
   ) {
     return super.transformEvents(
-      events.throttleTime(const Duration(milliseconds: _throttleMilliseconds)),
+      events.throttleTime(const Duration(milliseconds: _throttleTimeout)),
       transitionFn,
     );
   }
@@ -41,7 +41,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     } else if (event is ArtObjectListFullReloadEvent) {
       yield await const ArtObjectListState();
       // refetch art objects after trottling timeout
-      await Future.delayed(Duration(milliseconds: _throttleMilliseconds));
+      await Future.delayed(Duration(milliseconds: _throttleTimeout));
       add(ArtObjectListFetchedEvent());
     }
   }
