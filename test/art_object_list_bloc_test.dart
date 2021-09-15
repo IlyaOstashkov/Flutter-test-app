@@ -1,11 +1,11 @@
 import 'package:art_object_repository/art_object_repository.dart' as repository;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockArtObjectRepository extends Mock
     implements repository.ArtObjectRepository {}
@@ -96,6 +96,13 @@ void main() {
               ])),
           )
         ],
+        verify: (_) {
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 1,
+                limit: limit,
+                century: century,
+              )).called(1);
+        },
       );
 
       blocTest<ArtObjectListBloc, ArtObjectListState>(
@@ -107,6 +114,13 @@ void main() {
         },
         skip: 1,
         expect: () => [],
+        verify: (_) {
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 1,
+                limit: limit,
+                century: century,
+              )).called(1);
+        },
       );
 
       blocTest<ArtObjectListBloc, ArtObjectListState>(
@@ -130,6 +144,18 @@ void main() {
               ])),
           )
         ],
+        verify: (_) {
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 1,
+                limit: limit,
+                century: century,
+              )).called(1);
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 2,
+                limit: limit,
+                century: century,
+              )).called(1);
+        },
       );
     });
 
@@ -152,6 +178,18 @@ void main() {
             listItems: [],
           )
         ],
+        verify: (_) {
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 1,
+                limit: limit,
+                century: century,
+              )).called(1);
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 2,
+                limit: limit,
+                century: century,
+              )).called(1);
+        },
       );
 
       blocTest<ArtObjectListBloc, ArtObjectListState>(
@@ -176,6 +214,18 @@ void main() {
               ])),
           )
         ],
+        verify: (_) {
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 1,
+                limit: limit,
+                century: century,
+              )).called(2);
+          verify(() => artObjectRepository.getArtObjectList(
+                page: 2,
+                limit: limit,
+                century: century,
+              )).called(1);
+        },
       );
     });
   });
