@@ -29,10 +29,8 @@ class PageFabric {
     return BlocProvider(
       create: (context) {
         final IArtObjectRepository repository = ArtObjectRepository();
-        return ArtObjectDetailBloc(
-          repository: repository,
-          initialArtObject: artObject,
-        )..add(ArtObjectDetailFetchedEvent());
+        return ArtObjectDetailBloc(repository: repository)
+          ..add(ArtObjectDetailFetchedEvent(artObject));
       },
       child: const ArtObjectDetailView(
         notificationManager: NotificationManager(),
