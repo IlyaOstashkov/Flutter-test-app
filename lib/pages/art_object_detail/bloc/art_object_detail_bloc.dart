@@ -19,12 +19,12 @@ class ArtObjectDetailBloc
   Stream<ArtObjectDetailState> mapEventToState(
       ArtObjectDetailEvent event) async* {
     if (event is ArtObjectDetailInitialEvent) {
-      yield await _mapInitialEventToState(event);
-      print('fetch');
+      yield state.copyWith(artObject: event.artObject);
+      yield await _fetchDetailInfo(event);
     }
   }
 
-  Future<ArtObjectDetailState> _mapInitialEventToState(
+  Future<ArtObjectDetailState> _fetchDetailInfo(
       ArtObjectDetailInitialEvent event) async {
     if (state.status != ArtObjectDetailStatus.initialLoading) {
       return state;
