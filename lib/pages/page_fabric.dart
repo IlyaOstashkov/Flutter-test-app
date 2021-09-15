@@ -9,6 +9,7 @@ import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_view
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
 import 'package:flutter_test_app/pages/art_object_detail/view/art_object_detail_view.dart';
+import 'package:flutter_test_app/pages/image_gallery/image_gallery_view.dart';
 
 class PageFabric {
   static Widget artObjectListPage() {
@@ -34,7 +35,15 @@ class PageFabric {
       },
       child: const ArtObjectDetailView(
         notificationManager: NotificationManager(),
+        navigationManager: NavigationManager(),
       ),
+    );
+  }
+
+  static Widget imageGalleryPage({required List<String> imageUrls}) {
+    return ImageGalleryPage(
+      imageUrls: imageUrls,
+      navigationManager: NavigationManager(),
     );
   }
 }

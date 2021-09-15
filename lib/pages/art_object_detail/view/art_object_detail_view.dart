@@ -1,23 +1,28 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test_app/pages/page_fabric.dart';
 import 'package:flutter_test_app/widgets/app_bar_factory.dart';
 import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/simple_text.dart';
+import 'package:flutter_test_app/widgets/transparent_button.dart';
 
 class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({
     Key? key,
     required this.notificationManager,
+    required this.navigationManager,
   }) : super(key: key);
 
   final INotificationManager notificationManager;
+  final INavigationManager navigationManager;
 
   @override
   _ArtObjectDetailView createState() => _ArtObjectDetailView();
@@ -50,7 +55,18 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
               children: [
                 OffsetSpace.vertical(OffsetValue.big),
                 state.artObject != null
-                    ? _TopViews(artObject: state.artObject!)
+                    ? _TopViews(
+                        artObject: state.artObject!,
+                        onImageTap: () {
+                          if ((state.artObject!.imageUrl ?? '').isEmpty) {
+                            return;
+                          }
+                          final Widget page =
+                              PageFabric.imageGalleryPage(imageUrls: [
+                            state.artObject!.imageUrl!,
+                          ]);
+                          widget.navigationManager.push(context, page);
+                        })
                     : Container(),
                 state.status == ArtObjectDetailStatus.success &&
                         state.artObject != null
@@ -150,10 +166,12 @@ class _RegularText extends StatelessWidget {
 class _TopViews extends StatelessWidget {
   const _TopViews({
     required this.artObject,
+    required this.onImageTap,
     Key? key,
   }) : super(key: key);
 
   final ArtObject artObject;
+  final VoidCallback onImageTap;
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +180,12 @@ class _TopViews extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _Image(
-              imageRadius: 100.0,
-              imageUrl: artObject.imageUrl,
+            TransparentButton(
+              onTap: onImageTap,
+              child: _Image(
+                imageRadius: 100.0,
+                imageUrl: artObject.imageUrl,
+              ),
             ),
           ],
         ),
@@ -270,12 +291,10 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SimpleLoader(),
-        ],
+        children: [SimpleLoader()],
       ),
     );
   }
