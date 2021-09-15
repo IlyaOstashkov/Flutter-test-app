@@ -16,10 +16,9 @@ import 'package:flutter_test_app/widgets/transparent_button.dart';
 
 class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({
-    Key? key,
     required this.notificationManager,
     required this.navigationManager,
-  }) : super(key: key);
+  });
 
   final INotificationManager notificationManager;
   final INavigationManager navigationManager;

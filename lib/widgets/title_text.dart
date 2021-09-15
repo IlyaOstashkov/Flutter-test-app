@@ -5,7 +5,7 @@ class TitleText extends StatelessWidget {
   const TitleText(
     this.text, {
     this.textAlign = TextAlign.left,
-    this.isFlexible = true,
+    this.isFlexible = false,
     this.maxLines,
   });
 

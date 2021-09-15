@@ -15,7 +15,6 @@ class ArtObjectListHeader extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: TitleText(
         title,
-        isFlexible: false,
         maxLines: 2,
       ),
     );
