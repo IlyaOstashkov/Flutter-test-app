@@ -3,9 +3,6 @@
 * Author: Ilia Ostashkov
 * Flutter version: 2.2.3
 
-https://user-images.githubusercontent.com/8611478/133454564-70659cae-25cc-4d51-8c41-e6feb8ff926f.MOV
-https://user-images.githubusercontent.com/8611478/133454624-71f3b088-0815-4362-b169-2720d0502214.MOV
-
 ## Main checkpoints
 
 ### ✅ API
@@ -49,7 +46,7 @@ This is a simple screen without business logic. It is only needed to display the
 
 Request failure handling is implemented. If an error occurs, a corresponding pop-up notification will be displayed.
 
-![IMG_7306](https://user-images.githubusercontent.com/8611478/133454847-f74d60a0-8390-4bf1-8265-5e50dbbb1bb1.PNG)
+<img src="https://user-images.githubusercontent.com/8611478/133454847-f74d60a0-8390-4bf1-8265-5e50dbbb1bb1.PNG" width="250">
 
 ### ✅ Unit tests
 
@@ -67,3 +64,11 @@ Widget tests are written only for simple text widgets (`/test/widgets/`). In the
 ### 📌 Integration tests
 
 Integration tests have not yet been implemented.
+
+## Video
+
+https://user-images.githubusercontent.com/8611478/133456754-e35a3aea-9f5c-46c4-be2a-74d14a16b442.MOV
+
+https://user-images.githubusercontent.com/8611478/133454564-70659cae-25cc-4d51-8c41-e6feb8ff926f.MOV
+
+https://user-images.githubusercontent.com/8611478/133458463-cdf6e1b5-0cb0-418e-b8ca-3231ac47b0e9.MOV
