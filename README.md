@@ -3,6 +3,9 @@
 * Author: Ilia Ostashkov
 * Flutter version: 2.2.3
 
+https://user-images.githubusercontent.com/8611478/133454564-70659cae-25cc-4d51-8c41-e6feb8ff926f.MOV
+https://user-images.githubusercontent.com/8611478/133454624-71f3b088-0815-4362-b169-2720d0502214.MOV
+
 ## Main checkpoints
 
 ### ✅ API
@@ -46,12 +49,16 @@ This is a simple screen without business logic. It is only needed to display the
 
 Request failure handling is implemented. If an error occurs, a corresponding pop-up notification will be displayed.
 
+![IMG_7306](https://user-images.githubusercontent.com/8611478/133454847-f74d60a0-8390-4bf1-8265-5e50dbbb1bb1.PNG)
+
 ### ✅ Unit tests
 
 Unit tests are written for:
 - data layer (html report is generated at `/packages/rijks_api/coverage/index.html`) 
 - repository layer (html report is generated at `/packages/art_object_repository/coverage/index.html`)
 - business logic layer (`/test/unit/`)
+
+<img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
 
 ### 📌 Widget tests
 
