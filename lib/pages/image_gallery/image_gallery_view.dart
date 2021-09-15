@@ -31,11 +31,7 @@ class ImageGalleryPage extends StatelessWidget {
                 );
               },
               loadingBuilder: (context, event) => Center(
-                child: Container(
-                  width: 20.0,
-                  height: 20.0,
-                  child: SimpleLoader(),
-                ),
+                child: SimpleLoader(),
               ),
             ),
           ),
