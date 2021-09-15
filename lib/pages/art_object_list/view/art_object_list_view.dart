@@ -65,36 +65,21 @@ class _ArtObjectListView extends State<ArtObjectListView> {
             case ArtObjectListStatus.failure:
             case ArtObjectListStatus.success:
               if (state.listItems.isEmpty) {
-                return _buildRefreshIndicator(
-                  state: state,
-                  child: const _NoArtObjectsPlaceholderWidget(),
-                );
+                return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
+                  _bloc.add(ArtObjectListFullReloadEvent());
+                });
               }
               return _buildListView(state);
             default:
-              return const _Loader();
+              return _Loader();
           }
         },
       ),
     );
   }
 
-  Widget _buildRefreshIndicator({
-    required ArtObjectListState state,
-    required Widget child,
-  }) {
-    return RefreshIndicator(
-      color: Colors.black12,
-      child: child,
-      onRefresh: () async {
-        _bloc.add(ArtObjectListFullReloadEvent());
-      },
-    );
-  }
-
   Widget _buildListView(ArtObjectListState state) {
-    return _buildRefreshIndicator(
-      state: state,
+    return _RefreshControl(
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return index >= state.listItems.length
@@ -104,6 +89,9 @@ class _ArtObjectListView extends State<ArtObjectListView> {
         itemCount: _itemCount(state),
         controller: _scrollController,
       ),
+      onRefresh: () async {
+        _bloc.add(ArtObjectListFullReloadEvent());
+      },
     );
   }
 
@@ -153,6 +141,26 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   }
 }
 
+class _RefreshControl extends StatelessWidget {
+  const _RefreshControl({
+    required this.child,
+    required this.onRefresh,
+    Key? key,
+  }) : super(key: key);
+
+  final Widget child;
+  final RefreshCallback onRefresh;
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      color: Colors.black12,
+      child: child,
+      onRefresh: onRefresh,
+    );
+  }
+}
+
 class _Loader extends StatelessWidget {
   const _Loader({
     Key? key,
@@ -161,11 +169,11 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SimpleLoader(),
+          SimpleLoader(),
         ],
       ),
     );
@@ -174,28 +182,34 @@ class _Loader extends StatelessWidget {
 
 class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
   const _NoArtObjectsPlaceholderWidget({
+    required this.onRefresh,
     Key? key,
   }) : super(key: key);
 
+  final RefreshCallback onRefresh;
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        OffsetSpace.vertical(),
-        Row(
-          children: [
-            const OffsetSpace.horizontal(),
-            SimpleText(
-              'Couldn\'t get any art objects. Please try again later',
-              maxLines: 3,
-              isFlexible: true,
-              textAlign: TextAlign.center,
-            ),
-            const OffsetSpace.horizontal(),
-          ],
-        ),
-        OffsetSpace.vertical(),
-      ],
+    return _RefreshControl(
+      child: ListView(
+        children: [
+          OffsetSpace.vertical(),
+          Row(
+            children: [
+              OffsetSpace.horizontal(),
+              SimpleText(
+                'Couldn\'t get any art objects. Please try again later',
+                maxLines: 3,
+                isFlexible: true,
+                textAlign: TextAlign.center,
+              ),
+              OffsetSpace.horizontal(),
+            ],
+          ),
+          OffsetSpace.vertical(),
+        ],
+      ),
+      onRefresh: onRefresh,
     );
   }
 }
