@@ -48,7 +48,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
         context: context,
         title: 'Art objects',
       ),
-      body: BlocListener<ArtObjectListBloc, ArtObjectListState>(
+      body: BlocConsumer<ArtObjectListBloc, ArtObjectListState>(
         listener: (context, state) {
           if (state.status == ArtObjectListStatus.failure) {
             final String message = state.errorMessage.isNotEmpty
@@ -60,23 +60,21 @@ class _ArtObjectListView extends State<ArtObjectListView> {
             );
           }
         },
-        child: BlocBuilder<ArtObjectListBloc, ArtObjectListState>(
-          builder: (context, state) {
-            switch (state.status) {
-              case ArtObjectListStatus.failure:
-              case ArtObjectListStatus.success:
-                if (state.listItems.isEmpty) {
-                  return _buildRefreshIndicator(
-                    state: state,
-                    child: const _NoArtObjectsPlaceholderWidget(),
-                  );
-                }
-                return _buildListView(state);
-              default:
-                return const _Loader();
-            }
-          },
-        ),
+        builder: (context, state) {
+          switch (state.status) {
+            case ArtObjectListStatus.failure:
+            case ArtObjectListStatus.success:
+              if (state.listItems.isEmpty) {
+                return _buildRefreshIndicator(
+                  state: state,
+                  child: const _NoArtObjectsPlaceholderWidget(),
+                );
+              }
+              return _buildListView(state);
+            default:
+              return const _Loader();
+          }
+        },
       ),
     );
   }

@@ -13,13 +13,14 @@ class ArtObjectDetailBloc
   @override
   Stream<ArtObjectDetailState> mapEventToState(
       ArtObjectDetailEvent event) async* {
-    if (event is ArtObjectDetailFetchedEvent) {
-      yield await _mapFetchedEventToState(event);
+    if (event is ArtObjectDetailInitialEvent) {
+      yield await _mapInitialEventToState(event);
+      print('fetch');
     }
   }
 
-  Future<ArtObjectDetailState> _mapFetchedEventToState(
-      ArtObjectDetailFetchedEvent event) async {
+  Future<ArtObjectDetailState> _mapInitialEventToState(
+      ArtObjectDetailInitialEvent event) async {
     return state.copyWith(
       status: ArtObjectDetailStatus.success,
       artObject: event.artObject,

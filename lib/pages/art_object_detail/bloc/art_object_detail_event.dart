@@ -8,8 +8,8 @@ abstract class ArtObjectDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ArtObjectDetailFetchedEvent extends ArtObjectDetailEvent {
-  const ArtObjectDetailFetchedEvent(this.artObject);
+class ArtObjectDetailInitialEvent extends ArtObjectDetailEvent {
+  const ArtObjectDetailInitialEvent(this.artObject);
 
   final ArtObject artObject;
 

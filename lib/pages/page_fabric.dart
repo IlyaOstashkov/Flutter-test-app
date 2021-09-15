@@ -30,7 +30,7 @@ class PageFabric {
       create: (context) {
         final IArtObjectRepository repository = ArtObjectRepository();
         return ArtObjectDetailBloc(repository: repository)
-          ..add(ArtObjectDetailFetchedEvent(artObject));
+          ..add(ArtObjectDetailInitialEvent(artObject));
       },
       child: const ArtObjectDetailView(
         notificationManager: NotificationManager(),
