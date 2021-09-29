@@ -2,6 +2,7 @@ import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
+import 'package:flutter_test_app/pages/art_object_detail/art_object_detail_page.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
-import 'package:flutter_test_app/pages/page_fabric.dart';
 import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
@@ -125,7 +125,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
     if (artObject == null) return;
     widget.navigationManager.push(
       context,
-      PageFabric.artObjectDetailPage(artObject: artObject),
+      ArtObjectDetailPage(artObject: artObject),
     );
   }
 

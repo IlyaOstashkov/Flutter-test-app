@@ -5,7 +5,7 @@ import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/pages/page_fabric.dart';
+import 'package:flutter_test_app/pages/image_gallery/full_screen_image_page.dart';
 import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
@@ -57,13 +57,12 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
                   _TopViews(
                       artObject: state.artObject!,
                       onImageTap: () {
-                        if ((state.artObject!.imageUrl ?? '').isEmpty) {
+                        final imageUrl = state.artObject?.imageUrl;
+                        if (imageUrl == null) {
                           return;
                         }
                         final Widget page =
-                            PageFabric.imageGalleryPage(imageUrls: [
-                          state.artObject!.imageUrl!,
-                        ]);
+                            FullScreenImagePage(imageUrls: [imageUrl]);
                         widget.navigationManager.push(context, page);
                       }),
                 if (state.status == ArtObjectDetailStatus.success &&

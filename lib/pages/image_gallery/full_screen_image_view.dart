@@ -4,8 +4,8 @@ import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class ImageGalleryPage extends StatelessWidget {
-  const ImageGalleryPage({
+class FullScreenImageView extends StatelessWidget {
+  const FullScreenImageView({
     required this.imageUrls,
     required this.navigationManager,
     Key? key,

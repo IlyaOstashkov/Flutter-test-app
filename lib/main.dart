@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/pages/page_fabric.dart';
+import 'package:flutter_test_app/pages/art_object_list/art_object_list_page.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PageFabric.artObjectListPage(),
+      home: ArtObjectListPage(),
     ),
   );
 }
