@@ -20,7 +20,7 @@ void main() {
     const someUrl =
         'https://lh3.googleusercontent.com/8Zuq2V0qH_gxlcJ9BDu6HOcRGqWn7kxZyfYbFVWU4mlEXYM8mnWD_rbBTi7la88ZPgJl4m74kWHIWgSFoLytlqbikmk=s0';
 
-    MockArtObject _getMockArtObject() {
+    MockArtObject _mockArtObject() {
       final mockArtObject = MockArtObject();
       when(() => mockArtObject.dating)
           .thenReturn(api.ArtObjectDating(presentingDate: somePresentingDate));
@@ -82,7 +82,7 @@ void main() {
       });
 
       test('returns correct ArtObject on success', () async {
-        final mockArtObject = _getMockArtObject();
+        final mockArtObject = _mockArtObject();
         when(() => rijksApiClient.getArtObjectList(
               page: page,
               limit: limit,
@@ -137,7 +137,7 @@ void main() {
       });
 
       test('returns correct ArtObject on success', () async {
-        final mockArtObject = _getMockArtObject();
+        final mockArtObject = _mockArtObject();
         when(() => rijksApiClient.getArtObject(objectNumber: someObjectNumber))
             .thenAnswer(
           (_) async => mockArtObject,

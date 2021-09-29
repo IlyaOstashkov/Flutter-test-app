@@ -6,7 +6,7 @@ import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/pages/page_fabric.dart';
-import 'package:flutter_test_app/widgets/app_bar_factory.dart';
+import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';

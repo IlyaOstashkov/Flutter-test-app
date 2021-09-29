@@ -24,12 +24,12 @@ class OffsetSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = _getSize(horizontal);
-    double height = _getSize(vertical);
+    double width = _size(horizontal);
+    double height = _size(vertical);
     return SizedBox(width: width, height: height);
   }
 
-  double _getSize(OffsetValue? size) {
+  double _size(OffsetValue? size) {
     if (size == null) {
       return 0;
     }

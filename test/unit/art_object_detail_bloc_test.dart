@@ -11,7 +11,7 @@ class MockArtObjectRepository extends Mock
 
 void main() {
   const String objectNumber = '1';
-  group('ArtObjectDetailBloc', () {
+  group('ArtObjectDetailBloc - ', () {
     late repository.IArtObjectRepository artObjectRepository;
     late ArtObjectDetailBloc artObjectDetailBloc;
 
@@ -53,30 +53,28 @@ void main() {
       expect(artObjectDetailBloc.state, const ArtObjectDetailState());
     });
 
-    group('add ArtObjectDetailInitialEvent', () {
-      blocTest<ArtObjectDetailBloc, ArtObjectDetailState>(
-        'emits correct statuses and art objects when ArtObjectDetailInitialEvent is added',
-        build: () => artObjectDetailBloc,
-        act: (bloc) =>
-            bloc.add(ArtObjectDetailInitialEvent(_artObjectFromList())),
-        expect: () => [
-          ArtObjectDetailState(
-            status: ArtObjectDetailStatus.initialLoading,
-            artObject: _artObjectFromList(),
-            errorMessage: '',
-          ),
-          ArtObjectDetailState(
-            status: ArtObjectDetailStatus.success,
-            artObject: _artObjectDetail(),
-            errorMessage: '',
-          )
-        ],
-        verify: (_) {
-          verify(() =>
-                  artObjectRepository.getArtObject(objectNumber: objectNumber))
-              .called(1);
-        },
-      );
-    });
+    blocTest<ArtObjectDetailBloc, ArtObjectDetailState>(
+      'emits correct statuses and art objects when ArtObjectDetailInitialEvent is added',
+      build: () => artObjectDetailBloc,
+      act: (bloc) =>
+          bloc.add(ArtObjectDetailInitialEvent(_artObjectFromList())),
+      expect: () => [
+        ArtObjectDetailState(
+          status: ArtObjectDetailStatus.initialLoading,
+          artObject: _artObjectFromList(),
+          errorMessage: '',
+        ),
+        ArtObjectDetailState(
+          status: ArtObjectDetailStatus.success,
+          artObject: _artObjectDetail(),
+          errorMessage: '',
+        )
+      ],
+      verify: (_) {
+        verify(() =>
+                artObjectRepository.getArtObject(objectNumber: objectNumber))
+            .called(1);
+      },
+    );
   });
 }

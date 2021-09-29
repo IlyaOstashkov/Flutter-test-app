@@ -11,7 +11,7 @@ class MockArtObjectRepository extends Mock
     implements repository.ArtObjectRepository {}
 
 void main() {
-  group('ArtObjectListBloc', () {
+  group('ArtObjectListBloc - ', () {
     late repository.IArtObjectRepository artObjectRepository;
     late ArtObjectListBloc artObjectListBloc;
 

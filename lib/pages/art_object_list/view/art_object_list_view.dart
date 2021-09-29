@@ -10,7 +10,7 @@ import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_it
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
 import 'package:flutter_test_app/pages/page_fabric.dart';
-import 'package:flutter_test_app/widgets/app_bar_factory.dart';
+import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/simple_text.dart';
