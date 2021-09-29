@@ -5,7 +5,8 @@ class TransparentButton extends StatelessWidget {
     required this.onTap,
     required this.child,
     this.radius = 0,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final VoidCallback? onTap;
   final Widget child;

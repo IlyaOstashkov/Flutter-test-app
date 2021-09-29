@@ -8,11 +8,9 @@ class AppBarFabric {
     return AppBar(
       title: Text(
         title ?? '',
-        style: TextStyle(color: Colors.black87),
+        style: const TextStyle(color: Colors.black87),
       ),
-      iconTheme: IconThemeData(
-        color: Colors.black87,
-      ),
+      iconTheme: const IconThemeData(color: Colors.black87),
       backgroundColor: Colors.white,
     );
   }

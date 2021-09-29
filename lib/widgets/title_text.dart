@@ -7,7 +7,8 @@ class TitleText extends StatelessWidget {
     this.textAlign = TextAlign.left,
     this.isFlexible = false,
     this.maxLines,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final String text;
   final TextAlign textAlign;
@@ -20,7 +21,7 @@ class TitleText extends StatelessWidget {
       text,
       isFlexible: isFlexible,
       textAlign: textAlign,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: 24.0,
         color: Colors.black87,

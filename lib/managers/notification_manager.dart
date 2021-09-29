@@ -10,6 +10,7 @@ abstract class INotificationManager {
 class NotificationManager implements INotificationManager {
   const NotificationManager();
 
+  @override
   void show(
     BuildContext context,
     String text,

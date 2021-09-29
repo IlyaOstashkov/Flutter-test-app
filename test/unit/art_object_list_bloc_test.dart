@@ -32,7 +32,7 @@ void main() {
     }
 
     ArtObjectListItem _header() {
-      return ArtObjectListItem(
+      return const ArtObjectListItem(
         isHeader: true,
         headerTitle: someHeader,
       );
@@ -49,7 +49,8 @@ void main() {
     }
 
     Future<void> _delayToWaitThrottleChecking() {
-      return Future.delayed(Duration(milliseconds: _throttleTimeout + 100));
+      return Future.delayed(
+          const Duration(milliseconds: _throttleTimeout + 100));
     }
 
     setUp(() {
@@ -78,7 +79,7 @@ void main() {
     });
 
     test('initial state is correct', () {
-      expect(artObjectListBloc.state, ArtObjectListState());
+      expect(artObjectListBloc.state, const ArtObjectListState());
     });
 
     group('add ArtObjectListFetchedEvent', () {
@@ -90,10 +91,13 @@ void main() {
           ArtObjectListState(
             century: century,
             status: ArtObjectListStatus.success,
-            listItems: [_header()]..addAll(_listItems([
+            listItems: [
+              _header(),
+              ..._listItems([
                 _artObject(1),
                 _artObject(2),
-              ])),
+              ])
+            ],
           )
         ],
         verify: (_) {
@@ -109,8 +113,9 @@ void main() {
         'check throttling when ArtObjectListFetchedEvent is added twice',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc..add(ArtObjectListFetchedEvent());
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc
+            ..add(ArtObjectListFetchedEvent())
+            ..add(ArtObjectListFetchedEvent());
         },
         skip: 1,
         expect: () => [],
@@ -127,21 +132,24 @@ void main() {
         'emits correct listItems when ArtObjectListFetchedEvent is added twice',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
           await _delayToWaitThrottleChecking();
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
         },
         skip: 1,
         expect: () => [
           ArtObjectListState(
             century: century,
             status: ArtObjectListStatus.success,
-            listItems: [_header()]..addAll(_listItems([
+            listItems: [
+              _header(),
+              ..._listItems([
                 _artObject(1),
                 _artObject(2),
                 _artObject(3),
                 _artObject(4),
-              ])),
+              ])
+            ],
           )
         ],
         verify: (_) {
@@ -164,15 +172,15 @@ void main() {
         'emits ArtObjectListStatus.initialLoading status at first when ArtObjectListFullReloadEvent is added',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
           await _delayToWaitThrottleChecking();
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
           await _delayToWaitThrottleChecking();
-          bloc..add(ArtObjectListFullReloadEvent());
+          bloc.add(ArtObjectListFullReloadEvent());
         },
         skip: 2,
         expect: () => [
-          ArtObjectListState(
+          const ArtObjectListState(
             century: century,
             status: ArtObjectListStatus.initialLoading,
             listItems: [],
@@ -196,11 +204,11 @@ void main() {
         'emits correct listItems when ArtObjectListFullReloadEvent is added',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
           await _delayToWaitThrottleChecking();
-          bloc..add(ArtObjectListFetchedEvent());
+          bloc.add(ArtObjectListFetchedEvent());
           await _delayToWaitThrottleChecking();
-          bloc..add(ArtObjectListFullReloadEvent());
+          bloc.add(ArtObjectListFullReloadEvent());
           await _delayToWaitThrottleChecking();
         },
         skip: 3,
@@ -208,10 +216,13 @@ void main() {
           ArtObjectListState(
             century: century,
             status: ArtObjectListStatus.success,
-            listItems: [_header()]..addAll(_listItems([
+            listItems: [
+              _header(),
+              ..._listItems([
                 _artObject(1),
                 _artObject(2),
-              ])),
+              ])
+            ],
           )
         ],
         verify: (_) {

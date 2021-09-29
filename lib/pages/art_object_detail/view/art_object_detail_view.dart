@@ -4,7 +4,6 @@ import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/pages/page_fabric.dart';
 import 'package:flutter_test_app/widgets/app_bar_factory.dart';
@@ -18,7 +17,8 @@ class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({
     required this.notificationManager,
     required this.navigationManager,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final INotificationManager notificationManager;
   final INavigationManager navigationManager;
@@ -38,7 +38,7 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
       ),
       body: BlocListener<ArtObjectDetailBloc, ArtObjectDetailState>(
         listener: (context, state) {
-          if (state.status == ArtObjectListStatus.failure) {
+          if (state.status == ArtObjectDetailStatus.failure) {
             final String message = state.errorMessage.isNotEmpty
                 ? state.errorMessage
                 : 'Failed to fetch additional information';
@@ -52,28 +52,25 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
           builder: (context, state) {
             return ListView(
               children: [
-                OffsetSpace.vertical(OffsetValue.big),
-                state.artObject != null
-                    ? _TopViews(
-                        artObject: state.artObject!,
-                        onImageTap: () {
-                          if ((state.artObject!.imageUrl ?? '').isEmpty) {
-                            return;
-                          }
-                          final Widget page =
-                              PageFabric.imageGalleryPage(imageUrls: [
-                            state.artObject!.imageUrl!,
-                          ]);
-                          widget.navigationManager.push(context, page);
-                        })
-                    : Container(),
-                state.status == ArtObjectDetailStatus.success &&
-                        state.artObject != null
-                    ? _AdditionalViews(artObject: state.artObject!)
-                    : Container(),
-                state.status == ArtObjectDetailStatus.initialLoading
-                    ? _Loader()
-                    : Container(),
+                const OffsetSpace.vertical(OffsetValue.big),
+                if (state.artObject != null)
+                  _TopViews(
+                      artObject: state.artObject!,
+                      onImageTap: () {
+                        if ((state.artObject!.imageUrl ?? '').isEmpty) {
+                          return;
+                        }
+                        final Widget page =
+                            PageFabric.imageGalleryPage(imageUrls: [
+                          state.artObject!.imageUrl!,
+                        ]);
+                        widget.navigationManager.push(context, page);
+                      }),
+                if (state.status == ArtObjectDetailStatus.success &&
+                    state.artObject != null)
+                  _AdditionalViews(artObject: state.artObject!),
+                if (state.status == ArtObjectDetailStatus.initialLoading)
+                  const _Loader(),
               ],
             );
           },
@@ -95,18 +92,18 @@ class _AdditionalViews extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        OffsetSpace.vertical(),
+        const OffsetSpace.vertical(),
         ...(artObject.description ?? '').isNotEmpty
             ? [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                     _RegularText(text: artObject.description!),
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                   ],
                 ),
-                OffsetSpace.vertical(),
+                const OffsetSpace.vertical(),
               ]
             : [Container()],
         ...(artObject.principalOrFirstMaker ?? '').isNotEmpty
@@ -114,12 +111,12 @@ class _AdditionalViews extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                     _GreyText(text: artObject.principalOrFirstMaker!),
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                   ],
                 ),
-                OffsetSpace.vertical(),
+                const OffsetSpace.vertical(),
               ]
             : [Container()],
         ...(artObject.presentingDate ?? '').isNotEmpty
@@ -127,12 +124,12 @@ class _AdditionalViews extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                     _RegularText(text: artObject.presentingDate!),
-                    OffsetSpace.horizontal(),
+                    const OffsetSpace.horizontal(),
                   ],
                 ),
-                OffsetSpace.vertical(),
+                const OffsetSpace.vertical(),
               ]
             : [Container()],
       ],
@@ -153,9 +150,7 @@ class _RegularText extends StatelessWidget {
     return SimpleText(
       text,
       textAlign: TextAlign.center,
-      textStyle: TextStyle(
-        fontSize: 14.0,
-      ),
+      textStyle: const TextStyle(fontSize: 14.0),
       maxLines: 50,
       isFlexible: true,
     );
@@ -188,22 +183,22 @@ class _TopViews extends StatelessWidget {
             ),
           ],
         ),
-        OffsetSpace.vertical(OffsetValue.big),
+        const OffsetSpace.vertical(OffsetValue.big),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OffsetSpace.horizontal(),
+            const OffsetSpace.horizontal(),
             _Title(title: artObject.title),
-            OffsetSpace.horizontal(),
+            const OffsetSpace.horizontal(),
           ],
         ),
-        OffsetSpace.vertical(),
+        const OffsetSpace.vertical(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OffsetSpace.horizontal(),
+            const OffsetSpace.horizontal(),
             _GreyText(text: artObject.objectNumber),
-            OffsetSpace.horizontal(),
+            const OffsetSpace.horizontal(),
           ],
         ),
       ],
@@ -224,7 +219,7 @@ class _GreyText extends StatelessWidget {
     return SimpleText(
       text,
       textAlign: TextAlign.center,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 14.0,
         color: Colors.black38,
       ),
@@ -247,7 +242,7 @@ class _Title extends StatelessWidget {
     return SimpleText(
       title,
       textAlign: TextAlign.center,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 18.0,
         fontWeight: FontWeight.bold,
       ),
@@ -273,7 +268,7 @@ class _Image extends StatelessWidget {
       borderWidth: 2.0,
       radius: imageRadius,
       imageUrl: imageUrl,
-      placeholder: Icon(
+      placeholder: const Icon(
         Icons.color_lens,
         color: Colors.black12,
         size: 100.0,
@@ -290,10 +285,10 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [SimpleLoader()],
+        children: const [SimpleLoader()],
       ),
     );
   }

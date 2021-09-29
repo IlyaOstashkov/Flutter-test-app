@@ -58,7 +58,6 @@ class ArtObjectDetailBloc
         errorMessage: FetchErrorConstants.timeout,
       );
     } catch (e) {
-      print(e);
       return state.copyWith(
         status: ArtObjectDetailStatus.failure,
         errorMessage: FetchErrorConstants.undefinedError,

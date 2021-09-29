@@ -16,7 +16,7 @@ void main() {
     late ArtObjectDetailBloc artObjectDetailBloc;
 
     repository.ArtObject _artObjectFromList() {
-      return repository.ArtObject(
+      return const repository.ArtObject(
         objectNumber: objectNumber,
         title: 'title1',
         imageUrl: 'imageUrl1',
@@ -27,7 +27,7 @@ void main() {
     }
 
     repository.ArtObject _artObjectDetail() {
-      return repository.ArtObject(
+      return const repository.ArtObject(
         objectNumber: objectNumber,
         title: 'title1',
         imageUrl: 'imageUrl1',
@@ -50,7 +50,7 @@ void main() {
     });
 
     test('initial state is correct', () {
-      expect(artObjectDetailBloc.state, ArtObjectDetailState());
+      expect(artObjectDetailBloc.state, const ArtObjectDetailState());
     });
 
     group('add ArtObjectDetailInitialEvent', () {

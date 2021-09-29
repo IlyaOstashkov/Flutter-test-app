@@ -39,9 +39,9 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     if (event is ArtObjectListFetchedEvent) {
       yield await _mapFetchedEventToState();
     } else if (event is ArtObjectListFullReloadEvent) {
-      yield await const ArtObjectListState();
+      yield const ArtObjectListState();
       // refetch art objects after trottling timeout
-      await Future.delayed(Duration(milliseconds: _throttleTimeout));
+      await Future.delayed(const Duration(milliseconds: _throttleTimeout));
       add(ArtObjectListFetchedEvent());
     }
   }
@@ -62,7 +62,8 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
             .toList();
         final List<ArtObjectListItem> listItems = [
           _headerItem(_startCentury),
-        ]..addAll(nextPageListItems);
+          ...nextPageListItems,
+        ];
         return state.copyWith(
           status: ArtObjectListStatus.success,
           listItems: listItems,
@@ -129,7 +130,6 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         errorMessage: FetchErrorConstants.timeout,
       );
     } catch (e) {
-      print(e);
       return state.copyWith(
         status: ArtObjectListStatus.failure,
         errorMessage: FetchErrorConstants.undefinedError,

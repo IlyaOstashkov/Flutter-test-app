@@ -4,17 +4,20 @@ class OffsetSpace extends StatelessWidget {
   const OffsetSpace({
     this.horizontal,
     this.vertical,
-  });
+    Key? key,
+  }) : super(key: key);
 
   const OffsetSpace.vertical([
     this.vertical = OffsetValue.medium,
     this.horizontal,
-  ]);
+    Key? key,
+  ]) : super(key: key);
 
   const OffsetSpace.horizontal([
     this.horizontal = OffsetValue.medium,
     this.vertical,
-  ]);
+    Key? key,
+  ]) : super(key: key);
 
   final OffsetValue? horizontal;
   final OffsetValue? vertical;

@@ -71,7 +71,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
               }
               return _buildListView(state);
             default:
-              return _Loader();
+              return const _Loader();
           }
         },
       ),
@@ -83,7 +83,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return index >= state.listItems.length
-              ? _Loader()
+              ? const _Loader()
               : _buildListItem(state.listItems[index]);
         },
         itemCount: _itemCount(state),
@@ -169,12 +169,10 @@ class _Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SimpleLoader(),
-        ],
+        children: const [SimpleLoader()],
       ),
     );
   }
@@ -193,9 +191,9 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
     return _RefreshControl(
       child: ListView(
         children: [
-          OffsetSpace.vertical(),
+          const OffsetSpace.vertical(),
           Row(
-            children: [
+            children: const [
               OffsetSpace.horizontal(),
               SimpleText(
                 'Couldn\'t get any art objects. Please try again later',
@@ -206,7 +204,7 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
               OffsetSpace.horizontal(),
             ],
           ),
-          OffsetSpace.vertical(),
+          const OffsetSpace.vertical(),
         ],
       ),
       onRefresh: onRefresh,

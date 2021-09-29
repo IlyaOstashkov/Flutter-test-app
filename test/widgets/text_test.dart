@@ -7,14 +7,14 @@ void main() {
   const String someText = 'some-text';
   testWidgets('SimpleText has correct text', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(home: SimpleText(someText)),
+      const MaterialApp(home: SimpleText(someText)),
     );
     expect(find.text(someText), findsOneWidget);
   });
 
   testWidgets('TitleText has correct text', (WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(home: TitleText(someText)),
+      const MaterialApp(home: TitleText(someText)),
     );
     expect(find.text(someText), findsOneWidget);
   });

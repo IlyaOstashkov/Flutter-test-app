@@ -43,7 +43,7 @@ class PageFabric {
   static Widget imageGalleryPage({required List<String> imageUrls}) {
     return ImageGalleryPage(
       imageUrls: imageUrls,
-      navigationManager: NavigationManager(),
+      navigationManager: const NavigationManager(),
     );
   }
 }

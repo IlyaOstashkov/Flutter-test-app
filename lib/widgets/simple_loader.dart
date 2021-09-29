@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 class SimpleLoader extends StatelessWidget {
-  const SimpleLoader();
+  const SimpleLoader({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoActivityIndicator();
+    return const CupertinoActivityIndicator();
   }
 }

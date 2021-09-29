@@ -39,20 +39,20 @@ class ArtObjectListTile extends StatelessWidget {
           radius: _containerRadius,
           child: Column(
             children: [
-              OffsetSpace.vertical(),
+              const OffsetSpace.vertical(),
               Row(
                 children: <Widget>[
-                  OffsetSpace.horizontal(),
+                  const OffsetSpace.horizontal(),
                   _Image(
                     imageRadius: _imageRadius,
                     imageUrl: imageUrl,
                   ),
-                  OffsetSpace.horizontal(),
+                  const OffsetSpace.horizontal(),
                   _TitleText(title: title),
-                  OffsetSpace.horizontal(),
+                  const OffsetSpace.horizontal(),
                 ],
               ),
-              OffsetSpace.vertical(),
+              const OffsetSpace.vertical(),
             ],
           ),
         ),
@@ -78,7 +78,7 @@ class _Image extends StatelessWidget {
       borderWidth: 1.0,
       radius: _imageRadius,
       imageUrl: imageUrl,
-      placeholder: Icon(
+      placeholder: const Icon(
         Icons.color_lens,
         color: Colors.black12,
         size: 50.0,
@@ -100,9 +100,7 @@ class _TitleText extends StatelessWidget {
     return SimpleText(
       title,
       textAlign: TextAlign.left,
-      textStyle: TextStyle(
-        fontSize: 16.0,
-      ),
+      textStyle: const TextStyle(fontSize: 16.0),
       maxLines: 3,
       isFlexible: true,
     );

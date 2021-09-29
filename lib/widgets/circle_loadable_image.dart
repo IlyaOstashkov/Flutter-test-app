@@ -8,7 +8,8 @@ class CircleLoadableImage extends StatelessWidget {
     required this.placeholder,
     this.borderWidth = 0,
     this.onTap,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final double radius;
   final String? imageUrl;

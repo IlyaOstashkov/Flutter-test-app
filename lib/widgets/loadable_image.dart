@@ -7,7 +7,8 @@ class LoadableImage extends StatelessWidget {
   const LoadableImage({
     required this.imageUrl,
     required this.onTap,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final String imageUrl;
   final VoidCallback? onTap;
@@ -19,8 +20,8 @@ class LoadableImage extends StatelessWidget {
       child: CachedNetworkImage(
         fit: BoxFit.cover,
         imageUrl: imageUrl,
-        placeholder: (context, url) => SimpleLoader(),
-        errorWidget: (context, url, error) => Icon(
+        placeholder: (context, url) => const SimpleLoader(),
+        errorWidget: (context, url, error) => const Icon(
           Icons.error,
           color: Colors.red,
         ),
