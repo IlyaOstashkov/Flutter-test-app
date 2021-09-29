@@ -18,62 +18,58 @@ linter:
     unnecessary_this: true
     dead_code: true
     always_declare_return_types: true
-    # - prefer_final_locals
-    # - unnecessary_lambdas
-    # - unnecessary_await_in_return
-    # - unnecessary_parenthesis
-    # - sort_child_properties_last
-    # - prefer_if_null_operators
-    # - prefer_const_declarations
-    # - prefer_const_constructors_in_immutables
-    # - prefer_const_constructors
-    # - always_put_required_named_parameters_first
-    # - always_require_non_null_named_parameters
-    # from flutter style
-    # https://github.com/flutter/flutter/blob/master/packages/flutter/lib/analysis_options_user.yaml
-    # - always_specify_types
-    # - avoid_as
-    # - avoid_empty_else
-    # - avoid_init_to_null
-    # - avoid_return_types_on_setters
-    # - await_only_futures
-    # - camel_case_types
-    # - cancel_subscriptions
-    # - close_sinks
-    # - comment_references
-    # - control_flow_in_finally
-    # - empty_constructor_bodies
-    # - empty_statements
-    # - hash_and_equals
-    # - implementation_imports
-    # - invariant_booleans
-    # - iterable_contains_unrelated_type
-    # - library_names
-    # - library_prefixes
-    # - list_remove_unrelated_type
-    # - literal_only_boolean_expressions
-    # - non_constant_identifier_names
-    # - one_member_abstracts
-    # - only_throw_errors
-    # - overridden_fields
-    # - package_api_docs
-    # - package_names
-    # - package_prefixed_library_names
-    # - prefer_is_not_empty
-    # - prefer_mixin # https://github.com/dart-lang/language/issues/32
-    # - public_member_api_docs
-    # - slash_for_doc_comments
-    # - sort_constructors_first
-    # - sort_unnamed_constructors_first
-    # - super_goes_last # no longer needed w/ Dart 2
-    # - test_types_in_equals
-    # - throw_in_finally
-    # - type_annotate_public_apis # subset of always_specify_types
-    # - type_init_formals
-    # - unawaited_futures
-    # - unnecessary_brace_in_string_interps
-    # - unnecessary_getters_setters
-    # - unnecessary_statements
-    # - unrelated_type_equality_checks
-    # - valid_regexps
+    prefer_final_locals: true
+    unnecessary_lambdas: true
+    unnecessary_await_in_return: true
+    unnecessary_parenthesis: true
+    sort_child_properties_last: true
+    prefer_if_null_operators: true
+    prefer_const_declarations: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_constructors: true
+    always_put_required_named_parameters_first: true
+    always_require_non_null_named_parameters: true
+    always_specify_types: false
+    avoid_empty_else: true
+    avoid_as: true
+    avoid_init_to_null: true
+    avoid_return_types_on_setters: true
+    await_only_futures: true
+    camel_case_types: true
+    cancel_subscriptions: true
+    close_sinks: true
+    comment_references: true
+    control_flow_in_finally: true
+    empty_constructor_bodies: true
+    empty_statements: true
+    hash_and_equals: true
+    implementation_imports: true
+    invariant_booleans: true
+    iterable_contains_unrelated_type: true
+    library_names: true
+    library_prefixes: true
+    list_remove_unrelated_type: true
+    literal_only_boolean_expressions: true
+    non_constant_identifier_names: true
+    one_member_abstracts: false
+    only_throw_errors: true
+    overridden_fields: true
+    package_api_docs: true
+    package_names: true
+    package_prefixed_library_names: true
+    prefer_is_not_empty: true
+    prefer_mixin: true
+    public_member_api_docs: false
+    slash_for_doc_comments: true
+    sort_constructors_first: true
+    sort_unnamed_constructors_first: true
+    test_types_in_equals: true
+    throw_in_finally: true
+    type_init_formals: true
+    unawaited_futures: true
+    unnecessary_brace_in_string_interps: true
+    unnecessary_getters_setters: true
+    unnecessary_statements: true
+    unrelated_type_equality_checks: true
+    valid_regexps: true
 

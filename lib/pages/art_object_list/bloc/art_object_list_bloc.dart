@@ -138,7 +138,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   }
 
   ArtObjectListItem _headerItem(int century) {
-    var centuryString = century.toString();
+    final centuryString = century.toString();
     return ArtObjectListItem(
       isHeader: true,
       headerTitle: '$centuryString century',

@@ -6,10 +6,10 @@ import 'package:flutter_test_app/widgets/transparent_button.dart';
 
 class ArtObjectListTile extends StatelessWidget {
   const ArtObjectListTile({
-    Key? key,
     required this.title,
     required this.imageUrl,
     required this.onTap,
+    Key? key,
   }) : super(key: key);
 
   final String title;
@@ -63,20 +63,19 @@ class ArtObjectListTile extends StatelessWidget {
 
 class _Image extends StatelessWidget {
   const _Image({
-    Key? key,
-    required double imageRadius,
+    required this.imageRadius,
     required this.imageUrl,
-  })  : _imageRadius = imageRadius,
-        super(key: key);
+    Key? key,
+  }) : super(key: key);
 
-  final double _imageRadius;
+  final double imageRadius;
   final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return CircleLoadableImage(
       borderWidth: 1.0,
-      radius: _imageRadius,
+      radius: imageRadius,
       imageUrl: imageUrl,
       placeholder: const Icon(
         Icons.color_lens,
@@ -89,8 +88,8 @@ class _Image extends StatelessWidget {
 
 class _TitleText extends StatelessWidget {
   const _TitleText({
-    Key? key,
     required this.title,
+    Key? key,
   }) : super(key: key);
 
   final String title;

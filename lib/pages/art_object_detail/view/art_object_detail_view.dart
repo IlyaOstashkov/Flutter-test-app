@@ -139,8 +139,8 @@ class _AdditionalViews extends StatelessWidget {
 
 class _RegularText extends StatelessWidget {
   const _RegularText({
-    Key? key,
     required this.text,
+    Key? key,
   }) : super(key: key);
 
   final String text;
@@ -254,9 +254,9 @@ class _Title extends StatelessWidget {
 
 class _Image extends StatelessWidget {
   const _Image({
-    Key? key,
     required this.imageRadius,
     required this.imageUrl,
+    Key? key,
   }) : super(key: key);
 
   final double imageRadius;

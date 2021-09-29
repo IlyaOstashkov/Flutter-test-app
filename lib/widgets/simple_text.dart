@@ -42,11 +42,11 @@ class SimpleText extends StatelessWidget {
 
 class _Text extends StatelessWidget {
   const _Text({
-    Key? key,
     required this.text,
     required this.textAlign,
     required this.textStyle,
     required this.maxLines,
+    Key? key,
   }) : super(key: key);
 
   final String? text;

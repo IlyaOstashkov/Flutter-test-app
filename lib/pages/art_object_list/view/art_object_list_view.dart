@@ -17,9 +17,9 @@ import 'package:flutter_test_app/widgets/simple_text.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({
-    Key? key,
     required this.notificationManager,
     required this.navigationManager,
+    Key? key,
   }) : super(key: key);
 
   final INotificationManager notificationManager;
@@ -80,6 +80,9 @@ class _ArtObjectListView extends State<ArtObjectListView> {
 
   Widget _buildListView(ArtObjectListState state) {
     return _RefreshControl(
+      onRefresh: () async {
+        _bloc.add(ArtObjectListFullReloadEvent());
+      },
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           return index >= state.listItems.length
@@ -89,9 +92,6 @@ class _ArtObjectListView extends State<ArtObjectListView> {
         itemCount: _itemCount(state),
         controller: _scrollController,
       ),
-      onRefresh: () async {
-        _bloc.add(ArtObjectListFullReloadEvent());
-      },
     );
   }
 
@@ -155,8 +155,8 @@ class _RefreshControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       color: Colors.black12,
-      child: child,
       onRefresh: onRefresh,
+      child: child,
     );
   }
 }
@@ -189,6 +189,7 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _RefreshControl(
+      onRefresh: onRefresh,
       child: ListView(
         children: [
           const OffsetSpace.vertical(),
@@ -207,7 +208,6 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
           const OffsetSpace.vertical(),
         ],
       ),
-      onRefresh: onRefresh,
     );
   }
 }

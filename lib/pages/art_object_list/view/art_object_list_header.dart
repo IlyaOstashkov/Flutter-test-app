@@ -3,8 +3,8 @@ import 'package:flutter_test_app/widgets/title_text.dart';
 
 class ArtObjectListHeader extends StatelessWidget {
   const ArtObjectListHeader({
-    Key? key,
     required this.title,
+    Key? key,
   }) : super(key: key);
 
   final String title;
