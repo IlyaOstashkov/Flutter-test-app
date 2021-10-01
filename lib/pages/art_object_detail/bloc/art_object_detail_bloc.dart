@@ -11,17 +11,18 @@ import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_
 class ArtObjectDetailBloc
     extends Bloc<ArtObjectDetailEvent, ArtObjectDetailState> {
   ArtObjectDetailBloc({required this.repository})
-      : super(const ArtObjectDetailState());
+      : super(const ArtObjectDetailState()) {
+    on<ArtObjectDetailInitialEvent>(_onArtObjectDetailInitialEvent);
+  }
 
   final IArtObjectRepository repository;
 
-  @override
-  Stream<ArtObjectDetailState> mapEventToState(
-      ArtObjectDetailEvent event) async* {
-    if (event is ArtObjectDetailInitialEvent) {
-      yield state.copyWith(artObject: event.artObject);
-      yield await _fetchDetailInfo(event);
-    }
+  void _onArtObjectDetailInitialEvent(
+    ArtObjectDetailInitialEvent event,
+    Emitter<ArtObjectDetailState> emit,
+  ) async {
+    emit(state.copyWith(artObject: event.artObject));
+    emit(await _fetchDetailInfo(event));
   }
 
   Future<ArtObjectDetailState> _fetchDetailInfo(
