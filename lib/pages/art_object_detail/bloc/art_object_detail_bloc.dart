@@ -17,7 +17,7 @@ class ArtObjectDetailBloc
 
   final IArtObjectRepository repository;
 
-  void _onArtObjectDetailInitialEvent(
+  Future<void> _onArtObjectDetailInitialEvent(
     ArtObjectDetailInitialEvent event,
     Emitter<ArtObjectDetailState> emit,
   ) async {

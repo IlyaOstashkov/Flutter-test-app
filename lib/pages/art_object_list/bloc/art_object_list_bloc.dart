@@ -35,7 +35,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         .flatMap(mapper);
   }
 
-  void _onArtObjectListFetchedEvent(
+  Future<void> _onArtObjectListFetchedEvent(
     ArtObjectListFetchedEvent event,
     Emitter<ArtObjectListState> emit,
   ) async {
@@ -45,7 +45,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     }
     try {
       if (state.status == ArtObjectListStatus.initialLoading) {
-        _initialLoading(emit);
+        await _initialLoading(emit);
         return;
       }
       final int nextFetchPage = state.fetchPage + 1;
@@ -97,7 +97,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     }
   }
 
-  void _onArtObjectListFullReloadEvent(
+  Future<void> _onArtObjectListFullReloadEvent(
     ArtObjectListFullReloadEvent event,
     Emitter<ArtObjectListState> emit,
   ) async {
@@ -107,7 +107,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     add(ArtObjectListFetchedEvent());
   }
 
-  void _initialLoading(Emitter<ArtObjectListState> emit) async {
+  Future<void> _initialLoading(Emitter<ArtObjectListState> emit) async {
     final List<ArtObject> nextPageArtObjects =
         await repository.getArtObjectList(
       page: _startFetchPage,
