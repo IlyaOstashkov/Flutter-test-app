@@ -92,45 +92,39 @@ class _AdditionalViews extends StatelessWidget {
     return Column(
       children: [
         const OffsetSpace.vertical(),
-        ...(artObject.description ?? '').isNotEmpty
-            ? [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const OffsetSpace.horizontal(),
-                    _RegularText(text: artObject.description!),
-                    const OffsetSpace.horizontal(),
-                  ],
-                ),
-                const OffsetSpace.vertical(),
-              ]
-            : [Container()],
-        ...(artObject.principalOrFirstMaker ?? '').isNotEmpty
-            ? [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const OffsetSpace.horizontal(),
-                    _GreyText(text: artObject.principalOrFirstMaker!),
-                    const OffsetSpace.horizontal(),
-                  ],
-                ),
-                const OffsetSpace.vertical(),
-              ]
-            : [Container()],
-        ...(artObject.presentingDate ?? '').isNotEmpty
-            ? [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const OffsetSpace.horizontal(),
-                    _RegularText(text: artObject.presentingDate!),
-                    const OffsetSpace.horizontal(),
-                  ],
-                ),
-                const OffsetSpace.vertical(),
-              ]
-            : [Container()],
+        if ((artObject.description ?? '').isNotEmpty) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const OffsetSpace.horizontal(),
+              _RegularText(text: artObject.description!),
+              const OffsetSpace.horizontal(),
+            ],
+          ),
+          const OffsetSpace.vertical(),
+        ],
+        if ((artObject.principalOrFirstMaker ?? '').isNotEmpty) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const OffsetSpace.horizontal(),
+              _GreyText(text: artObject.principalOrFirstMaker!),
+              const OffsetSpace.horizontal(),
+            ],
+          ),
+          const OffsetSpace.vertical(),
+        ],
+        if ((artObject.presentingDate ?? '').isNotEmpty) ...[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const OffsetSpace.horizontal(),
+              _RegularText(text: artObject.presentingDate!),
+              const OffsetSpace.horizontal(),
+            ],
+          ),
+          const OffsetSpace.vertical(),
+        ],
       ],
     );
   }
