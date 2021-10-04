@@ -69,28 +69,33 @@ class _ArtObjectListView extends State<ArtObjectListView> {
                   _bloc.add(ArtObjectListFullReloadEvent());
                 });
               }
-              return _buildListView(state);
+              return _RefreshControl(
+                onRefresh: () async {
+                  _bloc.add(ArtObjectListFullReloadEvent());
+                },
+                child: ListView.builder(
+                  itemBuilder: (BuildContext context, int index) {
+                    if (index >= state.listItems.length) return const _Loader();
+                    final ArtObjectListItem item = state.listItems[index];
+                    return (item.isHeader)
+                        ? ArtObjectListHeader(title: item.headerTitle)
+                        : ArtObjectListTile(
+                            title: item.artObject?.title ?? '',
+                            imageUrl: item.artObject?.imageUrl,
+                            onTap: () {
+                              _navigateToARtObjectDetailPage(
+                                  artObject: item.artObject);
+                            },
+                          );
+                  },
+                  itemCount: _itemCount(state),
+                  controller: _scrollController,
+                ),
+              );
             default:
               return const _Loader();
           }
         },
-      ),
-    );
-  }
-
-  Widget _buildListView(ArtObjectListState state) {
-    return _RefreshControl(
-      onRefresh: () async {
-        _bloc.add(ArtObjectListFullReloadEvent());
-      },
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return index >= state.listItems.length
-              ? const _Loader()
-              : _buildListItem(state.listItems[index]);
-        },
-        itemCount: _itemCount(state),
-        controller: _scrollController,
       ),
     );
   }
@@ -104,21 +109,6 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   int _itemCount(ArtObjectListState state) {
     final int length = state.listItems.length;
     return state.hasReachedMax ? length : length + 1;
-  }
-
-  Widget _buildListItem(ArtObjectListItem listItem) {
-    if (listItem.isHeader) {
-      return ArtObjectListHeader(title: listItem.headerTitle);
-    }
-    final ArtObject? artObject = listItem.artObject;
-    final String title = artObject != null ? artObject.title : '';
-    return ArtObjectListTile(
-      title: title,
-      imageUrl: listItem.artObject?.imageUrl,
-      onTap: () {
-        _navigateToARtObjectDetailPage(artObject: artObject);
-      },
-    );
   }
 
   void _navigateToARtObjectDetailPage({required ArtObject? artObject}) {

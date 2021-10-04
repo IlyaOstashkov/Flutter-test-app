@@ -32,19 +32,14 @@ class CircleLoadableImage extends StatelessWidget {
       child: ClipOval(
         child: AspectRatio(
           aspectRatio: 1,
-          child: _buildImage(),
+          child: (imageUrl == null)
+              ? placeholder
+              : LoadableImage(
+                  imageUrl: imageUrl!,
+                  onTap: onTap,
+                ),
         ),
       ),
-    );
-  }
-
-  Widget _buildImage() {
-    if (imageUrl == null) {
-      return placeholder;
-    }
-    return LoadableImage(
-      imageUrl: imageUrl!,
-      onTap: onTap,
     );
   }
 }
