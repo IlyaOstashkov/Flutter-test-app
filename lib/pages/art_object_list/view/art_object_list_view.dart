@@ -44,10 +44,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBarFabric.simpleAppBar(
-        context: context,
-        title: 'Art objects',
-      ),
+      appBar: AppBarFabric.simpleAppBar(title: 'Art objects'),
       body: BlocConsumer<ArtObjectListBloc, ArtObjectListState>(
         listener: (context, state) {
           if (state.status == ArtObjectListStatus.failure) {

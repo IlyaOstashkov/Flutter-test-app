@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppBarFabric {
-  static PreferredSizeWidget simpleAppBar({
-    required BuildContext context,
-    String? title,
-  }) {
+  static PreferredSizeWidget simpleAppBar({String? title}) {
     return AppBar(
       title: Text(
         title ?? '',

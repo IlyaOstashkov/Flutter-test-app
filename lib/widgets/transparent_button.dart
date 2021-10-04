@@ -13,13 +13,15 @@ class TransparentButton extends StatelessWidget {
   final double radius;
 
   @override
-  InkWell build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.black12,
-      borderRadius: BorderRadius.circular(radius),
-      onTap: onTap,
-      child: child,
+  Widget build(BuildContext context) {
+    return Material(
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.black12,
+        borderRadius: BorderRadius.circular(radius),
+        onTap: onTap,
+        child: child,
+      ),
     );
   }
 }

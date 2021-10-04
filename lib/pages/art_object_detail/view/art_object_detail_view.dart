@@ -32,10 +32,7 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBarFabric.simpleAppBar(
-        context: context,
-        title: 'Art object',
-      ),
+      appBar: AppBarFabric.simpleAppBar(title: 'Art object'),
       body: BlocListener<ArtObjectDetailBloc, ArtObjectDetailState>(
         listener: (context, state) {
           if (state.status == ArtObjectDetailStatus.failure) {
