@@ -17,7 +17,7 @@ The Dutch Rijksmuseum API was used in the application (documentation here: https
     - Repository: abstract the data layer and expose domain models for the application to consume. ArtObjectRepository also implemented as an internal package. 
     - Business Logic: manage the state of each feature (BLoC, event, state).
     - Presentation: display art objects information.
-- Dependency injection occurs in the `PageFabric` class when creating screens. This implementation can be replaced with some DI library if needed (for example, https://pub.dev/packages/flutter_simple_dependency_injection)
+- Dependency injection occurs in page classes with BlocProvider and other. This implementation can be replaced with some DI library if needed (for example, https://pub.dev/packages/flutter_simple_dependency_injection)
 
 ### ✅ Screens
 
