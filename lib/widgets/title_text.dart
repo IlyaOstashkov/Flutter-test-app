@@ -5,21 +5,18 @@ class TitleText extends StatelessWidget {
   const TitleText(
     this.text, {
     this.textAlign = TextAlign.left,
-    this.isFlexible = false,
     this.maxLines,
     Key? key,
   }) : super(key: key);
 
   final String text;
   final TextAlign textAlign;
-  final bool isFlexible;
   final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return SimpleText(
       text,
-      isFlexible: isFlexible,
       textAlign: textAlign,
       textStyle: const TextStyle(
         fontWeight: FontWeight.w700,

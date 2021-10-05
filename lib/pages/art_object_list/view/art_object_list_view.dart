@@ -183,11 +183,12 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
           Row(
             children: const [
               OffsetSpace.horizontal(),
-              SimpleText(
-                'Couldn\'t get any art objects. Please try again later',
-                maxLines: 3,
-                isFlexible: true,
-                textAlign: TextAlign.center,
+              Flexible(
+                child: SimpleText(
+                  'Couldn\'t get any art objects. Please try again later',
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
+                ),
               ),
               OffsetSpace.horizontal(),
             ],

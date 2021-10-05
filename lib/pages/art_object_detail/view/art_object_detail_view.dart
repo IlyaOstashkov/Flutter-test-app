@@ -137,12 +137,13 @@ class _RegularText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleText(
-      text,
-      textAlign: TextAlign.center,
-      textStyle: const TextStyle(fontSize: 14.0),
-      maxLines: 50,
-      isFlexible: true,
+    return Flexible(
+      child: SimpleText(
+        text,
+        textAlign: TextAlign.center,
+        textStyle: const TextStyle(fontSize: 14.0),
+        maxLines: 50,
+      ),
     );
   }
 }
@@ -206,15 +207,16 @@ class _GreyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleText(
-      text,
-      textAlign: TextAlign.center,
-      textStyle: const TextStyle(
-        fontSize: 14.0,
-        color: Colors.black38,
+    return Flexible(
+      child: SimpleText(
+        text,
+        textAlign: TextAlign.center,
+        textStyle: const TextStyle(
+          fontSize: 14.0,
+          color: Colors.black38,
+        ),
+        maxLines: 2,
       ),
-      maxLines: 2,
-      isFlexible: true,
     );
   }
 }
@@ -229,15 +231,16 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleText(
-      title,
-      textAlign: TextAlign.center,
-      textStyle: const TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
+    return Flexible(
+      child: SimpleText(
+        title,
+        textAlign: TextAlign.center,
+        textStyle: const TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+        ),
+        maxLines: 5,
       ),
-      maxLines: 5,
-      isFlexible: true,
     );
   }
 }

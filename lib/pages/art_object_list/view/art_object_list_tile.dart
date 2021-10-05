@@ -96,12 +96,13 @@ class _TitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleText(
-      title,
-      textAlign: TextAlign.left,
-      textStyle: const TextStyle(fontSize: 16.0),
-      maxLines: 3,
-      isFlexible: true,
+    return Flexible(
+      child: SimpleText(
+        title,
+        textAlign: TextAlign.left,
+        textStyle: const TextStyle(fontSize: 16.0),
+        maxLines: 3,
+      ),
     );
   }
 }
