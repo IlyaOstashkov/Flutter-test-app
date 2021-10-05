@@ -1,7 +1,7 @@
 # Flutter test app
 
 * Author: Ilia Ostashkov
-* Flutter version: 2.2.3
+* Flutter version: 2.6.0
 
 ## Main checkpoints
 
@@ -51,15 +51,15 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 ### ✅ Unit tests
 
 Unit tests are written for:
-- data layer (html report is generated at `/packages/rijks_api/coverage/index.html`) 
-- repository layer (html report is generated at `/packages/art_object_repository/coverage/index.html`)
+- data layer (`/packages/rijks_api/test/`)
+- repository layer (`/packages/art_object_repository/test/`)
 - business logic layer (`/test/unit/`)
 
 <img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
 
 ### 📌 Widget tests
 
-Widget tests are written only for simple text widgets (`/test/widgets/`). In the future, I will add the widget tests for screens.
+Widget tests are written only for common widgets (`/test/widgets/`). In the future, I will add the widget tests for screens.
 
 ### 📌 Integration tests
 
