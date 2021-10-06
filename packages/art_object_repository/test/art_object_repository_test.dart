@@ -39,12 +39,6 @@ void main() {
       artObjectRepository = ArtObjectRepository(apiClient: rijksApiClient);
     });
 
-    group('constructor', () {
-      test('instantiates internal IRijksApiClient when not injected', () {
-        expect(ArtObjectRepository(), isNotNull);
-      });
-    });
-
     group('getArtObjectList', () {
       const int page = 1;
       const int limit = 10;

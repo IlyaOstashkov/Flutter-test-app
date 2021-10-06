@@ -15,8 +15,8 @@ abstract class IArtObjectRepository {
 }
 
 class ArtObjectRepository implements IArtObjectRepository {
-  ArtObjectRepository({api.IRijksApiClient? apiClient})
-      : _apiClient = apiClient ?? api.RijksApiClient();
+  ArtObjectRepository({required api.IRijksApiClient apiClient})
+      : _apiClient = apiClient;
 
   final api.IRijksApiClient _apiClient;
 

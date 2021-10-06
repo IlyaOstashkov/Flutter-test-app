@@ -1,6 +1,7 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
@@ -14,15 +15,16 @@ class ArtObjectListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Injector injector = Injector();
     return BlocProvider(
       create: (context) {
-        final IArtObjectRepository repository = ArtObjectRepository();
-        return ArtObjectListBloc(repository: repository)
+        return ArtObjectListBloc(
+            repository: injector.get<IArtObjectRepository>())
           ..add(ArtObjectListFetchedEvent());
       },
-      child: const ArtObjectListView(
-        notificationManager: NotificationManager(),
-        navigationManager: NavigationManager(),
+      child: ArtObjectListView(
+        notificationManager: injector.get<INotificationManager>(),
+        navigationManager: injector.get<INavigationManager>(),
       ),
     );
   }
