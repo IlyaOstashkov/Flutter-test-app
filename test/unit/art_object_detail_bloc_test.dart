@@ -4,11 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'art_object_detail_bloc_test.mocks.dart';
 
-class MockArtObjectRepository extends Mock
-    implements repository.ArtObjectRepository {}
-
+@GenerateMocks([repository.ArtObjectRepository])
 void main() {
   const String objectNumber = '1';
   group('ArtObjectDetailBloc - ', () {
@@ -39,10 +39,12 @@ void main() {
 
     setUp(() {
       artObjectRepository = MockArtObjectRepository();
-      when(() => artObjectRepository.getArtObject(objectNumber: objectNumber))
+      when(artObjectRepository.getArtObject(objectNumber: objectNumber))
           .thenAnswer((_) async => _artObjectDetail());
-      artObjectDetailBloc =
-          ArtObjectDetailBloc(repository: artObjectRepository);
+      artObjectDetailBloc = ArtObjectDetailBloc(
+        repository: artObjectRepository,
+        artObject: _artObjectFromList(),
+      );
     });
 
     tearDown(() {
@@ -50,30 +52,24 @@ void main() {
     });
 
     test('initial state is correct', () {
-      expect(artObjectDetailBloc.state, const ArtObjectDetailState());
+      expect(
+        artObjectDetailBloc.state,
+        ArtObjectDetailState.initialContent(_artObjectFromList()),
+      );
     });
 
     blocTest<ArtObjectDetailBloc, ArtObjectDetailState>(
-      'emits correct statuses and art objects when ArtObjectDetailInitialEvent is added',
+      'Bloc emits correct state and detailed art object after ArtObjectDetailEvent.fetchFullContent was called',
       build: () => artObjectDetailBloc,
-      act: (bloc) =>
-          bloc.add(ArtObjectDetailInitialEvent(_artObjectFromList())),
-      expect: () => [
-        ArtObjectDetailState(
-          status: ArtObjectDetailStatus.initialLoading,
-          artObject: _artObjectFromList(),
-          errorMessage: '',
-        ),
-        ArtObjectDetailState(
-          status: ArtObjectDetailStatus.success,
-          artObject: _artObjectDetail(),
-          errorMessage: '',
-        )
-      ],
+      act: (bloc) => bloc.add(
+        ArtObjectDetailEvent.fetchFullContent(
+            _artObjectFromList().objectNumber),
+      ),
+      expect: () => [ArtObjectDetailState.fullContent(_artObjectDetail())],
       verify: (_) {
-        verify(() =>
-                artObjectRepository.getArtObject(objectNumber: objectNumber))
+        verify(artObjectRepository.getArtObject(objectNumber: objectNumber))
             .called(1);
+        verifyNoMoreInteractions(artObjectRepository);
       },
     );
   });
