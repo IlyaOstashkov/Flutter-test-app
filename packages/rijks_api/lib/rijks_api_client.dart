@@ -18,8 +18,7 @@ abstract class IRijksApiClient {
 }
 
 class RijksApiClient implements IRijksApiClient {
-  RijksApiClient({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+  RijksApiClient({required http.Client httpClient}) : _httpClient = httpClient;
 
   final http.Client _httpClient;
 

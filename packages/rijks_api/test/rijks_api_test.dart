@@ -24,12 +24,6 @@ void main() {
       rijksApiClient = RijksApiClient(httpClient: httpClient);
     });
 
-    group('constructor', () {
-      test('does not require httpClient', () {
-        expect(RijksApiClient(), isNotNull);
-      });
-    });
-
     group('getArtObjectList', () {
       const int page = 1;
       const int limit = 10;

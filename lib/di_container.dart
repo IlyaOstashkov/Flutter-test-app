@@ -3,6 +3,7 @@ import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:rijks_api/rijks_api.dart' as api;
+import 'package:http/http.dart' as http;
 
 class DIContainer {
   static void initialise() {
@@ -15,7 +16,10 @@ class DIContainer {
       (i) => const NotificationManager(),
       isSingleton: true,
     );
-    injector.map<api.IRijksApiClient>((i) => api.RijksApiClient());
+    injector.map<http.Client>((i) => http.Client());
+    injector.map<api.IRijksApiClient>(
+      (i) => api.RijksApiClient(httpClient: i.get<http.Client>()),
+    );
     injector.map<IArtObjectRepository>(
       (i) => ArtObjectRepository(apiClient: i.get<api.IRijksApiClient>()),
     );
