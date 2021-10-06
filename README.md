@@ -13,34 +13,33 @@ The Dutch Rijksmuseum API was used in the application (documentation here: https
 
 - The application uses the popular Bloc state management library (https://pub.dev/packages/flutter_bloc).
 - The test project demonstrate separating the application into layers.
-    - Data: retrieve data from the API. The RijksApiClient is independent of our application. As a result, I created it as an internal package (and could even publish it on pub.dev).
-    - Repository: abstract the data layer and expose domain models for the application to consume. ArtObjectRepository also implemented as an internal package. 
-    - Business Logic: manage the state of each feature (BLoC, event, state).
-    - Presentation: display art objects information.
+    - Data layer: retrieve data from the API. The RijksApiClient is independent of the application. As a result, I created it as an internal package (and could even publish it on pub.dev).
+    - Domain layer: abstract the data layer and expose domain models for the application to consume. ArtObjectRepository also implemented as an internal package. 
+    - Presentation layer: display art objects information and manage the state of each page (BLoC)
 - Dependency injection is implemented with a simple dependency injection plugin for Flutter and Dart.(https://pub.dev/packages/flutter_simple_dependency_injection)
 
-### ✅ Screens
+### ✅ Pages
 
-The application has 3 screens: 
-* list of art objects screen
-* art object details screen
-* picture viewing screen.
+The application has 3 pages: 
+* list of art objects page
+* art object details page
+* picture viewing page.
 
-### ✅ List of art objects screen
+### ✅ List of art objects page
 
-- The screen has sections with headers. Each header of the section displays the century to which the art objects belong. When scrolling down the list, we gradually load all the new art objects (pagination). When the elements in the current section run out, we request objects from the next section (century). Order of centuries: 21st, 20th, 19th century. Loading and converting JSON to objects is asynchronous.
+- The page has sections with headers. Each header of the section displays the century to which the art objects belong. When scrolling down the list, we gradually load all the new art objects (pagination). When the elements in the current section run out, we request objects from the next section (century). Order of centuries: 21st, 20th, 19th century. Loading and converting JSON to objects is asynchronous.
 
 - All images from the list items are loaded asynchronously. Also, images are cached and have an animation of loading and displaying. If the image loading is interrupted with an error, the corresponding icon is displayed.
 
 - The 'pull to refresh' ability is also implemented for a complete reload of the list. This is useful when we have received any error.
 
-### ✅ Art object details screen
+### ✅ Art object details page
 
-When you open the details screen, the data of the art object from the list is immediately displayed. Detailed information about the art object is also requested from the API. As soon as this information is received, additional information fields are displayed on the screen. If any of the additional fields is empty, it is not displayed.
+When you open the details page, the data of the art object from the list is immediately displayed. Detailed information about the art object is also requested from the API. As soon as this information is received, additional information fields are displayed on the page. If any of the additional fields is empty, it is not displayed.
 
-### ✅ Picture viewing screen
+### ✅ Picture viewing page
 
-This is a simple screen without business logic. It is only needed to display the image on the full screen.
+This is a simple page without business logic. It is only needed to display the image on the full screen.
 
 ### ✅ Handling of failures
 
@@ -52,14 +51,14 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 
 Unit tests are written for:
 - data layer (`/packages/rijks_api/test/`)
-- repository layer (`/packages/art_object_repository/test/`)
-- business logic layer (`/test/unit/`)
+- domain layer (`/packages/art_object_repository/test/`)
+- presentation BLoC (`/test/unit/`)
 
 <img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
 
 ### 📌 Widget tests
 
-Widget tests are written only for common widgets (`/test/widgets/`). In the future, I will add the widget tests for screens.
+Widget tests are written only for common widgets (`/test/widgets/`). In the future, I will add the widget tests for pages.
 
 ### 📌 Integration tests
 
