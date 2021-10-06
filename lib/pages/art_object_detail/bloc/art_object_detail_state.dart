@@ -1,35 +1,14 @@
 import 'package:art_object_repository/art_object_repository.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum ArtObjectDetailStatus { initialLoading, success, failure }
+part 'art_object_detail_state.freezed.dart';
 
-class ArtObjectDetailState extends Equatable {
-  const ArtObjectDetailState({
-    this.status = ArtObjectDetailStatus.initialLoading,
-    this.artObject,
-    this.errorMessage = '',
-  });
-
-  final ArtObjectDetailStatus status;
-  final ArtObject? artObject;
-  final String errorMessage;
-
-  ArtObjectDetailState copyWith({
-    ArtObjectDetailStatus? status,
-    ArtObject? artObject,
-    String? errorMessage,
-  }) {
-    return ArtObjectDetailState(
-      status: status ?? this.status,
-      artObject: artObject ?? this.artObject,
-      errorMessage: errorMessage ?? '',
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        status,
-        artObject,
-        errorMessage,
-      ];
+@freezed
+abstract class ArtObjectDetailState with _$ArtObjectDetailState {
+  const factory ArtObjectDetailState.initialContent(ArtObject artObject) =
+      _ArtObjectDetailStateInitialContent;
+  const factory ArtObjectDetailState.fullContent(ArtObject artObject) =
+      _ArtObjectDetailStateFullContent;
+  const factory ArtObjectDetailState.error(String errorMessage) =
+      _ArtObjectDetailStateError;
 }

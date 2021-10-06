@@ -28,6 +28,13 @@ class ArtObjectDetailView extends StatefulWidget {
 }
 
 class _ArtObjectDetailView extends State<ArtObjectDetailView> {
+  void _onImageTap(ArtObject artObject) {
+    final String? imageUrl = artObject.imageUrl;
+    if (imageUrl == null) return;
+    final Widget page = FullScreenImagePage(imageUrls: [imageUrl]);
+    widget.navigationManager.push(context, page);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,38 +42,43 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
       appBar: AppBarFabric.simpleAppBar(title: 'Art object'),
       body: BlocListener<ArtObjectDetailBloc, ArtObjectDetailState>(
         listener: (context, state) {
-          if (state.status == ArtObjectDetailStatus.failure) {
-            final String message = state.errorMessage.isNotEmpty
-                ? state.errorMessage
-                : 'Failed to fetch additional information';
-            widget.notificationManager.show(
-              context,
-              message,
-            );
-          }
+          state.maybeWhen(
+            error: (errorMessage) {
+              final String message = errorMessage.isNotEmpty
+                  ? errorMessage
+                  : 'Failed to fetch additional information';
+              widget.notificationManager.show(
+                context,
+                message,
+              );
+            },
+            orElse: () {},
+          );
         },
         child: BlocBuilder<ArtObjectDetailBloc, ArtObjectDetailState>(
           builder: (context, state) {
             return ListView(
               children: [
                 const OffsetSpace.vertical(OffsetValue.big),
-                if (state.artObject != null)
-                  _TopViews(
-                      artObject: state.artObject!,
-                      onImageTap: () {
-                        final imageUrl = state.artObject?.imageUrl;
-                        if (imageUrl == null) {
-                          return;
-                        }
-                        final Widget page =
-                            FullScreenImagePage(imageUrls: [imageUrl]);
-                        widget.navigationManager.push(context, page);
-                      }),
-                if (state.status == ArtObjectDetailStatus.success &&
-                    state.artObject != null)
-                  _AdditionalViews(artObject: state.artObject!),
-                if (state.status == ArtObjectDetailStatus.initialLoading)
-                  const _Loader(),
+                ...state.when(initialContent: (artObject) {
+                  return [
+                    _TopViews(
+                      artObject: artObject,
+                      onImageTap: () => _onImageTap(artObject),
+                    ),
+                    const _Loader(),
+                  ];
+                }, fullContent: (artObject) {
+                  return [
+                    _TopViews(
+                      artObject: artObject,
+                      onImageTap: () => _onImageTap(artObject),
+                    ),
+                    _AdditionalViews(artObject: artObject),
+                  ];
+                }, error: (errorMessage) {
+                  return [Container()];
+                }),
               ],
             );
           },

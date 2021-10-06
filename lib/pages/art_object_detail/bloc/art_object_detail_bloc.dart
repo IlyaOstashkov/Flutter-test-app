@@ -10,59 +10,42 @@ import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_
 
 class ArtObjectDetailBloc
     extends Bloc<ArtObjectDetailEvent, ArtObjectDetailState> {
-  ArtObjectDetailBloc({required this.repository})
-      : super(const ArtObjectDetailState()) {
-    on<ArtObjectDetailInitialEvent>(_onArtObjectDetailInitialEvent);
+  ArtObjectDetailBloc({
+    required this.repository,
+    required ArtObject artObject,
+  }) : super(ArtObjectDetailState.initialContent(artObject)) {
+    on<ArtObjectDetailEventFetchFullContent>(_onArtObjectDetailInitialEvent);
   }
 
   final IArtObjectRepository repository;
 
   Future<void> _onArtObjectDetailInitialEvent(
-    ArtObjectDetailInitialEvent event,
+    ArtObjectDetailEventFetchFullContent event,
     Emitter<ArtObjectDetailState> emit,
   ) async {
-    emit(state.copyWith(artObject: event.artObject));
     emit(await _fetchDetailInfo(event));
   }
 
   Future<ArtObjectDetailState> _fetchDetailInfo(
-      ArtObjectDetailInitialEvent event) async {
-    if (state.status != ArtObjectDetailStatus.initialLoading) {
-      return state;
-    }
+      ArtObjectDetailEventFetchFullContent event) async {
     try {
       final ArtObject artObjectDetail = await repository.getArtObject(
-        objectNumber: event.artObject.objectNumber,
+        objectNumber: event.objectNumber,
       );
-      return state.copyWith(
-        status: ArtObjectDetailStatus.success,
-        artObject: artObjectDetail,
-      );
+      return ArtObjectDetailState.fullContent(artObjectDetail);
     } on ArtObjectException {
-      return state.copyWith(
-        status: ArtObjectDetailStatus.failure,
-        errorMessage: FetchErrorConstants.serverError,
-      );
+      return const ArtObjectDetailState.error(FetchErrorConstants.serverError);
     } on PlatformException catch (e) {
-      return state.copyWith(
-        status: ArtObjectDetailStatus.failure,
-        errorMessage: e.message,
-      );
+      return ArtObjectDetailState.error(
+          e.message ?? FetchErrorConstants.serverError);
     } on SocketException catch (_) {
-      return state.copyWith(
-        status: ArtObjectDetailStatus.failure,
-        errorMessage: FetchErrorConstants.noInternetConnection,
-      );
+      return const ArtObjectDetailState.error(
+          FetchErrorConstants.noInternetConnection);
     } on TimeoutException {
-      return state.copyWith(
-        status: ArtObjectDetailStatus.failure,
-        errorMessage: FetchErrorConstants.timeout,
-      );
+      return const ArtObjectDetailState.error(FetchErrorConstants.timeout);
     } catch (e) {
-      return state.copyWith(
-        status: ArtObjectDetailStatus.failure,
-        errorMessage: FetchErrorConstants.undefinedError,
-      );
+      return const ArtObjectDetailState.error(
+          FetchErrorConstants.undefinedError);
     }
   }
 }

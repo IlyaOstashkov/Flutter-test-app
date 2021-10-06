@@ -22,8 +22,9 @@ class ArtObjectDetailPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         return ArtObjectDetailBloc(
-            repository: injector.get<IArtObjectRepository>())
-          ..add(ArtObjectDetailInitialEvent(artObject));
+          repository: injector.get<IArtObjectRepository>(),
+          artObject: artObject,
+        )..add(ArtObjectDetailEvent.fetchFullContent(artObject.objectNumber));
       },
       child: ArtObjectDetailView(
         notificationManager: injector.get<INotificationManager>(),
