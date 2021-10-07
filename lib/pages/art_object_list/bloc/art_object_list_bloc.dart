@@ -13,12 +13,12 @@ import 'art_object_list_state.dart';
 
 class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   ArtObjectListBloc({required this.repository})
-      : super(const ArtObjectListState()) {
+      : super(const ArtObjectListState.initialLoading()) {
     on<ArtObjectListFetchedEvent>(
-      _onArtObjectListFetchedEvent,
+      _onFetchedEvent,
       transformer: _throttleTimeTransformer(),
     );
-    on<ArtObjectListFullReloadEvent>(_onArtObjectListFullReloadEvent);
+    on<ArtObjectListFullReloadEvent>(_onFullReloadEvent);
   }
 
   final IArtObjectRepository repository;
@@ -35,73 +35,83 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         .flatMap(mapper);
   }
 
-  Future<void> _onArtObjectListFetchedEvent(
+  Future<void> _onFetchedEvent(
     ArtObjectListFetchedEvent event,
     Emitter<ArtObjectListState> emit,
   ) async {
-    if (state.hasReachedMax) {
-      emit(state);
-      return;
-    }
     try {
-      if (state.status == ArtObjectListStatus.initialLoading) {
-        await _initialLoading(emit);
-        return;
-      }
-      final int nextFetchPage = state.fetchPage + 1;
-      // fetch art objects for current century
-      final List<ArtObject> nextPageArtObjects =
-          await repository.getArtObjectList(
-        page: nextFetchPage,
-        limit: _limit,
-        century: state.century,
-      );
-      // all items loaded
-      if (nextPageArtObjects.isEmpty) {
-        _allCenturyItemsLoaded(
-          nextFetchPage: nextFetchPage,
-          emit: emit,
-        );
-        return;
-      }
-      _notAllCenturyItemsLoaded(
-        nextPageArtObjects: nextPageArtObjects,
-        nextFetchPage: nextFetchPage,
-        emit: emit,
+      await state.maybeWhen(
+        initialLoading: () {
+          return _initialLoading(emit);
+        },
+        content: (listItems, reachedMax, century, fetchPage) async {
+          if (reachedMax) {
+            emit(state);
+            return;
+          }
+          final int nextFetchPage = fetchPage + 1;
+          // fetch art objects for current century
+          final List<ArtObject> nextPageArtObjects =
+              await repository.getArtObjectList(
+            page: nextFetchPage,
+            limit: _limit,
+            century: century,
+          );
+          // all items loaded
+          if (nextPageArtObjects.isEmpty) {
+            // all items loaded for all centuries
+            if (century == _endCentury) {
+              return emit(ArtObjectListState.content(
+                listItems,
+                true,
+                century,
+                nextFetchPage,
+              ));
+            }
+            // all items loaded for current century
+            final int nextCentury = century - 1;
+            final ArtObjectListItem nextCenturyHeaderItem =
+                _headerItem(nextCentury);
+            return emit(ArtObjectListState.content(
+              List.of(listItems)..add(nextCenturyHeaderItem),
+              false,
+              nextCentury,
+              0,
+            ));
+          }
+          // not all century items loaded
+          final List<ArtObjectListItem> nextPageListItems = nextPageArtObjects
+              .map((e) => ArtObjectListItem(artObject: e))
+              .toList();
+          emit(ArtObjectListState.content(
+            List.of(listItems)..addAll(nextPageListItems),
+            false,
+            century,
+            nextFetchPage,
+          ));
+        },
+        orElse: () {},
       );
     } on ArtObjectException {
-      emit(state.copyWith(
-        status: ArtObjectListStatus.failure,
-        errorMessage: FetchErrorConstants.serverError,
-      ));
+      emit(const ArtObjectListState.error(FetchErrorConstants.serverError));
     } on PlatformException catch (e) {
-      emit(state.copyWith(
-        status: ArtObjectListStatus.failure,
-        errorMessage: e.message,
-      ));
+      emit(ArtObjectListState.error(
+          e.message ?? FetchErrorConstants.serverError));
     } on SocketException catch (_) {
-      emit(state.copyWith(
-        status: ArtObjectListStatus.failure,
-        errorMessage: FetchErrorConstants.noInternetConnection,
-      ));
+      emit(const ArtObjectListState.error(
+          FetchErrorConstants.noInternetConnection));
     } on TimeoutException {
-      emit(state.copyWith(
-        status: ArtObjectListStatus.failure,
-        errorMessage: FetchErrorConstants.timeout,
-      ));
+      emit(const ArtObjectListState.error(FetchErrorConstants.timeout));
     } catch (e) {
-      emit(state.copyWith(
-        status: ArtObjectListStatus.failure,
-        errorMessage: FetchErrorConstants.undefinedError,
-      ));
+      emit(const ArtObjectListState.error(FetchErrorConstants.undefinedError));
     }
   }
 
-  Future<void> _onArtObjectListFullReloadEvent(
+  Future<void> _onFullReloadEvent(
     ArtObjectListFullReloadEvent event,
     Emitter<ArtObjectListState> emit,
   ) async {
-    emit(const ArtObjectListState());
+    emit(const ArtObjectListState.initialLoading());
     // refetch art objects after trottling timeout
     await Future.delayed(const Duration(milliseconds: _throttleTimeout));
     add(const ArtObjectListEvent.fetched());
@@ -120,49 +130,11 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
       _headerItem(_startCentury),
       ...nextPageListItems,
     ];
-    emit(state.copyWith(
-      status: ArtObjectListStatus.success,
-      listItems: listItems,
-      hasReachedMax: false,
-      century: _startCentury,
-      fetchPage: _startFetchPage,
-    ));
-  }
-
-  void _allCenturyItemsLoaded({
-    required int nextFetchPage,
-    required Emitter<ArtObjectListState> emit,
-  }) {
-    // all items loaded for all centuries
-    if (state.century == _endCentury) {
-      emit(state.copyWith(
-        hasReachedMax: true,
-        fetchPage: nextFetchPage,
-      ));
-      return;
-    }
-    // all items loaded for current century
-    final int nextCentury = state.century - 1;
-    final ArtObjectListItem nextCenturyHeaderItem = _headerItem(nextCentury);
-    emit(state.copyWith(
-      century: nextCentury,
-      listItems: List.of(state.listItems)..add(nextCenturyHeaderItem),
-      fetchPage: 0,
-    ));
-  }
-
-  void _notAllCenturyItemsLoaded({
-    required List<ArtObject> nextPageArtObjects,
-    required int nextFetchPage,
-    required Emitter<ArtObjectListState> emit,
-  }) {
-    final List<ArtObjectListItem> nextPageListItems =
-        nextPageArtObjects.map((e) => ArtObjectListItem(artObject: e)).toList();
-    emit(state.copyWith(
-      status: ArtObjectListStatus.success,
-      listItems: List.of(state.listItems)..addAll(nextPageListItems),
-      hasReachedMax: false,
-      fetchPage: nextFetchPage,
+    emit(ArtObjectListState.content(
+      listItems,
+      false,
+      _startCentury,
+      _startFetchPage,
     ));
   }
 

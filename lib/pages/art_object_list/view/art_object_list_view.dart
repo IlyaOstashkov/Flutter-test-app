@@ -47,51 +47,55 @@ class _ArtObjectListView extends State<ArtObjectListView> {
       appBar: AppBarFabric.simpleAppBar(title: 'Art objects'),
       body: BlocConsumer<ArtObjectListBloc, ArtObjectListState>(
         listener: (context, state) {
-          if (state.status == ArtObjectListStatus.failure) {
-            final String message = state.errorMessage.isNotEmpty
-                ? state.errorMessage
-                : 'Failed to fetch art objects';
-            widget.notificationManager.show(
-              context,
-              message,
-            );
-          }
+          state.maybeWhen(
+              error: (errorMessage) {
+                final String message = errorMessage.isNotEmpty
+                    ? errorMessage
+                    : 'Failed to fetch art objects';
+                widget.notificationManager.show(
+                  context,
+                  message,
+                );
+              },
+              orElse: () {});
         },
         builder: (context, state) {
-          switch (state.status) {
-            case ArtObjectListStatus.failure:
-            case ArtObjectListStatus.success:
-              if (state.listItems.isEmpty) {
-                return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
-                  _bloc.add(const ArtObjectListEvent.fullReload());
-                });
-              }
-              return _RefreshControl(
-                onRefresh: () async {
-                  _bloc.add(const ArtObjectListEvent.fullReload());
+          return state.when(initialLoading: () {
+            return const _Loader();
+          }, content: (listItems, reachedMax, century, fetchPage) {
+            if (listItems.isEmpty) {
+              return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
+                _bloc.add(const ArtObjectListEvent.fullReload());
+              });
+            }
+            return _RefreshControl(
+              onRefresh: () async {
+                _bloc.add(const ArtObjectListEvent.fullReload());
+              },
+              child: ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  if (index >= listItems.length) return const _Loader();
+                  final ArtObjectListItem item = listItems[index];
+                  return (item.isHeader)
+                      ? ArtObjectListHeader(title: item.headerTitle)
+                      : ArtObjectListTile(
+                          title: item.artObject?.title ?? '',
+                          imageUrl: item.artObject?.imageUrl,
+                          onTap: () {
+                            _navigateToARtObjectDetailPage(
+                                artObject: item.artObject);
+                          },
+                        );
                 },
-                child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    if (index >= state.listItems.length) return const _Loader();
-                    final ArtObjectListItem item = state.listItems[index];
-                    return (item.isHeader)
-                        ? ArtObjectListHeader(title: item.headerTitle)
-                        : ArtObjectListTile(
-                            title: item.artObject?.title ?? '',
-                            imageUrl: item.artObject?.imageUrl,
-                            onTap: () {
-                              _navigateToARtObjectDetailPage(
-                                  artObject: item.artObject);
-                            },
-                          );
-                  },
-                  itemCount: _itemCount(state),
-                  controller: _scrollController,
-                ),
-              );
-            default:
-              return const _Loader();
-          }
+                itemCount: reachedMax ? listItems.length : listItems.length + 1,
+                controller: _scrollController,
+              ),
+            );
+          }, error: (errorMessage) {
+            return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
+              _bloc.add(const ArtObjectListEvent.fullReload());
+            });
+          });
         },
       ),
     );
@@ -101,11 +105,6 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  int _itemCount(ArtObjectListState state) {
-    final int length = state.listItems.length;
-    return state.hasReachedMax ? length : length + 1;
   }
 
   void _navigateToARtObjectDetailPage({required ArtObject? artObject}) {

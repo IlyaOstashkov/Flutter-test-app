@@ -14,12 +14,12 @@ class ArtObjectDetailBloc
     required this.repository,
     required ArtObject artObject,
   }) : super(ArtObjectDetailState.initialContent(artObject)) {
-    on<ArtObjectDetailFetchFullContentEvent>(_onArtObjectDetailInitialEvent);
+    on<ArtObjectDetailFetchFullContentEvent>(_onInitialEvent);
   }
 
   final IArtObjectRepository repository;
 
-  Future<void> _onArtObjectDetailInitialEvent(
+  Future<void> _onInitialEvent(
     ArtObjectDetailFetchFullContentEvent event,
     Emitter<ArtObjectDetailState> emit,
   ) async {

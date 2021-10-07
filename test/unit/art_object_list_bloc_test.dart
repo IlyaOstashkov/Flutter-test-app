@@ -79,7 +79,8 @@ void main() {
     });
 
     test('initial state is correct', () {
-      expect(artObjectListBloc.state, const ArtObjectListState());
+      expect(
+          artObjectListBloc.state, const ArtObjectListState.initialLoading());
     });
 
     group('add ArtObjectListFetchedEvent', () {
@@ -88,17 +89,13 @@ void main() {
         build: () => artObjectListBloc,
         act: (bloc) => bloc.add(const ArtObjectListEvent.fetched()),
         expect: () => [
-          ArtObjectListState(
-            century: century,
-            status: ArtObjectListStatus.success,
-            listItems: [
-              _header(),
-              ..._listItems([
-                _artObject(1),
-                _artObject(2),
-              ])
-            ],
-          )
+          ArtObjectListState.content([
+            _header(),
+            ..._listItems([
+              _artObject(1),
+              _artObject(2),
+            ])
+          ], false, century, 1),
         ],
         verify: (_) {
           verify(() => artObjectRepository.getArtObjectList(
@@ -138,19 +135,15 @@ void main() {
         },
         skip: 1,
         expect: () => [
-          ArtObjectListState(
-            century: century,
-            status: ArtObjectListStatus.success,
-            listItems: [
-              _header(),
-              ..._listItems([
-                _artObject(1),
-                _artObject(2),
-                _artObject(3),
-                _artObject(4),
-              ])
-            ],
-          )
+          ArtObjectListState.content([
+            _header(),
+            ..._listItems([
+              _artObject(1),
+              _artObject(2),
+              _artObject(3),
+              _artObject(4),
+            ])
+          ], false, century, 2),
         ],
         verify: (_) {
           verify(() => artObjectRepository.getArtObjectList(
@@ -179,13 +172,7 @@ void main() {
           bloc.add(const ArtObjectListEvent.fullReload());
         },
         skip: 2,
-        expect: () => [
-          const ArtObjectListState(
-            century: century,
-            status: ArtObjectListStatus.initialLoading,
-            listItems: [],
-          )
-        ],
+        expect: () => [const ArtObjectListState.initialLoading()],
         verify: (_) {
           verify(() => artObjectRepository.getArtObjectList(
                 page: 1,
@@ -213,17 +200,13 @@ void main() {
         },
         skip: 3,
         expect: () => [
-          ArtObjectListState(
-            century: century,
-            status: ArtObjectListStatus.success,
-            listItems: [
-              _header(),
-              ..._listItems([
-                _artObject(1),
-                _artObject(2),
-              ])
-            ],
-          )
+          ArtObjectListState.content([
+            _header(),
+            ..._listItems([
+              _artObject(1),
+              _artObject(2),
+            ])
+          ], false, century, 1),
         ],
         verify: (_) {
           verify(() => artObjectRepository.getArtObjectList(

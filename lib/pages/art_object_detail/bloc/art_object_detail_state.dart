@@ -1,6 +1,5 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'art_object_detail_state.freezed.dart';
 
 @freezed
