@@ -68,29 +68,16 @@ class _ArtObjectListView extends State<ArtObjectListView> {
                 _bloc.add(const ArtObjectListEvent.fullReload());
               });
             }
-            return _RefreshControl(
-              onRefresh: () async {
-                _bloc.add(const ArtObjectListEvent.fullReload());
-              },
-              child: ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  if (index >= listItems.length) return const _Loader();
-                  final ArtObjectListItem item = listItems[index];
-                  return (item.isHeader)
-                      ? ArtObjectListHeader(title: item.headerTitle)
-                      : ArtObjectListTile(
-                          title: item.artObject?.title ?? '',
-                          imageUrl: item.artObject?.imageUrl,
-                          onTap: () {
-                            _navigateToARtObjectDetailPage(
-                                artObject: item.artObject);
-                          },
-                        );
+            return _List(
+                listItems: listItems,
+                reachedMax: reachedMax,
+                onRefresh: () async {
+                  _bloc.add(const ArtObjectListEvent.fullReload());
                 },
-                itemCount: reachedMax ? listItems.length : listItems.length + 1,
-                controller: _scrollController,
-              ),
-            );
+                onItemTap: (artObject) async {
+                  _navigateToARtObjectDetailPage(artObject: artObject);
+                },
+                scrollController: _scrollController);
           }, error: (errorMessage) {
             return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
               _bloc.add(const ArtObjectListEvent.fullReload());
@@ -124,6 +111,44 @@ class _ArtObjectListView extends State<ArtObjectListView> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
     return currentScroll >= (maxScroll * 0.9);
+  }
+}
+
+class _List extends StatelessWidget {
+  const _List({
+    required this.listItems,
+    required this.reachedMax,
+    required this.onRefresh,
+    required this.onItemTap,
+    required this.scrollController,
+  });
+
+  final List<ArtObjectListItem> listItems;
+  final bool reachedMax;
+  final RefreshCallback onRefresh;
+  final Future<void> Function(ArtObject?) onItemTap;
+  final ScrollController? scrollController;
+
+  @override
+  Widget build(BuildContext context) {
+    return _RefreshControl(
+      onRefresh: onRefresh,
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          if (index >= listItems.length) return const _Loader();
+          final ArtObjectListItem item = listItems[index];
+          return (item.isHeader)
+              ? ArtObjectListHeader(title: item.headerTitle)
+              : ArtObjectListTile(
+                  title: item.artObject?.title ?? '',
+                  imageUrl: item.artObject?.imageUrl,
+                  onTap: () => onItemTap(item.artObject),
+                );
+        },
+        itemCount: reachedMax ? listItems.length : listItems.length + 1,
+        controller: scrollController,
+      ),
+    );
   }
 }
 
