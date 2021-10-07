@@ -104,7 +104,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     emit(const ArtObjectListState());
     // refetch art objects after trottling timeout
     await Future.delayed(const Duration(milliseconds: _throttleTimeout));
-    add(ArtObjectListFetchedEvent());
+    add(const ArtObjectListEvent.fetched());
   }
 
   Future<void> _initialLoading(Emitter<ArtObjectListState> emit) async {

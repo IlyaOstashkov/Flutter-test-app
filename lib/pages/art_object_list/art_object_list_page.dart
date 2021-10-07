@@ -20,7 +20,7 @@ class ArtObjectListPage extends StatelessWidget {
       create: (context) {
         return ArtObjectListBloc(
             repository: injector.get<IArtObjectRepository>())
-          ..add(ArtObjectListFetchedEvent());
+          ..add(const ArtObjectListEvent.fetched());
       },
       child: ArtObjectListView(
         notificationManager: injector.get<INotificationManager>(),

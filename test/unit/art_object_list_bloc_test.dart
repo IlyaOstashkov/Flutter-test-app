@@ -86,7 +86,7 @@ void main() {
       blocTest<ArtObjectListBloc, ArtObjectListState>(
         'emits correct listItems when ArtObjectListFetchedEvent is added',
         build: () => artObjectListBloc,
-        act: (bloc) => bloc.add(ArtObjectListFetchedEvent()),
+        act: (bloc) => bloc.add(const ArtObjectListEvent.fetched()),
         expect: () => [
           ArtObjectListState(
             century: century,
@@ -114,8 +114,8 @@ void main() {
         build: () => artObjectListBloc,
         act: (bloc) async {
           bloc
-            ..add(ArtObjectListFetchedEvent())
-            ..add(ArtObjectListFetchedEvent());
+            ..add(const ArtObjectListEvent.fetched())
+            ..add(const ArtObjectListEvent.fetched());
         },
         skip: 1,
         expect: () => [],
@@ -132,9 +132,9 @@ void main() {
         'emits correct listItems when ArtObjectListFetchedEvent is added twice',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
           await _delayToWaitThrottleChecking();
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
         },
         skip: 1,
         expect: () => [
@@ -172,11 +172,11 @@ void main() {
         'emits ArtObjectListStatus.initialLoading status at first when ArtObjectListFullReloadEvent is added',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
           await _delayToWaitThrottleChecking();
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
           await _delayToWaitThrottleChecking();
-          bloc.add(ArtObjectListFullReloadEvent());
+          bloc.add(const ArtObjectListEvent.fullReload());
         },
         skip: 2,
         expect: () => [
@@ -204,11 +204,11 @@ void main() {
         'emits correct listItems when ArtObjectListFullReloadEvent is added',
         build: () => artObjectListBloc,
         act: (bloc) async {
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
           await _delayToWaitThrottleChecking();
-          bloc.add(ArtObjectListFetchedEvent());
+          bloc.add(const ArtObjectListEvent.fetched());
           await _delayToWaitThrottleChecking();
-          bloc.add(ArtObjectListFullReloadEvent());
+          bloc.add(const ArtObjectListEvent.fullReload());
           await _delayToWaitThrottleChecking();
         },
         skip: 3,
