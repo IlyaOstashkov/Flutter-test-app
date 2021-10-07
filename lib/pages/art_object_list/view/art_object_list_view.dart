@@ -63,12 +63,12 @@ class _ArtObjectListView extends State<ArtObjectListView> {
             case ArtObjectListStatus.success:
               if (state.listItems.isEmpty) {
                 return _NoArtObjectsPlaceholderWidget(onRefresh: () async {
-                  _bloc.add(ArtObjectListFullReloadEvent());
+                  _bloc.add(const ArtObjectListEvent.fullReload());
                 });
               }
               return _RefreshControl(
                 onRefresh: () async {
-                  _bloc.add(ArtObjectListFullReloadEvent());
+                  _bloc.add(const ArtObjectListEvent.fullReload());
                 },
                 child: ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
@@ -117,7 +117,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
   }
 
   void _onScroll() {
-    if (_isBottom) _bloc.add(ArtObjectListFetchedEvent());
+    if (_isBottom) _bloc.add(const ArtObjectListEvent.fetched());
   }
 
   bool get _isBottom {

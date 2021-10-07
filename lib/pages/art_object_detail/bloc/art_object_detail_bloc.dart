@@ -14,20 +14,20 @@ class ArtObjectDetailBloc
     required this.repository,
     required ArtObject artObject,
   }) : super(ArtObjectDetailState.initialContent(artObject)) {
-    on<ArtObjectDetailEventFetchFullContent>(_onArtObjectDetailInitialEvent);
+    on<ArtObjectDetailFetchFullContentEvent>(_onArtObjectDetailInitialEvent);
   }
 
   final IArtObjectRepository repository;
 
   Future<void> _onArtObjectDetailInitialEvent(
-    ArtObjectDetailEventFetchFullContent event,
+    ArtObjectDetailFetchFullContentEvent event,
     Emitter<ArtObjectDetailState> emit,
   ) async {
     emit(await _fetchDetailInfo(event));
   }
 
   Future<ArtObjectDetailState> _fetchDetailInfo(
-      ArtObjectDetailEventFetchFullContent event) async {
+      ArtObjectDetailFetchFullContentEvent event) async {
     try {
       final ArtObject artObjectDetail = await repository.getArtObject(
         objectNumber: event.objectNumber,
