@@ -4,7 +4,9 @@ analyzer:
   exclude:
     - README.md
     - build/**
-    - lib/generated/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
   enable-experiment:
     - extension-methods
 
