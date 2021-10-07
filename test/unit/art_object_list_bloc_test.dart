@@ -1,15 +1,15 @@
 import 'package:art_object_repository/art_object_repository.dart' as repository;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'art_object_list_bloc_test.mocks.dart';
 
-class MockArtObjectRepository extends Mock
-    implements repository.ArtObjectRepository {}
-
+@GenerateMocks([repository.ArtObjectRepository])
 void main() {
   group('ArtObjectListBloc - ', () {
     late repository.IArtObjectRepository artObjectRepository;
@@ -55,19 +55,19 @@ void main() {
 
     setUp(() {
       artObjectRepository = MockArtObjectRepository();
-      when(() => artObjectRepository.getArtObjectList(
-            page: 1,
-            limit: limit,
-            century: century,
-          )).thenAnswer((_) async => [
+      when(artObjectRepository.getArtObjectList(
+        page: 1,
+        limit: limit,
+        century: century,
+      )).thenAnswer((_) async => [
             _artObject(1),
             _artObject(2),
           ]);
-      when(() => artObjectRepository.getArtObjectList(
-            page: 2,
-            limit: limit,
-            century: century,
-          )).thenAnswer((_) async => [
+      when(artObjectRepository.getArtObjectList(
+        page: 2,
+        limit: limit,
+        century: century,
+      )).thenAnswer((_) async => [
             _artObject(3),
             _artObject(4),
           ]);
@@ -98,11 +98,12 @@ void main() {
           ], false, century, 1),
         ],
         verify: (_) {
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 1,
-                limit: limit,
-                century: century,
-              )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 1,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verifyNoMoreInteractions(artObjectRepository);
         },
       );
 
@@ -117,11 +118,12 @@ void main() {
         skip: 1,
         expect: () => [],
         verify: (_) {
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 1,
-                limit: limit,
-                century: century,
-              )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 1,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verifyNoMoreInteractions(artObjectRepository);
         },
       );
 
@@ -146,16 +148,17 @@ void main() {
           ], false, century, 2),
         ],
         verify: (_) {
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 1,
-                limit: limit,
-                century: century,
-              )).called(1);
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 2,
-                limit: limit,
-                century: century,
-              )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 1,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 2,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verifyNoMoreInteractions(artObjectRepository);
         },
       );
     });
@@ -174,16 +177,17 @@ void main() {
         skip: 2,
         expect: () => [const ArtObjectListState.initialLoading()],
         verify: (_) {
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 1,
-                limit: limit,
-                century: century,
-              )).called(1);
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 2,
-                limit: limit,
-                century: century,
-              )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 1,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 2,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verifyNoMoreInteractions(artObjectRepository);
         },
       );
 
@@ -209,16 +213,17 @@ void main() {
           ], false, century, 1),
         ],
         verify: (_) {
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 1,
-                limit: limit,
-                century: century,
-              )).called(2);
-          verify(() => artObjectRepository.getArtObjectList(
-                page: 2,
-                limit: limit,
-                century: century,
-              )).called(1);
+          verify(artObjectRepository.getArtObjectList(
+            page: 1,
+            limit: limit,
+            century: century,
+          )).called(2);
+          verify(artObjectRepository.getArtObjectList(
+            page: 2,
+            limit: limit,
+            century: century,
+          )).called(1);
+          verifyNoMoreInteractions(artObjectRepository);
         },
       );
     });
