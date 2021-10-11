@@ -14,6 +14,7 @@
             "name": "Flutter_test_app (profile mode)",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main.dart",
             "flutterMode": "profile"
         }
     ]

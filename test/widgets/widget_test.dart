@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/simple_text.dart';
 import 'package:flutter_test_app/widgets/title_text.dart';
 import 'package:flutter_test_app/widgets/transparent_button.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 void main() {
   const String someText = 'some-text';
@@ -81,7 +81,7 @@ void main() {
         onTap: () {},
       )),
     );
-    expect(find.byType(CachedNetworkImage), findsOneWidget);
+    expect(find.byType(OptimizedCacheImage), findsOneWidget);
     expect(find.byType(SimpleLoader), findsOneWidget);
     expect(find.byType(Icon), findsNothing);
   });

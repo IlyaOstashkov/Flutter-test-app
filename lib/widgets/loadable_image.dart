@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/transparent_button.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class LoadableImage extends StatelessWidget {
   const LoadableImage({
@@ -17,8 +17,7 @@ class LoadableImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TransparentButton(
       onTap: onTap,
-      child: CachedNetworkImage(
-        fit: BoxFit.cover,
+      child: OptimizedCacheImage(
         imageUrl: imageUrl,
         placeholder: (context, url) => const SimpleLoader(),
         errorWidget: (context, url, error) => const Icon(
