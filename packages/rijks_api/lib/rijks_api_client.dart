@@ -27,6 +27,7 @@ class RijksApiClient implements IRijksApiClient {
   static const _technique = 'painting';
   static const _timeoutSeconds = 3;
 
+  @override
   Future<List<ArtObject>> getArtObjectList({
     required int page,
     required int limit,
@@ -39,33 +40,34 @@ class RijksApiClient implements IRijksApiClient {
       'technique': _technique,
       'f.dating.period': century.toString(),
     };
-    final Uri request = Uri.https(
+    final request = Uri.https(
       _baseUrl,
       '/api/en/collection',
       params,
     );
-    final Map<String, dynamic> json = await _makeRequest(request);
-    final ArtObjectPack pack = ArtObjectPack.fromJson(json);
+    final json = await _makeRequest(request);
+    final pack = ArtObjectPack.fromJson(json);
     return pack.artObjects;
   }
 
+  @override
   Future<ArtObject> getArtObject({required String objectNumber}) async {
     final params = <String, String>{
       'key': _apiKey,
     };
     final path = '/api/en/collection/$objectNumber';
-    final Uri request = Uri.https(
+    final request = Uri.https(
       _baseUrl,
       path,
       params,
     );
-    final Map<String, dynamic> json = await _makeRequest(request);
-    final ArtObjectDetail detail = ArtObjectDetail.fromJson(json);
+    final json = await _makeRequest(request);
+    final detail = ArtObjectDetail.fromJson(json);
     return detail.artObject;
   }
 
   Future<Map<String, dynamic>> _makeRequest(Uri request) async {
-    final http.Response response = await _httpClient.get(request).timeout(
+    final response = await _httpClient.get(request).timeout(
           const Duration(seconds: _timeoutSeconds),
         );
     if (response.statusCode != 200) {

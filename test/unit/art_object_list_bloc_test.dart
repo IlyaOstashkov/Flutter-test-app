@@ -15,15 +15,15 @@ void main() {
     late repository.IArtObjectRepository artObjectRepository;
     late ArtObjectListBloc artObjectListBloc;
 
-    const int limit = 10;
-    const int century = 21;
-    const String someHeader = '21 century';
-    const int _throttleTimeout = 500;
+    const limit = 10;
+    const century = 21;
+    const someHeader = '21 century';
+    const _throttleTimeout = 500;
 
     repository.ArtObject _artObject(int number) {
       return repository.ArtObject(
         objectNumber: number.toString(),
-        title: 'title' + number.toString(),
+        title: 'title ${number.toString()}',
         imageUrl: null,
         description: null,
         principalOrFirstMaker: null,
@@ -117,7 +117,7 @@ void main() {
             ..add(const ArtObjectListEvent.fetched());
         },
         skip: 1,
-        expect: () => [],
+        expect: () => <ArtObjectListState>[],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,

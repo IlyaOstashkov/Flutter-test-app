@@ -12,19 +12,19 @@ import 'package:flutter_test_app/widgets/transparent_button.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 void main() {
-  const String someText = 'some-text';
-  const String someImageUrl =
+  const someText = 'some-text';
+  const someImageUrl =
       'https://flutter.dev/assets/images/shared/brand/flutter/logo/flutter-lockup.png';
-  const double someRadius = 16.0;
+  const someRadius = 16.0;
 
-  testWidgets('SimpleText has correct text', (WidgetTester tester) async {
+  testWidgets('SimpleText has correct text', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: SimpleText(someText)),
     );
     expect(find.text(someText), findsOneWidget);
   });
 
-  testWidgets('TitleText has correct text', (WidgetTester tester) async {
+  testWidgets('TitleText has correct text', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: TitleText(someText)),
     );
@@ -32,7 +32,7 @@ void main() {
   });
 
   testWidgets('TransparentButton has one InkWell and correct child',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(
       MaterialApp(
           home: TransparentButton(
@@ -45,14 +45,14 @@ void main() {
   });
 
   testWidgets('SimpleLoader has one CupertinoActivityIndicator',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: SimpleLoader()),
     );
     expect(find.byType(CupertinoActivityIndicator), findsOneWidget);
   });
 
-  testWidgets('AppBar has corret title', (WidgetTester tester) async {
+  testWidgets('AppBar has corret title', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -63,8 +63,7 @@ void main() {
     expect(find.text(someText), findsOneWidget);
   });
 
-  testWidgets('SimpleOffsetSpaceLoader has one SizedBox',
-      (WidgetTester tester) async {
+  testWidgets('SimpleOffsetSpaceLoader has one SizedBox', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: OffsetSpace()),
     );
@@ -73,7 +72,7 @@ void main() {
 
   testWidgets(
       'LoadableImage has network image and loader, but without error Icon',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(
       MaterialApp(
           home: LoadableImage(
@@ -87,7 +86,7 @@ void main() {
   });
 
   testWidgets('CircleLoadableImage with image url has not placeholder',
-      (WidgetTester tester) async {
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: CircleLoadableImage(

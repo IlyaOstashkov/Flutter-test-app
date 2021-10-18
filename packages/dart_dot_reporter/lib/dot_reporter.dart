@@ -11,7 +11,6 @@ class DotReporter {
   int successCount = 0;
   // StringBuffer buffer = StringBuffer();
 
-  // TODO: move flags to some config model
   final bool showId;
   final bool showSuccess;
   final bool hideSkipped;
@@ -95,7 +94,8 @@ class DotReporter {
         .join('\n');
   }
 
-  String _renderSingleLineOfIcons() => parser.tests.values.map(_getIcon).join('');
+  String _renderSingleLineOfIcons() =>
+      parser.tests.values.map(_getIcon).join('');
 
   void _countTestResults() {
     for (final item in parser.tests.values) {
@@ -133,8 +133,9 @@ class DotReporter {
     if (fileNameIndex == -1) {
       fileNameIndex = model.filename.indexOf('test/');
     }
-    final fileNameShow =
-        fileNameIndex == -1 ? model.filename : model.filename.substring(fileNameIndex);
+    final fileNameShow = fileNameIndex == -1
+        ? model.filename
+        : model.filename.substring(fileNameIndex);
     switch (model.state) {
       case State.failure:
         base += _red('[${model.name}] in $fileNameShow');

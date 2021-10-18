@@ -12,13 +12,13 @@ class NavigationManager implements INavigationManager {
   @override
   Future<void> push(BuildContext context, Widget page) async {
     await Navigator.of(context).push(
-      CupertinoPageRoute(builder: (context) => page),
+      CupertinoPageRoute<void>(builder: (context) => page),
     );
   }
 
   @override
   Future<void> showModalPopup(BuildContext context, Widget page) async {
-    await showCupertinoModalPopup(
+    await showCupertinoModalPopup<void>(
       context: context,
       builder: (context) => page,
     );

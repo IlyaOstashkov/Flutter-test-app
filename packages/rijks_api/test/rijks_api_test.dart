@@ -1,6 +1,6 @@
-import 'package:rijks_api/rijks_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
+import 'package:rijks_api/rijks_api.dart';
 import 'package:test/test.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
@@ -13,7 +13,7 @@ void main() {
   group('RijksApiClient', () {
     late http.Client httpClient;
     late IRijksApiClient rijksApiClient;
-    const String apiKey = '0fiuZFh4';
+    const apiKey = '0fiuZFh4';
 
     setUpAll(() {
       registerFallbackValue<Uri>(FakeUri());
@@ -25,11 +25,11 @@ void main() {
     });
 
     group('getArtObjectList', () {
-      const int page = 1;
-      const int limit = 10;
-      const int century = 21;
+      const page = 1;
+      const limit = 10;
+      const century = 21;
       test('makes correct https request', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
@@ -58,11 +58,11 @@ void main() {
       });
 
       test('throws ArtObjectRequestException on 400 status', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(400);
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-          () async => await rijksApiClient.getArtObjectList(
+          () async => rijksApiClient.getArtObjectList(
             page: page,
             limit: limit,
             century: century,
@@ -73,12 +73,12 @@ void main() {
 
       test('throws ArtObjectEmptyResponseException on empty response',
           () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-          () async => await rijksApiClient.getArtObjectList(
+          () async => rijksApiClient.getArtObjectList(
             page: page,
             limit: limit,
             century: century,
@@ -88,7 +88,7 @@ void main() {
       });
 
       test('returns List<ArtObject> on valid response', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('''
           {
@@ -134,7 +134,7 @@ void main() {
             }
         ''');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        final List<ArtObject> list = await rijksApiClient.getArtObjectList(
+        final list = await rijksApiClient.getArtObjectList(
           page: page,
           limit: limit,
           century: century,
@@ -144,7 +144,7 @@ void main() {
           isA<List<ArtObject>>()
               .having((p0) => p0.isNotEmpty, 'is not empty', true),
         );
-        final ArtObject firstElement = list.first;
+        final firstElement = list.first;
         expect(
           firstElement,
           isA<ArtObject>()
@@ -165,9 +165,9 @@ void main() {
     });
 
     group('getArtObject', () {
-      const String objectNumber = 'BK-17496';
+      const objectNumber = 'BK-17496';
       test('makes correct https request', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
@@ -188,31 +188,29 @@ void main() {
       });
 
       test('throws ArtObjectRequestException on 400 status', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(400);
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-          () async =>
-              await rijksApiClient.getArtObject(objectNumber: objectNumber),
+          () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
           throwsA(isA<ArtObjectRequestException>()),
         );
       });
 
       test('throws ArtObjectEmptyResponseException on empty response',
           () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('{}');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
-          () async =>
-              await rijksApiClient.getArtObject(objectNumber: objectNumber),
+          () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
           throwsA(isA<ArtObjectEmptyResponseException>()),
         );
       });
 
       test('returns ArtObject on valid response', () async {
-        final MockResponse response = MockResponse();
+        final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
         when(() => response.body).thenReturn('''
           {
@@ -382,7 +380,7 @@ void main() {
         }
         ''');
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        final ArtObject artObject =
+        final artObject =
             await rijksApiClient.getArtObject(objectNumber: objectNumber);
         expect(
           artObject,

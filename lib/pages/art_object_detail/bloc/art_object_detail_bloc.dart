@@ -29,7 +29,7 @@ class ArtObjectDetailBloc
   Future<ArtObjectDetailState> _fetchDetailInfo(
       ArtObjectDetailFetchFullContentEvent event) async {
     try {
-      final ArtObject artObjectDetail = await repository.getArtObject(
+      final artObjectDetail = await repository.getArtObject(
         objectNumber: event.objectNumber,
       );
       return ArtObjectDetailState.fullContent(artObjectDetail);

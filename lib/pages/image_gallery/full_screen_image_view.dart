@@ -25,7 +25,7 @@ class FullScreenImageView extends StatelessWidget {
             child: PhotoViewGallery.builder(
               backgroundDecoration: const BoxDecoration(color: Colors.black),
               itemCount: imageUrls.length,
-              builder: (BuildContext context, int index) {
+              builder: (context, index) {
                 return PhotoViewGalleryPageOptions(
                   imageProvider: NetworkImage(imageUrls[index]),
                   initialScale: PhotoViewComputedScale.contained * 1,

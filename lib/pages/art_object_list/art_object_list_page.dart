@@ -15,7 +15,7 @@ class ArtObjectListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Injector injector = Injector();
+    final injector = Injector();
     return BlocProvider(
       create: (context) {
         return ArtObjectListBloc(

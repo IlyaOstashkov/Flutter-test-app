@@ -1,10 +1,10 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/pages/image_gallery/full_screen_image_page.dart';
 import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
@@ -29,7 +29,7 @@ class ArtObjectDetailView extends StatefulWidget {
 
 class _ArtObjectDetailView extends State<ArtObjectDetailView> {
   void _onImageTap(ArtObject artObject) {
-    final String? imageUrl = artObject.imageUrl;
+    final imageUrl = artObject.imageUrl;
     if (imageUrl == null) return;
     final Widget page = FullScreenImagePage(imageUrls: [imageUrl]);
     widget.navigationManager.push(context, page);
@@ -44,7 +44,7 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
         listener: (context, state) {
           state.maybeWhen(
             error: (errorMessage) {
-              final String message = errorMessage.isNotEmpty
+              final message = errorMessage.isNotEmpty
                   ? errorMessage
                   : 'Failed to fetch additional information';
               widget.notificationManager.show(

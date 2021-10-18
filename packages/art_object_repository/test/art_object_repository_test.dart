@@ -1,7 +1,7 @@
-import 'package:art_object_repository/repository/art_object_repository.dart';
 import 'package:art_object_repository/models/art_object.dart';
-import 'package:rijks_api/rijks_api.dart' as api;
+import 'package:art_object_repository/repository/art_object_repository.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:rijks_api/rijks_api.dart' as api;
 import 'package:test/test.dart';
 
 class MockRijksApiClient extends Mock implements api.RijksApiClient {}
@@ -22,13 +22,13 @@ void main() {
 
     MockArtObject _mockArtObject() {
       final mockArtObject = MockArtObject();
-      when(() => mockArtObject.dating)
-          .thenReturn(api.ArtObjectDating(presentingDate: somePresentingDate));
+      when(() => mockArtObject.dating).thenReturn(
+          const api.ArtObjectDating(presentingDate: somePresentingDate));
       when(() => mockArtObject.description).thenReturn(someDescription);
       when(() => mockArtObject.objectNumber).thenReturn(someObjectNumber);
       when(() => mockArtObject.principalOrFirstMaker).thenReturn(someMaker);
       when(() => mockArtObject.title).thenReturn(someTitle);
-      when(() => mockArtObject.webImage).thenReturn(api.WebImage(
+      when(() => mockArtObject.webImage).thenReturn(const api.WebImage(
         url: someUrl,
       ));
       return mockArtObject;
@@ -40,9 +40,9 @@ void main() {
     });
 
     group('getArtObjectList', () {
-      const int page = 1;
-      const int limit = 10;
-      const int century = 21;
+      const page = 1;
+      const limit = 10;
+      const century = 21;
       test('calls getArtObjectList with correct parameters', () async {
         try {
           await artObjectRepository.getArtObjectList(
@@ -66,7 +66,7 @@ void main() {
               century: century,
             )).thenThrow(exception);
         expect(
-          () async => await artObjectRepository.getArtObjectList(
+          () async => artObjectRepository.getArtObjectList(
             page: page,
             limit: limit,
             century: century,
@@ -92,7 +92,7 @@ void main() {
         expect(
           actual,
           [
-            ArtObject(
+            const ArtObject(
               objectNumber: someObjectNumber,
               title: someTitle,
               imageUrl: someUrl,
@@ -123,7 +123,7 @@ void main() {
           () => rijksApiClient.getArtObject(objectNumber: someObjectNumber),
         ).thenThrow(exception);
         expect(
-          () async => await artObjectRepository.getArtObject(
+          () async => artObjectRepository.getArtObject(
             objectNumber: someObjectNumber,
           ),
           throwsA(exception),
@@ -141,7 +141,7 @@ void main() {
         );
         expect(
           actual,
-          ArtObject(
+          const ArtObject(
             objectNumber: someObjectNumber,
             title: someTitle,
             imageUrl: someUrl,

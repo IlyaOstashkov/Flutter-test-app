@@ -24,8 +24,8 @@ class OffsetSpace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = _size(horizontal);
-    final double height = _size(vertical);
+    final width = _size(horizontal);
+    final height = _size(vertical);
     return SizedBox(width: width, height: height);
   }
 

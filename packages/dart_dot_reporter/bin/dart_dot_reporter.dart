@@ -30,7 +30,6 @@ void main(List<String> arguments) {
   }
 
   if (arguments.contains('-h')) {
-    // TODO: Add repo link
     stdout.writeln('''
     $usage
 

@@ -49,10 +49,9 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
             emit(state);
             return;
           }
-          final int nextFetchPage = fetchPage + 1;
+          final nextFetchPage = fetchPage + 1;
           // fetch art objects for current century
-          final List<ArtObject> nextPageArtObjects =
-              await repository.getArtObjectList(
+          final nextPageArtObjects = await repository.getArtObjectList(
             page: nextFetchPage,
             limit: _limit,
             century: century,
@@ -69,9 +68,8 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
               ));
             }
             // all items loaded for current century
-            final int nextCentury = century - 1;
-            final ArtObjectListViewModel nextCenturyHeaderItem =
-                _headerItem(nextCentury);
+            final nextCentury = century - 1;
+            final nextCenturyHeaderItem = _headerItem(nextCentury);
             return emit(ArtObjectListState.content(
               List.of(listItems)..add(nextCenturyHeaderItem),
               false,
@@ -80,10 +78,9 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
             ));
           }
           // not all century items loaded
-          final List<ArtObjectListViewModel> nextPageListItems =
-              nextPageArtObjects
-                  .map((e) => ArtObjectListViewModel(artObject: e))
-                  .toList();
+          final nextPageListItems = nextPageArtObjects
+              .map((e) => ArtObjectListViewModel(artObject: e))
+              .toList();
           emit(ArtObjectListState.content(
             List.of(listItems)..addAll(nextPageListItems),
             false,
@@ -114,21 +111,20 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   ) async {
     emit(const ArtObjectListState.initialLoading());
     // refetch art objects after trottling timeout
-    await Future.delayed(const Duration(milliseconds: _throttleTimeout));
+    await Future<void>.delayed(const Duration(milliseconds: _throttleTimeout));
     add(const ArtObjectListEvent.fetched());
   }
 
   Future<void> _initialLoading(Emitter<ArtObjectListState> emit) async {
-    final List<ArtObject> nextPageArtObjects =
-        await repository.getArtObjectList(
+    final nextPageArtObjects = await repository.getArtObjectList(
       page: _startFetchPage,
       limit: _limit,
       century: _startCentury,
     );
-    final List<ArtObjectListViewModel> nextPageListItems = nextPageArtObjects
+    final nextPageListItems = nextPageArtObjects
         .map((e) => ArtObjectListViewModel(artObject: e))
         .toList();
-    final List<ArtObjectListViewModel> listItems = [
+    final listItems = [
       _headerItem(_startCentury),
       ...nextPageListItems,
     ];

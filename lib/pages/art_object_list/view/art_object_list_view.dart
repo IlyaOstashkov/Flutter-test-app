@@ -1,15 +1,15 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/art_object_detail_page.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
+import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
+import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
@@ -49,7 +49,7 @@ class _ArtObjectListView extends State<ArtObjectListView> {
         listener: (context, state) {
           state.maybeWhen(
               error: (errorMessage) {
-                final String message = errorMessage.isNotEmpty
+                final message = errorMessage.isNotEmpty
                     ? errorMessage
                     : 'Failed to fetch art objects';
                 widget.notificationManager.show(
@@ -134,9 +134,9 @@ class _List extends StatelessWidget {
     return _RefreshControl(
       onRefresh: onRefresh,
       child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           if (index >= listItems.length) return const _Loader();
-          final ArtObjectListViewModel item = listItems[index];
+          final item = listItems[index];
           return (item.isHeader)
               ? ArtObjectListHeader(title: item.headerTitle)
               : ArtObjectListTile(
@@ -209,7 +209,7 @@ class _NoArtObjectsPlaceholderWidget extends StatelessWidget {
               OffsetSpace.horizontal(),
               Flexible(
                 child: SimpleText(
-                  'Couldn\'t get any art objects. Please try again later',
+                  "Couldn't get any art objects. Please try again later",
                   maxLines: 3,
                   textAlign: TextAlign.center,
                 ),

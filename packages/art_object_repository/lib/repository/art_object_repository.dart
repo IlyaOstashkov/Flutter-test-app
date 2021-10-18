@@ -20,18 +20,19 @@ class ArtObjectRepository implements IArtObjectRepository {
 
   final api.IRijksApiClient _apiClient;
 
+  @override
   Future<List<ArtObject>> getArtObjectList({
     required int page,
     required int limit,
     required int century,
   }) async {
     try {
-      final List<api.ArtObject> response = await _apiClient.getArtObjectList(
+      final response = await _apiClient.getArtObjectList(
         page: page,
         limit: limit,
         century: century,
       );
-      final List<ArtObject> artObjectList =
+      final artObjectList =
           response.map((e) => _mapArtObject(response: e)).toList();
       return artObjectList;
     } on api.ArtObjectRequestException {
@@ -42,11 +43,12 @@ class ArtObjectRepository implements IArtObjectRepository {
     }
   }
 
+  @override
   Future<ArtObject> getArtObject({required String objectNumber}) async {
     try {
-      final api.ArtObject response =
+      final response =
           await _apiClient.getArtObject(objectNumber: objectNumber);
-      final ArtObject artObject = _mapArtObject(response: response);
+      final artObject = _mapArtObject(response: response);
       return artObject;
     } on api.ArtObjectRequestException {
       // NOTE: we can add exception specific logic here
