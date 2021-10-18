@@ -27,3 +27,9 @@ doc/api/
 
 # Android Studio
 .idea/
+
+# Created by ./scripts/coverage.sh
+lcov.info
+machine.log
+coverage.xml
+coverage/

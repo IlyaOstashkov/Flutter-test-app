@@ -1,17 +1,24 @@
 name: rijks_api
 description: A Dart API Client for the Rijks Museum API.
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  analyzer_rules:
+    path: ../analyzer_rules
   http: ^0.13.3
   json_annotation: ^4.0.1
 
 dev_dependencies:
   build_runner: ^2.1.2
   coverage: ^1.0.3
+  dart_dot_reporter:
+    path: ../dart_dot_reporter
+  flutter_test:
+    sdk: flutter
   json_serializable: ^5.0.0
   mocktail: ^0.1.4
   test: ^1.17.12

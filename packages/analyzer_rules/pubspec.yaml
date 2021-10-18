@@ -1,0 +1,10 @@
+name: analyzer_rules
+version: 1.0.0
+description: The Dart analyzer settings and best practices used internally at Google.
+publish_to: none
+
+environment:
+  sdk: ">=2.13.0 <3.0.0"
+
+dev_dependencies:
+  dart_code_metrics: 4.3.3
