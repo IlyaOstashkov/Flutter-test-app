@@ -5,7 +5,7 @@ import 'package:art_object_repository/art_object_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test_app/constants/fetch_error_constants.dart';
-import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
+import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'art_object_list_event.dart';
@@ -70,7 +70,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
             }
             // all items loaded for current century
             final int nextCentury = century - 1;
-            final ArtObjectListItem nextCenturyHeaderItem =
+            final ArtObjectListViewModel nextCenturyHeaderItem =
                 _headerItem(nextCentury);
             return emit(ArtObjectListState.content(
               List.of(listItems)..add(nextCenturyHeaderItem),
@@ -80,9 +80,10 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
             ));
           }
           // not all century items loaded
-          final List<ArtObjectListItem> nextPageListItems = nextPageArtObjects
-              .map((e) => ArtObjectListItem(artObject: e))
-              .toList();
+          final List<ArtObjectListViewModel> nextPageListItems =
+              nextPageArtObjects
+                  .map((e) => ArtObjectListViewModel(artObject: e))
+                  .toList();
           emit(ArtObjectListState.content(
             List.of(listItems)..addAll(nextPageListItems),
             false,
@@ -124,9 +125,10 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
       limit: _limit,
       century: _startCentury,
     );
-    final List<ArtObjectListItem> nextPageListItems =
-        nextPageArtObjects.map((e) => ArtObjectListItem(artObject: e)).toList();
-    final List<ArtObjectListItem> listItems = [
+    final List<ArtObjectListViewModel> nextPageListItems = nextPageArtObjects
+        .map((e) => ArtObjectListViewModel(artObject: e))
+        .toList();
+    final List<ArtObjectListViewModel> listItems = [
       _headerItem(_startCentury),
       ...nextPageListItems,
     ];
@@ -138,9 +140,9 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     ));
   }
 
-  ArtObjectListItem _headerItem(int century) {
+  ArtObjectListViewModel _headerItem(int century) {
     final centuryString = century.toString();
-    return ArtObjectListItem(
+    return ArtObjectListViewModel(
       isHeader: true,
       headerTitle: '$centuryString century',
     );

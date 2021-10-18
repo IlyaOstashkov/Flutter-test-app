@@ -7,7 +7,7 @@ import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
+import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
 import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
@@ -123,7 +123,7 @@ class _List extends StatelessWidget {
     required this.scrollController,
   });
 
-  final List<ArtObjectListItem> listItems;
+  final List<ArtObjectListViewModel> listItems;
   final bool reachedMax;
   final RefreshCallback onRefresh;
   final Future<void> Function(ArtObject?) onItemTap;
@@ -136,7 +136,7 @@ class _List extends StatelessWidget {
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
           if (index >= listItems.length) return const _Loader();
-          final ArtObjectListItem item = listItems[index];
+          final ArtObjectListViewModel item = listItems[index];
           return (item.isHeader)
               ? ArtObjectListHeader(title: item.headerTitle)
               : ArtObjectListTile(

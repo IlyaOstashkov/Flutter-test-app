@@ -1,8 +1,8 @@
 import 'package:art_object_repository/art_object_repository.dart';
 import 'package:equatable/equatable.dart';
 
-class ArtObjectListItem extends Equatable {
-  const ArtObjectListItem({
+class ArtObjectListViewModel extends Equatable {
+  const ArtObjectListViewModel({
     this.isHeader = false,
     this.headerTitle = '',
     this.artObject,

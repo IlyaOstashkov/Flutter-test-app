@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
-import 'package:flutter_test_app/pages/art_object_list/models/art_object_list_item.dart';
+import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'art_object_list_bloc_test.mocks.dart';
@@ -31,16 +31,17 @@ void main() {
       );
     }
 
-    ArtObjectListItem _header() {
-      return const ArtObjectListItem(
+    ArtObjectListViewModel _header() {
+      return const ArtObjectListViewModel(
         isHeader: true,
         headerTitle: someHeader,
       );
     }
 
-    List<ArtObjectListItem> _listItems(List<repository.ArtObject?> artObjects) {
+    List<ArtObjectListViewModel> _listItems(
+        List<repository.ArtObject?> artObjects) {
       return artObjects
-          .map((e) => ArtObjectListItem(
+          .map((e) => ArtObjectListViewModel(
                 artObject: e,
                 isHeader: false,
                 headerTitle: '',

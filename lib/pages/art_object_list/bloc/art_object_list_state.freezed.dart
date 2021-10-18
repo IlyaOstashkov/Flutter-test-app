@@ -21,7 +21,7 @@ class _$ArtObjectListStateTearOff {
     return const _ArtObjectListStateInitialLoading();
   }
 
-  _ArtObjectListStateContent content(List<ArtObjectListItem> listItems,
+  _ArtObjectListStateContent content(List<ArtObjectListViewModel> listItems,
       bool reachedMax, int century, int fetchPage) {
     return _ArtObjectListStateContent(
       listItems,
@@ -46,7 +46,7 @@ mixin _$ArtObjectListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialLoading,
-    required TResult Function(List<ArtObjectListItem> listItems,
+    required TResult Function(List<ArtObjectListViewModel> listItems,
             bool reachedMax, int century, int fetchPage)
         content,
     required TResult Function(String errorMessage) error,
@@ -55,7 +55,7 @@ mixin _$ArtObjectListState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -64,7 +64,7 @@ mixin _$ArtObjectListState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -159,7 +159,7 @@ class _$_ArtObjectListStateInitialLoading
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialLoading,
-    required TResult Function(List<ArtObjectListItem> listItems,
+    required TResult Function(List<ArtObjectListViewModel> listItems,
             bool reachedMax, int century, int fetchPage)
         content,
     required TResult Function(String errorMessage) error,
@@ -171,7 +171,7 @@ class _$_ArtObjectListStateInitialLoading
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -183,7 +183,7 @@ class _$_ArtObjectListStateInitialLoading
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -242,7 +242,7 @@ abstract class _$ArtObjectListStateContentCopyWith<$Res> {
           $Res Function(_ArtObjectListStateContent) then) =
       __$ArtObjectListStateContentCopyWithImpl<$Res>;
   $Res call(
-      {List<ArtObjectListItem> listItems,
+      {List<ArtObjectListViewModel> listItems,
       bool reachedMax,
       int century,
       int fetchPage});
@@ -271,7 +271,7 @@ class __$ArtObjectListStateContentCopyWithImpl<$Res>
       listItems == freezed
           ? _value.listItems
           : listItems // ignore: cast_nullable_to_non_nullable
-              as List<ArtObjectListItem>,
+              as List<ArtObjectListViewModel>,
       reachedMax == freezed
           ? _value.reachedMax
           : reachedMax // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ class _$_ArtObjectListStateContent implements _ArtObjectListStateContent {
       this.listItems, this.reachedMax, this.century, this.fetchPage);
 
   @override
-  final List<ArtObjectListItem> listItems;
+  final List<ArtObjectListViewModel> listItems;
   @override
   final bool reachedMax;
   @override
@@ -345,7 +345,7 @@ class _$_ArtObjectListStateContent implements _ArtObjectListStateContent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialLoading,
-    required TResult Function(List<ArtObjectListItem> listItems,
+    required TResult Function(List<ArtObjectListViewModel> listItems,
             bool reachedMax, int century, int fetchPage)
         content,
     required TResult Function(String errorMessage) error,
@@ -357,7 +357,7 @@ class _$_ArtObjectListStateContent implements _ArtObjectListStateContent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -369,7 +369,7 @@ class _$_ArtObjectListStateContent implements _ArtObjectListStateContent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -419,12 +419,13 @@ class _$_ArtObjectListStateContent implements _ArtObjectListStateContent {
 
 abstract class _ArtObjectListStateContent implements ArtObjectListState {
   const factory _ArtObjectListStateContent(
-      List<ArtObjectListItem> listItems,
+      List<ArtObjectListViewModel> listItems,
       bool reachedMax,
       int century,
       int fetchPage) = _$_ArtObjectListStateContent;
 
-  List<ArtObjectListItem> get listItems => throw _privateConstructorUsedError;
+  List<ArtObjectListViewModel> get listItems =>
+      throw _privateConstructorUsedError;
   bool get reachedMax => throw _privateConstructorUsedError;
   int get century => throw _privateConstructorUsedError;
   int get fetchPage => throw _privateConstructorUsedError;
@@ -502,7 +503,7 @@ class _$_ArtObjectListStateError implements _ArtObjectListStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initialLoading,
-    required TResult Function(List<ArtObjectListItem> listItems,
+    required TResult Function(List<ArtObjectListViewModel> listItems,
             bool reachedMax, int century, int fetchPage)
         content,
     required TResult Function(String errorMessage) error,
@@ -514,7 +515,7 @@ class _$_ArtObjectListStateError implements _ArtObjectListStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
@@ -526,7 +527,7 @@ class _$_ArtObjectListStateError implements _ArtObjectListStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initialLoading,
-    TResult Function(List<ArtObjectListItem> listItems, bool reachedMax,
+    TResult Function(List<ArtObjectListViewModel> listItems, bool reachedMax,
             int century, int fetchPage)?
         content,
     TResult Function(String errorMessage)? error,
