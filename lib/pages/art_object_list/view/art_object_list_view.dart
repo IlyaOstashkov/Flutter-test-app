@@ -1,4 +1,3 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
 import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/simple_text.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({

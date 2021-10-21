@@ -1,9 +1,9 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:rijks_api/rijks_api.dart' as api;
+import 'package:test_app_domain/test_app_domain.dart';
 
 class DIContainer {
   static void initialise() {

@@ -1,6 +1,6 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 class MockApiClient extends Mock implements IApiClient {}
 

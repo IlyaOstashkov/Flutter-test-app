@@ -1,5 +1,6 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:test_app_domain/test_app_domain.dart';
+
 part 'art_object_detail_state.freezed.dart';
 
 @freezed

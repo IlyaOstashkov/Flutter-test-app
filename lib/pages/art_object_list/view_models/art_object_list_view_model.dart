@@ -1,5 +1,5 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:equatable/equatable.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 class ArtObjectListViewModel extends Equatable {
   const ArtObjectListViewModel({

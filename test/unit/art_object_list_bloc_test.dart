@@ -1,4 +1,3 @@
-import 'package:art_object_repository/art_object_repository.dart' as repository;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
@@ -7,12 +6,13 @@ import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_stat
 import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test_app_domain/test_app_domain.dart' as domain;
 import 'art_object_list_bloc_test.mocks.dart';
 
-@GenerateMocks([repository.ArtObjectRepository])
+@GenerateMocks([domain.ArtObjectRepository])
 void main() {
   group('ArtObjectListBloc - ', () {
-    late repository.IArtObjectRepository artObjectRepository;
+    late domain.IArtObjectRepository artObjectRepository;
     late ArtObjectListBloc artObjectListBloc;
 
     const limit = 10;
@@ -20,8 +20,8 @@ void main() {
     const someHeader = '21 century';
     const _throttleTimeout = 500;
 
-    repository.ArtObject _artObject(int number) {
-      return repository.ArtObject(
+    domain.ArtObject _artObject(int number) {
+      return domain.ArtObject(
         objectNumber: number.toString(),
         title: 'title ${number.toString()}',
         imageUrl: null,
@@ -39,7 +39,7 @@ void main() {
     }
 
     List<ArtObjectListViewModel> _listItems(
-        List<repository.ArtObject?> artObjects) {
+        List<domain.ArtObject?> artObjects) {
       return artObjects
           .map((e) => ArtObjectListViewModel(
                 artObject: e,

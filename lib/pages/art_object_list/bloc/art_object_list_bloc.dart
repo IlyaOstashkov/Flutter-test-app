@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test_app/constants/fetch_error_constants.dart';
 import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 import 'art_object_list_event.dart';
 import 'art_object_list_state.dart';

@@ -222,9 +222,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter/test_private/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter/test_private/build" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter/test_private/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/art_object_repository/.dart_tool" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/art_object_repository/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/art_object_repository/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/test_app_domain/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/test_app_domain/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/test_app_domain/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/dev/benchmarks/multiple_flutters/module/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/dev/benchmarks/multiple_flutters/module/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/dev/benchmarks/multiple_flutters/module/build" />

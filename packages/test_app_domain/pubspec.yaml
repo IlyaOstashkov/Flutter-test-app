@@ -1,5 +1,5 @@
-name: art_object_repository
-description: A Dart Repository which manages the art object domain.
+name: test_app_domain
+description: Manages domain layer.
 version: 1.0.0+1
 publish_to: none
 

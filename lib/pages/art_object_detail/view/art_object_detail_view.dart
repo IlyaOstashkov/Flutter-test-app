@@ -1,4 +1,3 @@
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_test_app/widgets/offset_space.dart';
 import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:flutter_test_app/widgets/simple_text.dart';
 import 'package:flutter_test_app/widgets/transparent_button.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({

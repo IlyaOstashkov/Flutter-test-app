@@ -1,8 +1,8 @@
-import 'package:art_object_repository/art_object_repository.dart' as domain;
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:rijks_api/rijks_api.dart';
 import 'package:test/test.dart';
+import 'package:test_app_domain/test_app_domain.dart' as domain;
 
 class MockHttpClient extends Mock implements http.Client {}
 

@@ -1,4 +1,3 @@
-import 'package:art_object_repository/art_object_repository.dart' as repository;
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test_app_domain/test_app_domain.dart' as repository;
 import 'art_object_detail_bloc_test.mocks.dart';
 
 @GenerateMocks([repository.ArtObjectRepository])

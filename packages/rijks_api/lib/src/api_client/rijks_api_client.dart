@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:art_object_repository/art_object_repository.dart' as domain;
 import 'package:http/http.dart' as http;
 import 'package:rijks_api/src/models/models.dart';
+import 'package:test_app_domain/test_app_domain.dart' as domain;
 
 class RijksApiClient implements domain.IApiClient {
   RijksApiClient({required http.Client httpClient}) : _httpClient = httpClient;

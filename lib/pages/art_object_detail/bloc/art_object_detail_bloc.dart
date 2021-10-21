@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test_app/constants/fetch_error_constants.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
+import 'package:test_app_domain/test_app_domain.dart';
 
 class ArtObjectDetailBloc
     extends Bloc<ArtObjectDetailEvent, ArtObjectDetailState> {

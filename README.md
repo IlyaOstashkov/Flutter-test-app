@@ -51,7 +51,7 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 
 Unit tests are written for:
 - data layer (`/packages/rijks_api/test/`)
-- domain layer (`/packages/art_object_repository/test/`)
+- domain layer (`/packages/test_app_domain/test/`)
 - presentation BLoC (`/test/unit/`)
 
 <img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
