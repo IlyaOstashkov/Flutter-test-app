@@ -19,6 +19,7 @@ class LoadableImage extends StatelessWidget {
       onTap: onTap,
       child: OptimizedCacheImage(
         imageUrl: imageUrl,
+        fit: BoxFit.cover,
         placeholder: (context, url) => const SimpleLoader(),
         errorWidget: (context, url, error) => const Icon(
           Icons.error,
