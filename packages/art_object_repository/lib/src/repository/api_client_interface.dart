@@ -1,4 +1,4 @@
-import '../art_object_repository.dart';
+import '../models/art_object.dart';
 
 class ApiClientRequestException implements Exception {}
 

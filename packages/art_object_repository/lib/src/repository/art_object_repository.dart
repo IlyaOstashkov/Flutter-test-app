@@ -1,5 +1,5 @@
 import 'dart:async';
-import '../art_object_repository.dart';
+import '../models/art_object.dart';
 import 'api_client_interface.dart';
 
 abstract class IArtObjectRepository {

@@ -1,10 +1,8 @@
 import 'package:art_object_repository/art_object_repository.dart';
-import 'package:art_object_repository/models/art_object.dart';
-import 'package:art_object_repository/repository/art_object_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockRijksApiClient extends Mock implements IApiClient {}
+class MockApiClient extends Mock implements IApiClient {}
 
 void main() {
   group('ArtObjectRepository', () {
@@ -30,7 +28,7 @@ void main() {
     }
 
     setUp(() {
-      apiClient = MockRijksApiClient();
+      apiClient = MockApiClient();
       artObjectRepository = ArtObjectRepository(apiClient: apiClient);
     });
 
