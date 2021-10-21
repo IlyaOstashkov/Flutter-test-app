@@ -63,7 +63,7 @@ void main() {
     expect(find.text(someText), findsOneWidget);
   });
 
-  testWidgets('SimpleOffsetSpaceLoader has one SizedBox', (tester) async {
+  testWidgets('OffsetSpace has one SizedBox', (tester) async {
     await tester.pumpWidget(
       const MaterialApp(home: OffsetSpace()),
     );
