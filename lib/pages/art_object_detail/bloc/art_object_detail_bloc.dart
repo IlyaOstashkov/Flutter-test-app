@@ -33,7 +33,7 @@ class ArtObjectDetailBloc
         objectNumber: event.objectNumber,
       );
       return ArtObjectDetailState.fullContent(artObjectDetail);
-    } on ArtObjectException {
+    } on ApiClientRequestException {
       return const ArtObjectDetailState.error(FetchErrorConstants.serverError);
     } on PlatformException catch (e) {
       return ArtObjectDetailState.error(

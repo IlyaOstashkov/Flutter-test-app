@@ -90,7 +90,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         },
         orElse: () {},
       );
-    } on ArtObjectException {
+    } on ApiClientRequestException {
       emit(const ArtObjectListState.error(FetchErrorConstants.serverError));
     } on PlatformException catch (e) {
       emit(ArtObjectListState.error(

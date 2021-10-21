@@ -2,11 +2,9 @@
 // in flutter_test_app/test/unit/art_object_detail_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
-import 'package:art_object_repository/models/art_object.dart' as _i2;
-import 'package:art_object_repository/repository/art_object_repository.dart'
-    as _i3;
+import 'package:art_object_repository/art_object_repository.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -24,24 +22,24 @@ class _FakeArtObject_0 extends _i1.Fake implements _i2.ArtObject {}
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockArtObjectRepository extends _i1.Mock
-    implements _i3.ArtObjectRepository {
+    implements _i2.ArtObjectRepository {
   MockArtObjectRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<List<_i2.ArtObject>> getArtObjectList(
+  _i3.Future<List<_i2.ArtObject>> getArtObjectList(
           {int? page, int? limit, int? century}) =>
       (super.noSuchMethod(
               Invocation.method(#getArtObjectList, [],
                   {#page: page, #limit: limit, #century: century}),
               returnValue: Future<List<_i2.ArtObject>>.value(<_i2.ArtObject>[]))
-          as _i4.Future<List<_i2.ArtObject>>);
+          as _i3.Future<List<_i2.ArtObject>>);
   @override
-  _i4.Future<_i2.ArtObject> getArtObject({String? objectNumber}) => (super
+  _i3.Future<_i2.ArtObject> getArtObject({String? objectNumber}) => (super
       .noSuchMethod(
           Invocation.method(#getArtObject, [], {#objectNumber: objectNumber}),
-          returnValue: Future<_i2.ArtObject>.value(_FakeArtObject_0())) as _i4
+          returnValue: Future<_i2.ArtObject>.value(_FakeArtObject_0())) as _i3
       .Future<_i2.ArtObject>);
   @override
   String toString() => super.toString();

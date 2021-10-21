@@ -1,4 +1,4 @@
-import 'package:art_object_repository/repository/art_object_repository.dart';
+import 'package:art_object_repository/art_object_repository.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
@@ -17,11 +17,11 @@ class DIContainer {
       isSingleton: true,
     );
     injector.map<http.Client>((i) => http.Client());
-    injector.map<api.IRijksApiClient>(
+    injector.map<IApiClient>(
       (i) => api.RijksApiClient(httpClient: i.get<http.Client>()),
     );
     injector.map<IArtObjectRepository>(
-      (i) => ArtObjectRepository(apiClient: i.get<api.IRijksApiClient>()),
+      (i) => ArtObjectRepository(apiClient: i.get<IApiClient>()),
     );
   }
 }

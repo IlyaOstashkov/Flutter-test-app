@@ -9,6 +9,8 @@ environment:
 dependencies:
   analyzer_rules:
     path: ../analyzer_rules
+  art_object_repository:
+    path: ../art_object_repository
   http: ^0.13.3
   json_annotation: ^4.0.1
 

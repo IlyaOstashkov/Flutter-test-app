@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'package:art_object_repository/models/art_object.dart';
-import 'package:rijks_api/rijks_api.dart' as api;
-
-class ArtObjectException implements Exception {}
+import '../art_object_repository.dart';
+import 'api_client_interface.dart';
 
 abstract class IArtObjectRepository {
   Future<List<ArtObject>> getArtObjectList({
@@ -15,10 +13,9 @@ abstract class IArtObjectRepository {
 }
 
 class ArtObjectRepository implements IArtObjectRepository {
-  ArtObjectRepository({required api.IRijksApiClient apiClient})
-      : _apiClient = apiClient;
+  ArtObjectRepository({required IApiClient apiClient}) : _apiClient = apiClient;
 
-  final api.IRijksApiClient _apiClient;
+  final IApiClient _apiClient;
 
   @override
   Future<List<ArtObject>> getArtObjectList({
@@ -27,45 +24,28 @@ class ArtObjectRepository implements IArtObjectRepository {
     required int century,
   }) async {
     try {
-      final response = await _apiClient.getArtObjectList(
+      return await _apiClient.getArtObjectList(
         page: page,
         limit: limit,
         century: century,
       );
-      final artObjectList =
-          response.map((e) => _mapArtObject(response: e)).toList();
-      return artObjectList;
-    } on api.ArtObjectRequestException {
+    } on ApiClientRequestException {
       // NOTE: we can add exception specific logic here
-      throw ArtObjectException();
-    } on api.ArtObjectEmptyResponseException {
-      throw ArtObjectException();
+      rethrow;
+    } on ApiClientEmptyResponseException {
+      rethrow;
     }
   }
 
   @override
   Future<ArtObject> getArtObject({required String objectNumber}) async {
     try {
-      final response =
-          await _apiClient.getArtObject(objectNumber: objectNumber);
-      final artObject = _mapArtObject(response: response);
-      return artObject;
-    } on api.ArtObjectRequestException {
+      return await _apiClient.getArtObject(objectNumber: objectNumber);
+    } on ApiClientRequestException {
       // NOTE: we can add exception specific logic here
-      throw ArtObjectException();
-    } on api.ArtObjectEmptyResponseException {
-      throw ArtObjectException();
+      rethrow;
+    } on ApiClientEmptyResponseException {
+      rethrow;
     }
-  }
-
-  ArtObject _mapArtObject({required api.ArtObject response}) {
-    return ArtObject(
-      objectNumber: response.objectNumber,
-      title: response.title ?? '',
-      imageUrl: response.webImage?.url,
-      description: response.description,
-      principalOrFirstMaker: response.principalOrFirstMaker,
-      presentingDate: response.dating?.presentingDate,
-    );
   }
 }

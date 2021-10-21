@@ -1,3 +1,4 @@
+import 'package:art_object_repository/art_object_repository.dart' as domain;
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:rijks_api/rijks_api.dart';
@@ -12,7 +13,7 @@ class FakeUri extends Fake implements Uri {}
 void main() {
   group('RijksApiClient', () {
     late http.Client httpClient;
-    late IRijksApiClient rijksApiClient;
+    late domain.IApiClient rijksApiClient;
     const apiKey = '0fiuZFh4';
 
     setUpAll(() {
@@ -67,7 +68,7 @@ void main() {
             limit: limit,
             century: century,
           ),
-          throwsA(isA<ArtObjectRequestException>()),
+          throwsA(isA<domain.ApiClientRequestException>()),
         );
       });
 
@@ -83,7 +84,7 @@ void main() {
             limit: limit,
             century: century,
           ),
-          throwsA(isA<ArtObjectEmptyResponseException>()),
+          throwsA(isA<domain.ApiClientEmptyResponseException>()),
         );
       });
 
@@ -141,13 +142,13 @@ void main() {
         );
         expect(
           list,
-          isA<List<ArtObject>>()
+          isA<List<domain.ArtObject>>()
               .having((p0) => p0.isNotEmpty, 'is not empty', true),
         );
         final firstElement = list.first;
         expect(
           firstElement,
-          isA<ArtObject>()
+          isA<domain.ArtObject>()
               .having((p0) => p0.objectNumber, 'objectNumber', 'BK-17496')
               .having((p0) => p0.title, 'title', 'Blue Macaw')
               .having(
@@ -157,9 +158,8 @@ void main() {
               ),
         );
         expect(
-          firstElement.webImage,
-          isA<WebImage>().having((p0) => p0.url, 'url',
-              'https://lh3.ggpht.com/5sc-SGzzgobkHnmnykUi4B1PqMtadoFqXOhYLQmsAI0Mcs_FeCoXT6loaiAUhr_zKvp2iyXntDxVhCzeVwjFulsjzRE=s0'),
+          firstElement.imageUrl,
+          'https://lh3.ggpht.com/5sc-SGzzgobkHnmnykUi4B1PqMtadoFqXOhYLQmsAI0Mcs_FeCoXT6loaiAUhr_zKvp2iyXntDxVhCzeVwjFulsjzRE=s0',
         );
       });
     });
@@ -193,7 +193,7 @@ void main() {
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
           () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
-          throwsA(isA<ArtObjectRequestException>()),
+          throwsA(isA<domain.ApiClientRequestException>()),
         );
       });
 
@@ -205,7 +205,7 @@ void main() {
         when(() => httpClient.get(any())).thenAnswer((_) async => response);
         expect(
           () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
-          throwsA(isA<ArtObjectEmptyResponseException>()),
+          throwsA(isA<domain.ApiClientEmptyResponseException>()),
         );
       });
 
@@ -384,7 +384,7 @@ void main() {
             await rijksApiClient.getArtObject(objectNumber: objectNumber);
         expect(
           artObject,
-          isA<ArtObject>()
+          isA<domain.ArtObject>()
               .having((p0) => p0.objectNumber, 'objectNumber', 'BK-1975-81')
               .having((p0) => p0.title, 'title', 'Cupboard')
               .having(
@@ -399,14 +399,12 @@ void main() {
               ),
         );
         expect(
-          artObject.webImage,
-          isA<WebImage>().having((p0) => p0.url, 'url',
-              'https://lh3.googleusercontent.com/tGI4dOAfJLBbewwspzXpUnSZxEKFACv9Y3FHqAxQUtN2p4AXt2MS9oFv6eJyIBtr7gvzmv58vSitMFVeHY0TGsfOfDN2=s0'),
+          artObject.imageUrl,
+          'https://lh3.googleusercontent.com/tGI4dOAfJLBbewwspzXpUnSZxEKFACv9Y3FHqAxQUtN2p4AXt2MS9oFv6eJyIBtr7gvzmv58vSitMFVeHY0TGsfOfDN2=s0',
         );
         expect(
-          artObject.dating,
-          isA<ArtObjectDating>().having(
-              (p0) => p0.presentingDate, 'presentingDate', 'c. 1635 - c. 1645'),
+          artObject.presentingDate,
+          'c. 1635 - c. 1645',
         );
       });
     });

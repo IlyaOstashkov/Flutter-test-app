@@ -1,23 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:art_object_repository/art_object_repository.dart' as domain;
 import 'package:http/http.dart' as http;
 import 'package:rijks_api/rijks_api.dart';
 
-class ArtObjectRequestException implements Exception {}
-
-class ArtObjectEmptyResponseException implements Exception {}
-
-abstract class IRijksApiClient {
-  Future<List<ArtObject>> getArtObjectList({
-    required int page,
-    required int limit,
-    required int century,
-  });
-
-  Future<ArtObject> getArtObject({required String objectNumber});
-}
-
-class RijksApiClient implements IRijksApiClient {
+class RijksApiClient implements domain.IApiClient {
   RijksApiClient({required http.Client httpClient}) : _httpClient = httpClient;
 
   final http.Client _httpClient;
@@ -28,7 +15,7 @@ class RijksApiClient implements IRijksApiClient {
   static const _timeoutSeconds = 3;
 
   @override
-  Future<List<ArtObject>> getArtObjectList({
+  Future<List<domain.ArtObject>> getArtObjectList({
     required int page,
     required int limit,
     required int century,
@@ -47,11 +34,11 @@ class RijksApiClient implements IRijksApiClient {
     );
     final json = await _makeRequest(request);
     final pack = ArtObjectPack.fromJson(json);
-    return pack.artObjects;
+    return pack.artObjects.map((e) => _mapArtObject(response: e)).toList();
   }
 
   @override
-  Future<ArtObject> getArtObject({required String objectNumber}) async {
+  Future<domain.ArtObject> getArtObject({required String objectNumber}) async {
     final params = <String, String>{
       'key': _apiKey,
     };
@@ -63,7 +50,7 @@ class RijksApiClient implements IRijksApiClient {
     );
     final json = await _makeRequest(request);
     final detail = ArtObjectDetail.fromJson(json);
-    return detail.artObject;
+    return _mapArtObject(response: detail.artObject);
   }
 
   Future<Map<String, dynamic>> _makeRequest(Uri request) async {
@@ -71,12 +58,23 @@ class RijksApiClient implements IRijksApiClient {
           const Duration(seconds: _timeoutSeconds),
         );
     if (response.statusCode != 200) {
-      throw ArtObjectRequestException();
+      throw domain.ApiClientRequestException();
     }
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     if (json.isEmpty) {
-      throw ArtObjectEmptyResponseException();
+      throw domain.ApiClientEmptyResponseException();
     }
     return json;
+  }
+
+  domain.ArtObject _mapArtObject({required ArtObject response}) {
+    return domain.ArtObject(
+      objectNumber: response.objectNumber,
+      title: response.title ?? '',
+      imageUrl: response.webImage?.url,
+      description: response.description,
+      principalOrFirstMaker: response.principalOrFirstMaker,
+      presentingDate: response.dating?.presentingDate,
+    );
   }
 }
