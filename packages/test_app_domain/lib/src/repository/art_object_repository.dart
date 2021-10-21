@@ -1,6 +1,6 @@
 import 'dart:async';
+import '../interfaces/api_client_interface.dart';
 import '../models/art_object.dart';
-import 'api_client_interface.dart';
 
 abstract class IArtObjectRepository {
   Future<List<ArtObject>> getArtObjectList({
