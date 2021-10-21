@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/title_text.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class ArtObjectListHeader extends StatelessWidget {
   const ArtObjectListHeader({

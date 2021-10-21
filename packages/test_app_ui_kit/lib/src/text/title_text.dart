@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/simple_text.dart';
+import 'simple_text.dart';
 
 class TitleText extends StatelessWidget {
   const TitleText(

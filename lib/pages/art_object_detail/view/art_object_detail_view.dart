@@ -5,13 +5,8 @@ import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:flutter_test_app/pages/image_gallery/full_screen_image_page.dart';
-import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
-import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
-import 'package:flutter_test_app/widgets/offset_space.dart';
-import 'package:flutter_test_app/widgets/simple_loader.dart';
-import 'package:flutter_test_app/widgets/simple_text.dart';
-import 'package:flutter_test_app/widgets/transparent_button.dart';
 import 'package:test_app_domain/test_app_domain.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({

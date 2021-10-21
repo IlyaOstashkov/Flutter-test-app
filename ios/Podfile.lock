@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   Mantle: 4c0ed6ce47c96eccc4dc3bb071deb3def0e2c3be
-  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  path_provider: d1e9807085df1f9cc9318206cd649dc0b76be3de
   SDWebImage: 4ea20cca2986adc5aacde07aa686742fd4c67a37
   SDWebImageWebPCoder: f93010f3f6c031e2f8fb3081ca4ee6966c539815
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904

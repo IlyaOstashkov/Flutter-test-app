@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/simple_loader.dart';
-import 'package:flutter_test_app/widgets/transparent_button.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
+import '../common/simple_loader.dart';
+import '../button/transparent_button.dart';
 
 class LoadableImage extends StatelessWidget {
   const LoadableImage({

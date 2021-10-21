@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/loadable_image.dart';
+
+import 'loadable_image.dart';
 
 class CircleLoadableImage extends StatelessWidget {
   const CircleLoadableImage({

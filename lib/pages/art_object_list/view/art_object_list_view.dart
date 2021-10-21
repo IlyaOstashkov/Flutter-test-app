@@ -9,11 +9,8 @@ import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_stat
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
 import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
 import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
-import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
-import 'package:flutter_test_app/widgets/offset_space.dart';
-import 'package:flutter_test_app/widgets/simple_loader.dart';
-import 'package:flutter_test_app/widgets/simple_text.dart';
 import 'package:test_app_domain/test_app_domain.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({

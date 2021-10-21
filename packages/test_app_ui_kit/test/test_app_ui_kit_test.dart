@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test_app/widgets/app_bar_fabric.dart';
-import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
-import 'package:flutter_test_app/widgets/loadable_image.dart';
-import 'package:flutter_test_app/widgets/offset_space.dart';
-import 'package:flutter_test_app/widgets/simple_loader.dart';
-import 'package:flutter_test_app/widgets/simple_text.dart';
-import 'package:flutter_test_app/widgets/title_text.dart';
-import 'package:flutter_test_app/widgets/transparent_button.dart';
+import 'package:test_app_ui_kit/src/app_bar/app_bar_fabric.dart';
+import 'package:test_app_ui_kit/src/button/transparent_button.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
+import 'package:test_app_ui_kit/src/common/offset_space.dart';
+import 'package:test_app_ui_kit/src/common/simple_loader.dart';
+import 'package:test_app_ui_kit/src/image/circle_loadable_image.dart';
+import 'package:test_app_ui_kit/src/image/loadable_image.dart';
+import 'package:test_app_ui_kit/src/text/simple_text.dart';
+import 'package:test_app_ui_kit/src/text/title_text.dart';
 
 void main() {
   const someText = 'some-text';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/managers/navigation_manager.dart';
-import 'package:flutter_test_app/widgets/simple_loader.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class FullScreenImageView extends StatelessWidget {
   const FullScreenImageView({

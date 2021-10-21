@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/widgets/circle_loadable_image.dart';
-import 'package:flutter_test_app/widgets/offset_space.dart';
-import 'package:flutter_test_app/widgets/simple_text.dart';
-import 'package:flutter_test_app/widgets/transparent_button.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class ArtObjectListTile extends StatelessWidget {
   const ArtObjectListTile({
