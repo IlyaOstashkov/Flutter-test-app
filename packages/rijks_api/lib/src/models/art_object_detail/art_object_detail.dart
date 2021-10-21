@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rijks_api/models/art_object/art_object.dart';
+import '../models.dart';
+
 part 'art_object_detail.g.dart';
 
 @JsonSerializable()

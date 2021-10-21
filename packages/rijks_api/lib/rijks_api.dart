@@ -1,4 +1,4 @@
 library rijks_api;
 
-export 'models/models.dart';
-export 'rijks_api_client.dart';
+export 'src/api_client/rijks_api_client.dart';
+export 'src/models/models.dart';

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rijks_api/models/art_object_dating/art_object_dating.dart';
-import 'package:rijks_api/models/web_image/web_image.dart';
+import 'package:rijks_api/src/models/models.dart';
+
 part 'art_object.g.dart';
 
 @JsonSerializable()
