@@ -7,6 +7,8 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 dependencies:
+  analyzer_rules:
+    path: packages/analyzer_rules
   equatable: ^2.0.3
   flutter:
     sdk: flutter
