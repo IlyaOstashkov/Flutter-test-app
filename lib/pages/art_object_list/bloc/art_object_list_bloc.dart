@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_test_app/constants/fetch_error_constants.dart';
 import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:test_app_domain/test_app_domain.dart';
@@ -90,18 +87,8 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         },
         orElse: () {},
       );
-    } on ApiClientRequestException {
-      emit(const ArtObjectListState.error(FetchErrorConstants.serverError));
-    } on PlatformException catch (e) {
-      emit(ArtObjectListState.error(
-          e.message ?? FetchErrorConstants.serverError));
-    } on SocketException catch (_) {
-      emit(const ArtObjectListState.error(
-          FetchErrorConstants.noInternetConnection));
-    } on TimeoutException {
-      emit(const ArtObjectListState.error(FetchErrorConstants.timeout));
-    } catch (e) {
-      emit(const ArtObjectListState.error(FetchErrorConstants.undefinedError));
+    } on ApiClientRequestException catch (e) {
+      emit(ArtObjectListState.error(e.message));
     }
   }
 

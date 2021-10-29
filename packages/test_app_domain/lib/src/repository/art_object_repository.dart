@@ -22,30 +22,18 @@ class ArtObjectRepository implements IArtObjectRepository {
     required int page,
     required int limit,
     required int century,
-  }) async {
-    try {
-      return await _apiClient.getArtObjectList(
-        page: page,
-        limit: limit,
-        century: century,
-      );
-    } on ApiClientRequestException {
-      // NOTE: we can add exception specific logic here
-      rethrow;
-    } on ApiClientEmptyResponseException {
-      rethrow;
-    }
+  }) {
+    // NOTE: here we can also use data base
+    return _apiClient.getArtObjectList(
+      page: page,
+      limit: limit,
+      century: century,
+    );
   }
 
   @override
-  Future<ArtObject> getArtObject({required String objectNumber}) async {
-    try {
-      return await _apiClient.getArtObject(objectNumber: objectNumber);
-    } on ApiClientRequestException {
-      // NOTE: we can add exception specific logic here
-      rethrow;
-    } on ApiClientEmptyResponseException {
-      rethrow;
-    }
+  Future<ArtObject> getArtObject({required String objectNumber}) {
+    // NOTE: here we can also use data base
+    return _apiClient.getArtObject(objectNumber: objectNumber);
   }
 }

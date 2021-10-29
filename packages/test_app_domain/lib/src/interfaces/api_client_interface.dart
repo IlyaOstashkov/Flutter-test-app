@@ -1,8 +1,9 @@
 import '../models/art_object.dart';
 
-class ApiClientRequestException implements Exception {}
-
-class ApiClientEmptyResponseException implements Exception {}
+class ApiClientRequestException implements Exception {
+  const ApiClientRequestException({required this.message});
+  final String message;
+}
 
 abstract class IApiClient {
   Future<List<ArtObject>> getArtObjectList({

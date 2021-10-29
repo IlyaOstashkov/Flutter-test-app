@@ -72,22 +72,6 @@ void main() {
         );
       });
 
-      test('throws ArtObjectEmptyResponseException on empty response',
-          () async {
-        final response = MockResponse();
-        when(() => response.statusCode).thenReturn(200);
-        when(() => response.body).thenReturn('{}');
-        when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        expect(
-          () async => rijksApiClient.getArtObjectList(
-            page: page,
-            limit: limit,
-            century: century,
-          ),
-          throwsA(isA<domain.ApiClientEmptyResponseException>()),
-        );
-      });
-
       test('returns List<ArtObject> on valid response', () async {
         final response = MockResponse();
         when(() => response.statusCode).thenReturn(200);
@@ -194,18 +178,6 @@ void main() {
         expect(
           () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
           throwsA(isA<domain.ApiClientRequestException>()),
-        );
-      });
-
-      test('throws ArtObjectEmptyResponseException on empty response',
-          () async {
-        final response = MockResponse();
-        when(() => response.statusCode).thenReturn(200);
-        when(() => response.body).thenReturn('{}');
-        when(() => httpClient.get(any())).thenAnswer((_) async => response);
-        expect(
-          () async => rijksApiClient.getArtObject(objectNumber: objectNumber),
-          throwsA(isA<domain.ApiClientEmptyResponseException>()),
         );
       });
 

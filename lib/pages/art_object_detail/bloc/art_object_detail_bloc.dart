@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/constants/fetch_error_constants.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:test_app_domain/test_app_domain.dart';
@@ -33,19 +30,8 @@ class ArtObjectDetailBloc
         objectNumber: event.objectNumber,
       );
       return ArtObjectDetailState.fullContent(artObjectDetail);
-    } on ApiClientRequestException {
-      return const ArtObjectDetailState.error(FetchErrorConstants.serverError);
-    } on PlatformException catch (e) {
-      return ArtObjectDetailState.error(
-          e.message ?? FetchErrorConstants.serverError);
-    } on SocketException catch (_) {
-      return const ArtObjectDetailState.error(
-          FetchErrorConstants.noInternetConnection);
-    } on TimeoutException {
-      return const ArtObjectDetailState.error(FetchErrorConstants.timeout);
-    } catch (e) {
-      return const ArtObjectDetailState.error(
-          FetchErrorConstants.undefinedError);
+    } on ApiClientRequestException catch (e) {
+      return ArtObjectDetailState.error(e.message);
     }
   }
 }

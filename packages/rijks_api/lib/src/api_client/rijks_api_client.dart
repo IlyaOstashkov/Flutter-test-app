@@ -1,9 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:rijks_api/src/models/models.dart';
 import 'package:test_app_domain/test_app_domain.dart' as domain;
+
+class FetchErrorConstants {
+  static const String serverError = 'Could not get data from the server';
+  static const String noInternetConnection = 'No internet connection';
+  static const String timeout =
+      'The time for the request is over. Try again later';
+  static const String undefinedError =
+      'Undefined error. Please write to app support';
+}
 
 class RijksApiClient implements domain.IApiClient {
   RijksApiClient({required http.Client httpClient}) : _httpClient = httpClient;
@@ -55,17 +66,29 @@ class RijksApiClient implements domain.IApiClient {
   }
 
   Future<Map<String, dynamic>> _makeRequest(Uri request) async {
-    final response = await _httpClient.get(request).timeout(
-          const Duration(seconds: _timeoutSeconds),
-        );
-    if (response.statusCode != 200) {
-      throw domain.ApiClientRequestException();
+    try {
+      final response = await _httpClient.get(request).timeout(
+            const Duration(seconds: _timeoutSeconds),
+          );
+      if (response.statusCode != 200) {
+        throw const domain.ApiClientRequestException(
+            message: FetchErrorConstants.serverError);
+      }
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      return json;
+    } on PlatformException {
+      throw const domain.ApiClientRequestException(
+          message: FetchErrorConstants.serverError);
+    } on SocketException catch (_) {
+      throw const domain.ApiClientRequestException(
+          message: FetchErrorConstants.noInternetConnection);
+    } on TimeoutException {
+      throw const domain.ApiClientRequestException(
+          message: FetchErrorConstants.timeout);
+    } catch (e) {
+      throw const domain.ApiClientRequestException(
+          message: FetchErrorConstants.undefinedError);
     }
-    final json = jsonDecode(response.body) as Map<String, dynamic>;
-    if (json.isEmpty) {
-      throw domain.ApiClientEmptyResponseException();
-    }
-    return json;
   }
 
   domain.ArtObject _mapArtObject({required ArtObject response}) {
