@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:test_app_shared/test_app_shared.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class FullScreenImageView extends StatelessWidget {
@@ -12,7 +12,7 @@ class FullScreenImageView extends StatelessWidget {
   }) : super(key: key);
 
   final List<String> imageUrls;
-  final INavigationManager navigationManager;
+  final NavigationManager navigationManager;
 
   @override
   Widget build(BuildContext context) {

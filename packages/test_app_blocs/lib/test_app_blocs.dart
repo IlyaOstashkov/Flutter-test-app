@@ -1,4 +1,4 @@
-library test_app_blocks;
+library test_app_blocs;
 
 export 'src/art_object_detail_bloc/art_object_detail_bloc.dart';
 export 'src/art_object_detail_bloc/art_object_detail_event.dart';

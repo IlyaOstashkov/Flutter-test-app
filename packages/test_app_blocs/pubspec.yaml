@@ -1,4 +1,4 @@
-name: test_app_blocks
+name: test_app_blocs
 description: BLoC layer
 version: 0.0.1
 publish_to: none

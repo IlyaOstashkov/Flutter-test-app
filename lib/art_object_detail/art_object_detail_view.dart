@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/managers/navigation_manager.dart';
-import 'package:flutter_test_app/managers/notification_manager.dart';
-import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
-import 'package:flutter_test_app/pages/image_gallery/full_screen_image_page.dart';
+import 'package:flutter_test_app/image_gallery/full_screen_image_page.dart';
+import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
+import 'package:test_app_shared/test_app_shared.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 class ArtObjectDetailView extends StatefulWidget {
@@ -15,8 +13,8 @@ class ArtObjectDetailView extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final INotificationManager notificationManager;
-  final INavigationManager navigationManager;
+  final NotificationManager notificationManager;
+  final NavigationManager navigationManager;
 
   @override
   _ArtObjectDetailView createState() => _ArtObjectDetailView();

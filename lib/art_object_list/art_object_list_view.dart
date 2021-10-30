@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/managers/navigation_manager.dart';
-import 'package:flutter_test_app/managers/notification_manager.dart';
-import 'package:flutter_test_app/pages/art_object_detail/art_object_detail_page.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
-import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_header.dart';
-import 'package:flutter_test_app/pages/art_object_list/view/art_object_list_tile.dart';
-import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
+import 'package:flutter_test_app/art_object_detail/art_object_detail_page.dart';
+import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
+import 'package:test_app_shared/test_app_shared.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
+
+import 'art_object_list_header.dart';
+import 'art_object_list_tile.dart';
 
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({
@@ -19,8 +16,8 @@ class ArtObjectListView extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final INotificationManager notificationManager;
-  final INavigationManager navigationManager;
+  final NotificationManager notificationManager;
+  final NavigationManager navigationManager;
 
   @override
   _ArtObjectListView createState() => _ArtObjectListView();

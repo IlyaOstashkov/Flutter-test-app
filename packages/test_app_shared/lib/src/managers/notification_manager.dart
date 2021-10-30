@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class INotificationManager {
-  void show(
-    BuildContext context,
-    String text,
-  );
-}
-
-class NotificationManager implements INotificationManager {
-  const NotificationManager();
-
-  @override
+class NotificationManager {
   void show(
     BuildContext context,
     String text,
