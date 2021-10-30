@@ -21,6 +21,8 @@ dependencies:
 dev_dependencies:
   bloc_test: ^8.2.0
   build_runner: ^2.1.4
+  dart_dot_reporter:
+    path: ../dart_dot_reporter
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
