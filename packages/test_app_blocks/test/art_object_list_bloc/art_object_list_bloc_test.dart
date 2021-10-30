@@ -1,11 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_event.dart';
-import 'package:flutter_test_app/pages/art_object_list/bloc/art_object_list_state.dart';
-import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test_app_blocks/test_app_blocks.dart';
 import 'package:test_app_domain/test_app_domain.dart' as domain;
 import 'art_object_list_bloc_test.mocks.dart';
 

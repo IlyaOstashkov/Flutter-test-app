@@ -5,7 +5,7 @@ import 'package:flutter_test_app/managers/navigation_manager.dart';
 import 'package:flutter_test_app/managers/notification_manager.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
 import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
-import 'package:flutter_test_app/pages/art_object_detail/view/art_object_detail_view.dart';
+import 'package:flutter_test_app/pages/art_object_detail/art_object_detail_view.dart';
 import 'package:test_app_domain/test_app_domain.dart';
 
 class ArtObjectDetailPage extends StatelessWidget {

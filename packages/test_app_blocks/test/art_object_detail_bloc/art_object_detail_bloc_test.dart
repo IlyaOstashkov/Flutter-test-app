@@ -1,10 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_bloc.dart';
-import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_event.dart';
-import 'package:flutter_test_app/pages/art_object_detail/bloc/art_object_detail_state.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test_app_blocks/test_app_blocks.dart';
 import 'package:test_app_domain/test_app_domain.dart' as repository;
 import 'art_object_detail_bloc_test.mocks.dart';
 

@@ -1,0 +1,28 @@
+name: test_app_blocks
+description: BLoC layer
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.15.0-116.0.dev <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  analyzer_rules:
+    path: ../analyzer_rules
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^7.3.0
+  freezed_annotation: ^0.14.3
+  rxdart: ^0.27.2
+  test_app_domain:
+    path: ../test_app_domain
+
+dev_dependencies:
+  bloc_test: ^8.2.0
+  build_runner: ^2.1.4
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+  freezed: ^0.14.5
+  mockito: ^5.0.16

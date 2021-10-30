@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:test_app_domain/test_app_domain.dart';
 
 import 'art_object_list_event.dart';
 import 'art_object_list_state.dart';
+import 'view_models/art_object_list_view_model.dart';
 
 class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
   ArtObjectListBloc({required this.repository})

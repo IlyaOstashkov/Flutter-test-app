@@ -12,28 +12,21 @@ dependencies:
   equatable: ^2.0.3
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.3.0
   flutter_simple_dependency_injection: ^2.0.0
-  freezed_annotation: ^0.14.3
   photo_view: ^0.13.0
   rijks_api:
     path: packages/rijks_api
-  rxdart: ^0.27.2
   test_app_domain:
     path: packages/test_app_domain
   test_app_ui_kit:
     path: packages/test_app_ui_kit
 
 dev_dependencies:
-  bloc_test: ^8.2.0
-  build_runner: ^2.1.4
   dart_dot_reporter:
     path: packages/dart_dot_reporter
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^0.14.5
-  mockito: ^5.0.16
 
 flutter:
   uses-material-design: true

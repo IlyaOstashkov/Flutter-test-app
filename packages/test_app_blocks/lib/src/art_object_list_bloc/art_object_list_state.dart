@@ -1,5 +1,6 @@
-import 'package:flutter_test_app/pages/art_object_list/view_models/art_object_list_view_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'view_models/art_object_list_view_model.dart';
 part 'art_object_list_state.freezed.dart';
 
 @freezed

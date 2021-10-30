@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:test_app_shared/test_app_shared.dart';
 
 void main() {
-  group('Service Locator', () {
+  group('Service Locator - ', () {
     late ServiceLocator serviceLocator;
 
     setUp(() {
