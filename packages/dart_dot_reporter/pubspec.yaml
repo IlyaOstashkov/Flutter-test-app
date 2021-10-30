@@ -6,7 +6,7 @@ repository: https://github.com/apastuhov/dart_dot_reporter
 publish_to: none
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
+  sdk: ">=2.15.0-116.0.dev <3.0.0"
 
 executables:
   dart_dot_reporter: dart_dot_reporter
