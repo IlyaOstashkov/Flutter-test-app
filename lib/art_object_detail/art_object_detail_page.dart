@@ -27,7 +27,6 @@ class ArtObjectDetailPage extends StatelessWidget {
       },
       child: ArtObjectDetailView(
         notificationManager: injector.get<NotificationManager>(),
-        navigationManager: injector.get<NavigationManager>(),
       ),
     );
   }

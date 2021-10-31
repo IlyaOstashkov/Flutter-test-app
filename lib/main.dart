@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test_app/di_container.dart';
 
-import 'art_object_list/art_object_list_page.dart';
+import 'navigation/app_navigation_stack.dart';
+import 'navigation/navigation_route_information_parser.dart';
+import 'navigation/navigation_router_delegate.dart';
 
 void main() {
   DIContainer.initialise();
-  runApp(
-    const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ArtObjectListPage(),
-    ),
-  );
+  runApp(MaterialApp.router(
+    routerDelegate:
+        NavigationRouterDelegate(stack: AppNavigationStack.instance),
+    routeInformationParser: NavigationRouteInformationParser(),
+  ));
 }

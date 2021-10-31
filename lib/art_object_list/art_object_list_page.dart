@@ -23,7 +23,6 @@ class ArtObjectListPage extends StatelessWidget {
       },
       child: ArtObjectListView(
         notificationManager: injector.get<NotificationManager>(),
-        navigationManager: injector.get<NavigationManager>(),
       ),
     );
   }

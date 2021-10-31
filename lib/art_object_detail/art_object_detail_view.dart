@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/image_gallery/full_screen_image_page.dart';
+import 'package:flutter_test_app/navigation/app_navigation_stack.dart';
+import 'package:flutter_test_app/navigation/navigation_stack_item.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
 import 'package:test_app_shared/test_app_shared.dart';
@@ -9,12 +10,10 @@ import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 class ArtObjectDetailView extends StatefulWidget {
   const ArtObjectDetailView({
     required this.notificationManager,
-    required this.navigationManager,
     Key? key,
   }) : super(key: key);
 
   final NotificationManager notificationManager;
-  final NavigationManager navigationManager;
 
   @override
   _ArtObjectDetailView createState() => _ArtObjectDetailView();
@@ -24,8 +23,8 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
   void _onImageTap(ArtObject artObject) {
     final imageUrl = artObject.imageUrl;
     if (imageUrl == null) return;
-    final Widget page = FullScreenImagePage(imageUrls: [imageUrl]);
-    widget.navigationManager.push(context, page);
+    AppNavigationStack.instance
+        .push(NavigationStackItem.fullScreenImage(imageUrls: [imageUrl]));
   }
 
   @override

@@ -7,10 +7,6 @@ import 'package:test_app_shared/test_app_shared.dart';
 class DIContainer {
   static void initialise() {
     final injector = Injector();
-    injector.map<NavigationManager>(
-      (i) => NavigationManager(),
-      isSingleton: true,
-    );
     injector.map<NotificationManager>(
       (i) => NotificationManager(),
       isSingleton: true,

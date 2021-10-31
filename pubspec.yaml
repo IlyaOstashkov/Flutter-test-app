@@ -15,6 +15,7 @@ dependencies:
   flutter_bloc: ^7.3.0
   flutter_simple_dependency_injection: ^2.0.0
   photo_view: ^0.13.0
+  pragmatic_navigation: ^0.1.1
   rijks_api:
     path: packages/rijks_api
   test_app_blocs:
@@ -27,11 +28,13 @@ dependencies:
     path: packages/test_app_ui_kit
 
 dev_dependencies:
+  build_runner: ^2.1.4
   dart_dot_reporter:
     path: packages/dart_dot_reporter
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  freezed: ^0.14.5
 
 flutter:
   uses-material-design: true

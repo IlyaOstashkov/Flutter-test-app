@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_test_app/art_object_detail/art_object_detail_page.dart';
+import 'package:flutter_test_app/navigation/app_navigation_stack.dart';
+import 'package:flutter_test_app/navigation/navigation_stack_item.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
 import 'package:test_app_shared/test_app_shared.dart';
@@ -12,12 +13,10 @@ import 'art_object_list_tile.dart';
 class ArtObjectListView extends StatefulWidget {
   const ArtObjectListView({
     required this.notificationManager,
-    required this.navigationManager,
     Key? key,
   }) : super(key: key);
 
   final NotificationManager notificationManager;
-  final NavigationManager navigationManager;
 
   @override
   _ArtObjectListView createState() => _ArtObjectListView();
@@ -90,9 +89,8 @@ class _ArtObjectListView extends State<ArtObjectListView> {
 
   void _navigateToARtObjectDetailPage({required ArtObject? artObject}) {
     if (artObject == null) return;
-    widget.navigationManager.push(
-      context,
-      ArtObjectDetailPage(artObject: artObject),
+    AppNavigationStack.instance.push(
+      NavigationStackItem.artObjectDetail(artObject: artObject),
     );
   }
 
