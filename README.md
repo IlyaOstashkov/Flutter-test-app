@@ -13,7 +13,7 @@ The Dutch Rijksmuseum API was used in the application (documentation here: https
 
 - The application uses the popular Bloc state management library (https://pub.dev/packages/flutter_bloc).
 - The test project demonstrate separating the application into layers.
-    - Data layer: retrieve data from the API. The RijksApiClient is independent of the application. As a result, I created it as an internal package (and could even publish it on pub.dev).
+    - Data layer: retrieve data from the API. The RijksApiClient is independent of the application. As a result, I created it as an internal package.
     - Domain layer: abstract the data layer and expose domain models for the application to consume. ArtObjectRepository also implemented as an internal package. 
     - Presentation layer: display art objects information and manage the state of each page (BLoC)
 - Dependency injection is implemented with a simple dependency injection plugin for Flutter and Dart.(https://pub.dev/packages/flutter_simple_dependency_injection)
@@ -50,9 +50,11 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 ### ✅ Unit tests
 
 Unit tests are written for:
-- data layer (`/packages/rijks_api/test/`)
-- domain layer (`/packages/test_app_domain/test/`)
-- presentation BLoC (`/test/unit/`)
+- api (`/packages/rijks_api/test/`)
+- domain (`/packages/test_app_domain/test/`)
+- presentation BLoC (`/packages/test_app_blocs/test/`)
+- shared utils (`/packages/test_app_shared/test/`)
+- UI Kit (`/packages/test_app_ui_kit/test/`)
 
 <img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
 
@@ -60,9 +62,11 @@ Unit tests are written for:
 
 Widget tests are written only for common widgets (`/test/widgets/`). In the future, I will add the widget tests for pages.
 
-### 📌 Integration tests
+### 📌 CI/CD
 
-Integration tests have not yet been implemented.
+I use CodeMagic.io for CI/CD.
+
+[![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/61801c5bf780e4f64be7e6c6/status_badge.svg)](https://codemagic.io/apps/61801c5bf780e4f64be7e6c7/61801c5bf780e4f64be7e6c6/latest_build)
 
 ## Video
 
