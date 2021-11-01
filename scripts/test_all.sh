@@ -14,7 +14,7 @@ for d in $(ls); do
     if [ -d "$d/$TEST_DIR" ]; then
         echo "Testing $d"
         cd $d
-        fvm flutter test --dart-define=OS=ios
+        fvm flutter test
         cd ..
     fi
 done

@@ -37,7 +37,7 @@ runTests () {
       escapedPath="$(echo $1 | sed 's/\//\\\//g')"
       # run tests with coverage
       if grep flutter pubspec.yaml > /dev/null; then
-        fvm flutter test --dart-define=OS=ios --coverage --machine > machine.log || error=true
+        fvm flutter test --coverage --machine > machine.log || error=true
         fvm flutter pub get && fvm flutter pub run dart_dot_reporter:dart_dot_reporter ./machine.log
         if [ -d "coverage" ]; then
           # combine line coverage info from package tests to a common file
