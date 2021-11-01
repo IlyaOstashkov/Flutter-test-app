@@ -4,19 +4,13 @@ import 'package:flutter_test_app/navigation/app_navigation_stack.dart';
 import 'package:flutter_test_app/navigation/navigation_stack_item.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
-import 'package:test_app_shared/test_app_shared.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 import 'art_object_list_header.dart';
 import 'art_object_list_tile.dart';
 
 class ArtObjectListView extends StatefulWidget {
-  const ArtObjectListView({
-    required this.notificationManager,
-    Key? key,
-  }) : super(key: key);
-
-  final NotificationManager notificationManager;
+  const ArtObjectListView({Key? key}) : super(key: key);
 
   @override
   _ArtObjectListView createState() => _ArtObjectListView();
@@ -45,10 +39,8 @@ class _ArtObjectListView extends State<ArtObjectListView> {
                 final message = errorMessage.isNotEmpty
                     ? errorMessage
                     : 'Failed to fetch art objects';
-                widget.notificationManager.show(
-                  context,
-                  message,
-                );
+                final snack = SnackBarWidget.of(context);
+                if (snack != null) snack.show(context, message);
               },
               orElse: () {});
         },

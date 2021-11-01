@@ -6,5 +6,6 @@ export 'src/common/offset_space.dart';
 export 'src/common/simple_loader.dart';
 export 'src/image/circle_loadable_image.dart';
 export 'src/image/loadable_image.dart';
+export 'src/snack_bar/snack_bar_widget.dart';
 export 'src/text/simple_text.dart';
 export 'src/text/title_text.dart';

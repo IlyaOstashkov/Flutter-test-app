@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
-import 'package:test_app_shared/test_app_shared.dart';
 
 import 'art_object_detail_view.dart';
 
@@ -25,9 +24,7 @@ class ArtObjectDetailPage extends StatelessWidget {
           artObject: artObject,
         )..add(ArtObjectDetailEvent.fetchFullContent(artObject.objectNumber));
       },
-      child: ArtObjectDetailView(
-        notificationManager: injector.get<NotificationManager>(),
-      ),
+      child: const ArtObjectDetailView(),
     );
   }
 }
