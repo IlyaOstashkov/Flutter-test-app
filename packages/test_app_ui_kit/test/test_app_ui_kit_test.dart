@@ -8,6 +8,7 @@ import 'package:test_app_ui_kit/src/common/offset_space.dart';
 import 'package:test_app_ui_kit/src/common/simple_loader.dart';
 import 'package:test_app_ui_kit/src/image/circle_loadable_image.dart';
 import 'package:test_app_ui_kit/src/image/loadable_image.dart';
+import 'package:test_app_ui_kit/src/snack_bar/snack_bar_widget.dart';
 import 'package:test_app_ui_kit/src/text/simple_text.dart';
 import 'package:test_app_ui_kit/src/text/title_text.dart';
 
@@ -98,5 +99,33 @@ void main() {
     );
     expect(find.byType(Icon), findsNothing);
     expect(find.byType(LoadableImage), findsOneWidget);
+  });
+
+  testWidgets(
+      'SnackBarWidget (Inherited widget) can be received from context. "Show" method is not crashed',
+      (tester) async {
+    var widgetFound = false;
+    SnackBarWidget? snack;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: SnackBarWidget(
+          child: Builder(
+            builder: (context) {
+              return ElevatedButton(
+                onPressed: () {
+                  snack = SnackBarWidget.of(context);
+                  if (snack == null) return;
+                  widgetFound = true;
+                  snack!.show(context, someText);
+                },
+                child: const Text(someText),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.byType(ElevatedButton));
+    expect(widgetFound, isTrue);
   });
 }
