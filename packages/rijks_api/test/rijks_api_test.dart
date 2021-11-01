@@ -11,7 +11,7 @@ class MockResponse extends Mock implements http.Response {}
 class FakeUri extends Fake implements Uri {}
 
 void main() {
-  group('RijksApiClient', () {
+  group('RijksApiClient -', () {
     late http.Client httpClient;
     late domain.IApiClient rijksApiClient;
     const apiKey = '0fiuZFh4';

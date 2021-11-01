@@ -5,7 +5,7 @@ import 'package:test_app_domain/test_app_domain.dart';
 class MockApiClient extends Mock implements IApiClient {}
 
 void main() {
-  group('ArtObjectRepository', () {
+  group('ArtObjectRepository -', () {
     late IApiClient apiClient;
     late ArtObjectRepository artObjectRepository;
     const someTitle = 'Witte gebeitste prentlijst';

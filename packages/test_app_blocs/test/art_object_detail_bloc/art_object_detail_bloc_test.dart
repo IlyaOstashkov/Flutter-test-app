@@ -9,7 +9,7 @@ import 'art_object_detail_bloc_test.mocks.dart';
 @GenerateMocks([repository.ArtObjectRepository])
 void main() {
   const objectNumber = '1';
-  group('ArtObjectDetailBloc - ', () {
+  group('ArtObjectDetailBloc -', () {
     late repository.IArtObjectRepository artObjectRepository;
     late ArtObjectDetailBloc artObjectDetailBloc;
 

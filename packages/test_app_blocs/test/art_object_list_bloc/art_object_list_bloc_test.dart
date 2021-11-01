@@ -8,7 +8,7 @@ import 'art_object_list_bloc_test.mocks.dart';
 
 @GenerateMocks([domain.ArtObjectRepository])
 void main() {
-  group('ArtObjectListBloc - ', () {
+  group('ArtObjectListBloc -', () {
     late domain.IArtObjectRepository artObjectRepository;
     late ArtObjectListBloc artObjectListBloc;
 
