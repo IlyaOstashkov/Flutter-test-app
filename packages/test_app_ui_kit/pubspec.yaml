@@ -15,9 +15,5 @@ dependencies:
   optimized_cached_image: ^3.0.0
 
 dev_dependencies:
-  dart_dot_reporter:
-    path: ../dart_dot_reporter
   flutter_lints: ^1.0.0
-  flutter_test:
-    sdk: flutter
   
