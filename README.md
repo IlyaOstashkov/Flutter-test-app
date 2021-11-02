@@ -50,17 +50,16 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 ### ✅ Unit tests
 
 Unit tests are written for:
-- api (`/packages/rijks_api/test/`)
-- domain (`/packages/test_app_domain/test/`)
-- presentation BLoC (`/packages/test_app_blocs/test/`)
-- shared utils (`/packages/test_app_shared/test/`)
-- UI Kit (`/packages/test_app_ui_kit/test/`)
+- api (`/test/packages/rijks_api/`)
+- domain (`/test/packages/test_app_domain/`)
+- presentation BLoC (`/test/packages/test_app_blocs/`)
+- shared utils (`/test/packages/test_app_shared/`)
 
 <img width="387" alt="Screenshot 2021-09-15 at 4 21 57 PM" src="https://user-images.githubusercontent.com/8611478/133454790-a0c02cf5-edaa-44b2-a847-aaef6efcced8.png">
 
 ### 📌 Widget tests
 
-Widget tests are written only for common widgets (`/test/widgets/`). In the future, I will add the widget tests for pages.
+Widget tests are written only for common widgets (`/test/packages/test_app_ui_kit`). In the future, I will add the widget tests for pages.
 
 ### 📌 CI/CD
 
