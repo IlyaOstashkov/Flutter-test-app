@@ -1,4 +1,5 @@
 import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'dart:async';
 
 typedef FactoryFn<T> = T Function();
 
