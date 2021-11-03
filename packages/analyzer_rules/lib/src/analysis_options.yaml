@@ -10,7 +10,7 @@ analyzer:
     todo: info
     deprecated_member_use_from_same_package: info
     deprecated_member_use: info
-    dead_code: error
+    dead_code: warning
 
   exclude:
     - README.md
@@ -48,7 +48,7 @@ dart_code_metrics:
     #      - test/**
     #- avoid-non-null-assertion #Need rethink, report cases like profile.currentValue!,
     - always-remove-listener:
-        severity: error
+        severity: warning
     #- avoid-returning-widgets:
     #    ignored-names:
     #      - testFunction
@@ -57,15 +57,15 @@ dart_code_metrics:
     - avoid-unnecessary-setstate:
         exclude:
           - test/**
-        severity: error
+        severity: warning
     - avoid-unused-parameters:
         exclude:
           - test/**
-        severity: error
+        severity: warning
     - avoid-wrapping-in-padding:
         exclude:
           - test/**
-        severity: error
+        severity: warning
     #- binary-expression-operand-order Don't see profit
     #- double-literal-format  Don't see profit
     #- member-ordering-extended: Need discussion, but must have
@@ -75,21 +75,21 @@ dart_code_metrics:
     #      - private-fields
     #      - constructors
     - newline-before-return:
-        severity: error
+        severity: warning
     - no-boolean-literal-compare:
-        severity: error
+        severity: warning
     #- no-empty-block Need to create approach for empty stub on tvos/cpe
     #- no-equal-arguments:
     #    exclude:
     #      - test/**
     #      - "**/*.mapping.dart"
-    #    severity: error
+    #    severity: warning
     #- no-equal-then-else Don't see profit
     #- no-magic-number:
     #    exclude:
     #      - test/**
     - no-object-declaration:
-        severity: error
+        severity: warning
     #- prefer-conditional-expressions Like both variant
     - prefer-trailing-comma:
         exclude:
