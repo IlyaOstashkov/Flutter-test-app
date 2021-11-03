@@ -17,18 +17,11 @@ void main() {
       expect(() => diContainer.get<ArtObjectDetailBloc>(), throwsException);
     });
 
-    test('container returns correct ArtObjectDetailBloc', () {
+    test('container returns correct blocs', () {
       diContainer.initialise();
-      final bloc = diContainer.get<ArtObjectDetailBloc>();
-      expect(bloc, isNotNull);
-      expect(bloc, isA<ArtObjectDetailBloc>());
-    });
-
-    test('container returns correct ArtObjectListBloc', () {
-      diContainer.initialise();
-      final bloc = diContainer.get<ArtObjectListBloc>();
-      expect(bloc, isNotNull);
-      expect(bloc, isA<ArtObjectListBloc>());
+      expect(
+          diContainer.get<ArtObjectDetailBloc>(), isA<ArtObjectDetailBloc>());
+      expect(diContainer.get<ArtObjectListBloc>(), isA<ArtObjectListBloc>());
     });
   });
 }
