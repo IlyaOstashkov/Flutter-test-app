@@ -19,7 +19,8 @@ class BlocDIContainer extends DIContainer {
   }
 
   void _registerApiClient() {
-    map<http.Client>(http.Client.new);
+    // ignore: unnecessary_lambdas
+    map<http.Client>(() => http.Client());
     map<IApiClient>(() => api.RijksApiClient(httpClient: get<http.Client>()));
   }
 
