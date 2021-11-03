@@ -1,8 +1,13 @@
 import '../models/art_object.dart';
 
 class ApiClientRequestException implements Exception {
-  const ApiClientRequestException({required this.message});
-  final String message;
+  const ApiClientRequestException({required this.cause});
+  final String cause;
+
+  @override
+  String toString() {
+    return cause;
+  }
 }
 
 abstract class IApiClient {

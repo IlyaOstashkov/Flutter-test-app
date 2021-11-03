@@ -30,7 +30,7 @@ class ArtObjectDetailBloc
       );
       return ArtObjectDetailState.fullContent(artObjectDetail);
     } on ApiClientRequestException catch (e) {
-      return ArtObjectDetailState.error(e.message);
+      return ArtObjectDetailState.error(e.cause);
     }
   }
 }

@@ -88,7 +88,7 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
         orElse: () {},
       );
     } on ApiClientRequestException catch (e) {
-      emit(ArtObjectListState.error(e.message));
+      emit(ArtObjectListState.error(e.cause));
     }
   }
 

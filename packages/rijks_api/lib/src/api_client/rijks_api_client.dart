@@ -72,22 +72,22 @@ class RijksApiClient implements domain.IApiClient {
           );
       if (response.statusCode != 200) {
         throw const domain.ApiClientRequestException(
-            message: FetchErrorConstants.serverError);
+            cause: FetchErrorConstants.serverError);
       }
       final json = jsonDecode(response.body) as Map<String, dynamic>;
       return json;
     } on PlatformException {
       throw const domain.ApiClientRequestException(
-          message: FetchErrorConstants.serverError);
+          cause: FetchErrorConstants.serverError);
     } on SocketException catch (_) {
       throw const domain.ApiClientRequestException(
-          message: FetchErrorConstants.noInternetConnection);
+          cause: FetchErrorConstants.noInternetConnection);
     } on TimeoutException {
       throw const domain.ApiClientRequestException(
-          message: FetchErrorConstants.timeout);
+          cause: FetchErrorConstants.timeout);
     } catch (e) {
       throw const domain.ApiClientRequestException(
-          message: FetchErrorConstants.undefinedError);
+          cause: FetchErrorConstants.undefinedError);
     }
   }
 
