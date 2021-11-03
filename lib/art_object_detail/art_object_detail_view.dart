@@ -44,25 +44,32 @@ class _ArtObjectDetailView extends State<ArtObjectDetailView> {
             return ListView(
               children: [
                 const OffsetSpace.vertical(OffsetValue.big),
-                ...state.when(initialContent: (artObject) {
-                  return [
-                    _TopViews(
-                      artObject: artObject,
-                      onImageTap: () => _onImageTap(artObject),
-                    ),
-                    const _Loader(),
-                  ];
-                }, fullContent: (artObject) {
-                  return [
-                    _TopViews(
-                      artObject: artObject,
-                      onImageTap: () => _onImageTap(artObject),
-                    ),
-                    _AdditionalViews(artObject: artObject),
-                  ];
-                }, error: (errorMessage) {
-                  return [Container()];
-                }),
+                ...state.when(
+                  initialLoading: () {
+                    return [Container()];
+                  },
+                  partialContent: (artObject) {
+                    return [
+                      _TopViews(
+                        artObject: artObject,
+                        onImageTap: () => _onImageTap(artObject),
+                      ),
+                      const _Loader(),
+                    ];
+                  },
+                  fullContent: (artObject) {
+                    return [
+                      _TopViews(
+                        artObject: artObject,
+                        onImageTap: () => _onImageTap(artObject),
+                      ),
+                      _AdditionalViews(artObject: artObject),
+                    ];
+                  },
+                  error: (errorMessage) {
+                    return [Container()];
+                  },
+                ),
               ],
             );
           },

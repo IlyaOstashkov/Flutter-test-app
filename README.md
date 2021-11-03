@@ -74,3 +74,9 @@ https://user-images.githubusercontent.com/8611478/133456754-e35a3aea-9f5c-46c4-b
 https://user-images.githubusercontent.com/8611478/133454564-70659cae-25cc-4d51-8c41-e6feb8ff926f.MOV
 
 https://user-images.githubusercontent.com/8611478/133458463-cdf6e1b5-0cb0-418e-b8ca-3231ac47b0e9.MOV
+
+## Before build
+
+You need to run it at first for code generating.
+
+`fvm flutter pub run build_runner build --delete-conflicting-outputs`

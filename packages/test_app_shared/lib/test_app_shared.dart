@@ -1,3 +1,3 @@
 library test_app_shared;
 
-export 'src/service_locator/service_locator.dart';
+export 'src/di_container/di_container.dart';

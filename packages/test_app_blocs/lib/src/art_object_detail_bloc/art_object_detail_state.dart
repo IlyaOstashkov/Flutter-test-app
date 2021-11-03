@@ -5,8 +5,10 @@ part 'art_object_detail_state.freezed.dart';
 
 @freezed
 abstract class ArtObjectDetailState with _$ArtObjectDetailState {
-  const factory ArtObjectDetailState.initialContent(ArtObject artObject) =
-      _ArtObjectDetailStateInitialContent;
+  const factory ArtObjectDetailState.initialLoading() =
+      _ArtObjectDetailStateInitialLoading;
+  const factory ArtObjectDetailState.partialContent(ArtObject artObject) =
+      _ArtObjectDetailStatePartialContent;
   const factory ArtObjectDetailState.fullContent(ArtObject artObject) =
       _ArtObjectDetailStateFullContent;
   const factory ArtObjectDetailState.error(String errorMessage) =

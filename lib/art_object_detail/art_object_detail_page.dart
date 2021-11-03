@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
 import 'package:test_app_domain/test_app_domain.dart';
 
@@ -16,13 +15,10 @@ class ArtObjectDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final injector = Injector();
     return BlocProvider(
       create: (context) {
-        return ArtObjectDetailBloc(
-          repository: injector.get<IArtObjectRepository>(),
-          artObject: artObject,
-        )..add(ArtObjectDetailEvent.fetchFullContent(artObject.objectNumber));
+        return BlocDIContainer.instance.get<ArtObjectDetailBloc>()
+          ..add(ArtObjectDetailEvent.initialLoad(artObject));
       },
       child: const ArtObjectDetailView(),
     );

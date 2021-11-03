@@ -8,27 +8,25 @@ import 'art_object_detail_state.dart';
 
 class ArtObjectDetailBloc
     extends Bloc<ArtObjectDetailEvent, ArtObjectDetailState> {
-  ArtObjectDetailBloc({
-    required this.repository,
-    required ArtObject artObject,
-  }) : super(ArtObjectDetailState.initialContent(artObject)) {
-    on<ArtObjectDetailFetchFullContentEvent>(_onInitialEvent);
+  ArtObjectDetailBloc({required this.repository})
+      : super(const ArtObjectDetailState.initialLoading()) {
+    on<ArtObjectDetailPartialContentEvent>(_onPartialContentEvent);
   }
 
   final IArtObjectRepository repository;
 
-  Future<void> _onInitialEvent(
-    ArtObjectDetailFetchFullContentEvent event,
+  Future<void> _onPartialContentEvent(
+    ArtObjectDetailPartialContentEvent event,
     Emitter<ArtObjectDetailState> emit,
   ) async {
-    emit(await _fetchDetailInfo(event));
+    emit(ArtObjectDetailState.partialContent(event.artObject));
+    emit(await _fetchDetailInfo(event.artObject.objectNumber));
   }
 
-  Future<ArtObjectDetailState> _fetchDetailInfo(
-      ArtObjectDetailFetchFullContentEvent event) async {
+  Future<ArtObjectDetailState> _fetchDetailInfo(String objectNumber) async {
     try {
       final artObjectDetail = await repository.getArtObject(
-        objectNumber: event.objectNumber,
+        objectNumber: objectNumber,
       );
       return ArtObjectDetailState.fullContent(artObjectDetail);
     } on ApiClientRequestException catch (e) {

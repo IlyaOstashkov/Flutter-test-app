@@ -17,9 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ArtObjectDetailEventTearOff {
   const _$ArtObjectDetailEventTearOff();
 
-  ArtObjectDetailFetchFullContentEvent fetchFullContent(String objectNumber) {
-    return ArtObjectDetailFetchFullContentEvent(
-      objectNumber,
+  ArtObjectDetailPartialContentEvent initialLoad(ArtObject artObject) {
+    return ArtObjectDetailPartialContentEvent(
+      artObject,
     );
   }
 }
@@ -29,40 +29,38 @@ const $ArtObjectDetailEvent = _$ArtObjectDetailEventTearOff();
 
 /// @nodoc
 mixin _$ArtObjectDetailEvent {
-  String get objectNumber => throw _privateConstructorUsedError;
+  ArtObject get artObject => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String objectNumber) fetchFullContent,
+    required TResult Function(ArtObject artObject) initialLoad,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String objectNumber)? fetchFullContent,
+    TResult Function(ArtObject artObject)? initialLoad,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String objectNumber)? fetchFullContent,
+    TResult Function(ArtObject artObject)? initialLoad,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ArtObjectDetailFetchFullContentEvent value)
-        fetchFullContent,
+    required TResult Function(ArtObjectDetailPartialContentEvent value)
+        initialLoad,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ArtObjectDetailFetchFullContentEvent value)?
-        fetchFullContent,
+    TResult Function(ArtObjectDetailPartialContentEvent value)? initialLoad,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArtObjectDetailFetchFullContentEvent value)?
-        fetchFullContent,
+    TResult Function(ArtObjectDetailPartialContentEvent value)? initialLoad,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,7 +75,7 @@ abstract class $ArtObjectDetailEventCopyWith<$Res> {
   factory $ArtObjectDetailEventCopyWith(ArtObjectDetailEvent value,
           $Res Function(ArtObjectDetailEvent) then) =
       _$ArtObjectDetailEventCopyWithImpl<$Res>;
-  $Res call({String objectNumber});
+  $Res call({ArtObject artObject});
 }
 
 /// @nodoc
@@ -91,112 +89,112 @@ class _$ArtObjectDetailEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? objectNumber = freezed,
+    Object? artObject = freezed,
   }) {
     return _then(_value.copyWith(
-      objectNumber: objectNumber == freezed
-          ? _value.objectNumber
-          : objectNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+      artObject: artObject == freezed
+          ? _value.artObject
+          : artObject // ignore: cast_nullable_to_non_nullable
+              as ArtObject,
     ));
   }
 }
 
 /// @nodoc
-abstract class $ArtObjectDetailFetchFullContentEventCopyWith<$Res>
+abstract class $ArtObjectDetailPartialContentEventCopyWith<$Res>
     implements $ArtObjectDetailEventCopyWith<$Res> {
-  factory $ArtObjectDetailFetchFullContentEventCopyWith(
-          ArtObjectDetailFetchFullContentEvent value,
-          $Res Function(ArtObjectDetailFetchFullContentEvent) then) =
-      _$ArtObjectDetailFetchFullContentEventCopyWithImpl<$Res>;
+  factory $ArtObjectDetailPartialContentEventCopyWith(
+          ArtObjectDetailPartialContentEvent value,
+          $Res Function(ArtObjectDetailPartialContentEvent) then) =
+      _$ArtObjectDetailPartialContentEventCopyWithImpl<$Res>;
   @override
-  $Res call({String objectNumber});
+  $Res call({ArtObject artObject});
 }
 
 /// @nodoc
-class _$ArtObjectDetailFetchFullContentEventCopyWithImpl<$Res>
+class _$ArtObjectDetailPartialContentEventCopyWithImpl<$Res>
     extends _$ArtObjectDetailEventCopyWithImpl<$Res>
-    implements $ArtObjectDetailFetchFullContentEventCopyWith<$Res> {
-  _$ArtObjectDetailFetchFullContentEventCopyWithImpl(
-      ArtObjectDetailFetchFullContentEvent _value,
-      $Res Function(ArtObjectDetailFetchFullContentEvent) _then)
-      : super(_value, (v) => _then(v as ArtObjectDetailFetchFullContentEvent));
+    implements $ArtObjectDetailPartialContentEventCopyWith<$Res> {
+  _$ArtObjectDetailPartialContentEventCopyWithImpl(
+      ArtObjectDetailPartialContentEvent _value,
+      $Res Function(ArtObjectDetailPartialContentEvent) _then)
+      : super(_value, (v) => _then(v as ArtObjectDetailPartialContentEvent));
 
   @override
-  ArtObjectDetailFetchFullContentEvent get _value =>
-      super._value as ArtObjectDetailFetchFullContentEvent;
+  ArtObjectDetailPartialContentEvent get _value =>
+      super._value as ArtObjectDetailPartialContentEvent;
 
   @override
   $Res call({
-    Object? objectNumber = freezed,
+    Object? artObject = freezed,
   }) {
-    return _then(ArtObjectDetailFetchFullContentEvent(
-      objectNumber == freezed
-          ? _value.objectNumber
-          : objectNumber // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(ArtObjectDetailPartialContentEvent(
+      artObject == freezed
+          ? _value.artObject
+          : artObject // ignore: cast_nullable_to_non_nullable
+              as ArtObject,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ArtObjectDetailFetchFullContentEvent
-    implements ArtObjectDetailFetchFullContentEvent {
-  const _$ArtObjectDetailFetchFullContentEvent(this.objectNumber);
+class _$ArtObjectDetailPartialContentEvent
+    implements ArtObjectDetailPartialContentEvent {
+  const _$ArtObjectDetailPartialContentEvent(this.artObject);
 
   @override
-  final String objectNumber;
+  final ArtObject artObject;
 
   @override
   String toString() {
-    return 'ArtObjectDetailEvent.fetchFullContent(objectNumber: $objectNumber)';
+    return 'ArtObjectDetailEvent.initialLoad(artObject: $artObject)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is ArtObjectDetailFetchFullContentEvent &&
-            (identical(other.objectNumber, objectNumber) ||
+        (other is ArtObjectDetailPartialContentEvent &&
+            (identical(other.artObject, artObject) ||
                 const DeepCollectionEquality()
-                    .equals(other.objectNumber, objectNumber)));
+                    .equals(other.artObject, artObject)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(objectNumber);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(artObject);
 
   @JsonKey(ignore: true)
   @override
-  $ArtObjectDetailFetchFullContentEventCopyWith<
-          ArtObjectDetailFetchFullContentEvent>
-      get copyWith => _$ArtObjectDetailFetchFullContentEventCopyWithImpl<
-          ArtObjectDetailFetchFullContentEvent>(this, _$identity);
+  $ArtObjectDetailPartialContentEventCopyWith<
+          ArtObjectDetailPartialContentEvent>
+      get copyWith => _$ArtObjectDetailPartialContentEventCopyWithImpl<
+          ArtObjectDetailPartialContentEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String objectNumber) fetchFullContent,
+    required TResult Function(ArtObject artObject) initialLoad,
   }) {
-    return fetchFullContent(objectNumber);
+    return initialLoad(artObject);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String objectNumber)? fetchFullContent,
+    TResult Function(ArtObject artObject)? initialLoad,
   }) {
-    return fetchFullContent?.call(objectNumber);
+    return initialLoad?.call(artObject);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String objectNumber)? fetchFullContent,
+    TResult Function(ArtObject artObject)? initialLoad,
     required TResult orElse(),
   }) {
-    if (fetchFullContent != null) {
-      return fetchFullContent(objectNumber);
+    if (initialLoad != null) {
+      return initialLoad(artObject);
     }
     return orElse();
   }
@@ -204,45 +202,43 @@ class _$ArtObjectDetailFetchFullContentEvent
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(ArtObjectDetailFetchFullContentEvent value)
-        fetchFullContent,
+    required TResult Function(ArtObjectDetailPartialContentEvent value)
+        initialLoad,
   }) {
-    return fetchFullContent(this);
+    return initialLoad(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ArtObjectDetailFetchFullContentEvent value)?
-        fetchFullContent,
+    TResult Function(ArtObjectDetailPartialContentEvent value)? initialLoad,
   }) {
-    return fetchFullContent?.call(this);
+    return initialLoad?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(ArtObjectDetailFetchFullContentEvent value)?
-        fetchFullContent,
+    TResult Function(ArtObjectDetailPartialContentEvent value)? initialLoad,
     required TResult orElse(),
   }) {
-    if (fetchFullContent != null) {
-      return fetchFullContent(this);
+    if (initialLoad != null) {
+      return initialLoad(this);
     }
     return orElse();
   }
 }
 
-abstract class ArtObjectDetailFetchFullContentEvent
+abstract class ArtObjectDetailPartialContentEvent
     implements ArtObjectDetailEvent {
-  const factory ArtObjectDetailFetchFullContentEvent(String objectNumber) =
-      _$ArtObjectDetailFetchFullContentEvent;
+  const factory ArtObjectDetailPartialContentEvent(ArtObject artObject) =
+      _$ArtObjectDetailPartialContentEvent;
 
   @override
-  String get objectNumber => throw _privateConstructorUsedError;
+  ArtObject get artObject => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $ArtObjectDetailFetchFullContentEventCopyWith<
-          ArtObjectDetailFetchFullContentEvent>
+  $ArtObjectDetailPartialContentEventCopyWith<
+          ArtObjectDetailPartialContentEvent>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -17,8 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ArtObjectDetailStateTearOff {
   const _$ArtObjectDetailStateTearOff();
 
-  _ArtObjectDetailStateInitialContent initialContent(ArtObject artObject) {
-    return _ArtObjectDetailStateInitialContent(
+  _ArtObjectDetailStateInitialLoading initialLoading() {
+    return const _ArtObjectDetailStateInitialLoading();
+  }
+
+  _ArtObjectDetailStatePartialContent partialContent(ArtObject artObject) {
+    return _ArtObjectDetailStatePartialContent(
       artObject,
     );
   }
@@ -43,21 +47,24 @@ const $ArtObjectDetailState = _$ArtObjectDetailStateTearOff();
 mixin _$ArtObjectDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ArtObject artObject) initialContent,
+    required TResult Function() initialLoading,
+    required TResult Function(ArtObject artObject) partialContent,
     required TResult Function(ArtObject artObject) fullContent,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -65,8 +72,10 @@ mixin _$ArtObjectDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ArtObjectDetailStateInitialContent value)
-        initialContent,
+    required TResult Function(_ArtObjectDetailStateInitialLoading value)
+        initialLoading,
+    required TResult Function(_ArtObjectDetailStatePartialContent value)
+        partialContent,
     required TResult Function(_ArtObjectDetailStateFullContent value)
         fullContent,
     required TResult Function(_ArtObjectDetailStateError value) error,
@@ -74,14 +83,16 @@ mixin _$ArtObjectDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
     required TResult orElse(),
@@ -107,32 +118,158 @@ class _$ArtObjectDetailStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ArtObjectDetailStateInitialContentCopyWith<$Res> {
-  factory _$ArtObjectDetailStateInitialContentCopyWith(
-          _ArtObjectDetailStateInitialContent value,
-          $Res Function(_ArtObjectDetailStateInitialContent) then) =
-      __$ArtObjectDetailStateInitialContentCopyWithImpl<$Res>;
+abstract class _$ArtObjectDetailStateInitialLoadingCopyWith<$Res> {
+  factory _$ArtObjectDetailStateInitialLoadingCopyWith(
+          _ArtObjectDetailStateInitialLoading value,
+          $Res Function(_ArtObjectDetailStateInitialLoading) then) =
+      __$ArtObjectDetailStateInitialLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ArtObjectDetailStateInitialLoadingCopyWithImpl<$Res>
+    extends _$ArtObjectDetailStateCopyWithImpl<$Res>
+    implements _$ArtObjectDetailStateInitialLoadingCopyWith<$Res> {
+  __$ArtObjectDetailStateInitialLoadingCopyWithImpl(
+      _ArtObjectDetailStateInitialLoading _value,
+      $Res Function(_ArtObjectDetailStateInitialLoading) _then)
+      : super(_value, (v) => _then(v as _ArtObjectDetailStateInitialLoading));
+
+  @override
+  _ArtObjectDetailStateInitialLoading get _value =>
+      super._value as _ArtObjectDetailStateInitialLoading;
+}
+
+/// @nodoc
+
+class _$_ArtObjectDetailStateInitialLoading
+    implements _ArtObjectDetailStateInitialLoading {
+  const _$_ArtObjectDetailStateInitialLoading();
+
+  @override
+  String toString() {
+    return 'ArtObjectDetailState.initialLoading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ArtObjectDetailStateInitialLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialLoading,
+    required TResult Function(ArtObject artObject) partialContent,
+    required TResult Function(ArtObject artObject) fullContent,
+    required TResult Function(String errorMessage) error,
+  }) {
+    return initialLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
+    TResult Function(ArtObject artObject)? fullContent,
+    TResult Function(String errorMessage)? error,
+  }) {
+    return initialLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
+    TResult Function(ArtObject artObject)? fullContent,
+    TResult Function(String errorMessage)? error,
+    required TResult orElse(),
+  }) {
+    if (initialLoading != null) {
+      return initialLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ArtObjectDetailStateInitialLoading value)
+        initialLoading,
+    required TResult Function(_ArtObjectDetailStatePartialContent value)
+        partialContent,
+    required TResult Function(_ArtObjectDetailStateFullContent value)
+        fullContent,
+    required TResult Function(_ArtObjectDetailStateError value) error,
+  }) {
+    return initialLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
+    TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
+    TResult Function(_ArtObjectDetailStateError value)? error,
+  }) {
+    return initialLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
+    TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
+    TResult Function(_ArtObjectDetailStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (initialLoading != null) {
+      return initialLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ArtObjectDetailStateInitialLoading
+    implements ArtObjectDetailState {
+  const factory _ArtObjectDetailStateInitialLoading() =
+      _$_ArtObjectDetailStateInitialLoading;
+}
+
+/// @nodoc
+abstract class _$ArtObjectDetailStatePartialContentCopyWith<$Res> {
+  factory _$ArtObjectDetailStatePartialContentCopyWith(
+          _ArtObjectDetailStatePartialContent value,
+          $Res Function(_ArtObjectDetailStatePartialContent) then) =
+      __$ArtObjectDetailStatePartialContentCopyWithImpl<$Res>;
   $Res call({ArtObject artObject});
 }
 
 /// @nodoc
-class __$ArtObjectDetailStateInitialContentCopyWithImpl<$Res>
+class __$ArtObjectDetailStatePartialContentCopyWithImpl<$Res>
     extends _$ArtObjectDetailStateCopyWithImpl<$Res>
-    implements _$ArtObjectDetailStateInitialContentCopyWith<$Res> {
-  __$ArtObjectDetailStateInitialContentCopyWithImpl(
-      _ArtObjectDetailStateInitialContent _value,
-      $Res Function(_ArtObjectDetailStateInitialContent) _then)
-      : super(_value, (v) => _then(v as _ArtObjectDetailStateInitialContent));
+    implements _$ArtObjectDetailStatePartialContentCopyWith<$Res> {
+  __$ArtObjectDetailStatePartialContentCopyWithImpl(
+      _ArtObjectDetailStatePartialContent _value,
+      $Res Function(_ArtObjectDetailStatePartialContent) _then)
+      : super(_value, (v) => _then(v as _ArtObjectDetailStatePartialContent));
 
   @override
-  _ArtObjectDetailStateInitialContent get _value =>
-      super._value as _ArtObjectDetailStateInitialContent;
+  _ArtObjectDetailStatePartialContent get _value =>
+      super._value as _ArtObjectDetailStatePartialContent;
 
   @override
   $Res call({
     Object? artObject = freezed,
   }) {
-    return _then(_ArtObjectDetailStateInitialContent(
+    return _then(_ArtObjectDetailStatePartialContent(
       artObject == freezed
           ? _value.artObject
           : artObject // ignore: cast_nullable_to_non_nullable
@@ -143,22 +280,22 @@ class __$ArtObjectDetailStateInitialContentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ArtObjectDetailStateInitialContent
-    implements _ArtObjectDetailStateInitialContent {
-  const _$_ArtObjectDetailStateInitialContent(this.artObject);
+class _$_ArtObjectDetailStatePartialContent
+    implements _ArtObjectDetailStatePartialContent {
+  const _$_ArtObjectDetailStatePartialContent(this.artObject);
 
   @override
   final ArtObject artObject;
 
   @override
   String toString() {
-    return 'ArtObjectDetailState.initialContent(artObject: $artObject)';
+    return 'ArtObjectDetailState.partialContent(artObject: $artObject)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ArtObjectDetailStateInitialContent &&
+        (other is _ArtObjectDetailStatePartialContent &&
             (identical(other.artObject, artObject) ||
                 const DeepCollectionEquality()
                     .equals(other.artObject, artObject)));
@@ -170,41 +307,44 @@ class _$_ArtObjectDetailStateInitialContent
 
   @JsonKey(ignore: true)
   @override
-  _$ArtObjectDetailStateInitialContentCopyWith<
-          _ArtObjectDetailStateInitialContent>
-      get copyWith => __$ArtObjectDetailStateInitialContentCopyWithImpl<
-          _ArtObjectDetailStateInitialContent>(this, _$identity);
+  _$ArtObjectDetailStatePartialContentCopyWith<
+          _ArtObjectDetailStatePartialContent>
+      get copyWith => __$ArtObjectDetailStatePartialContentCopyWithImpl<
+          _ArtObjectDetailStatePartialContent>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ArtObject artObject) initialContent,
+    required TResult Function() initialLoading,
+    required TResult Function(ArtObject artObject) partialContent,
     required TResult Function(ArtObject artObject) fullContent,
     required TResult Function(String errorMessage) error,
   }) {
-    return initialContent(artObject);
+    return partialContent(artObject);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
   }) {
-    return initialContent?.call(artObject);
+    return partialContent?.call(artObject);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
-    if (initialContent != null) {
-      return initialContent(artObject);
+    if (partialContent != null) {
+      return partialContent(artObject);
     }
     return orElse();
   }
@@ -212,49 +352,53 @@ class _$_ArtObjectDetailStateInitialContent
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ArtObjectDetailStateInitialContent value)
-        initialContent,
+    required TResult Function(_ArtObjectDetailStateInitialLoading value)
+        initialLoading,
+    required TResult Function(_ArtObjectDetailStatePartialContent value)
+        partialContent,
     required TResult Function(_ArtObjectDetailStateFullContent value)
         fullContent,
     required TResult Function(_ArtObjectDetailStateError value) error,
   }) {
-    return initialContent(this);
+    return partialContent(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
   }) {
-    return initialContent?.call(this);
+    return partialContent?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
     required TResult orElse(),
   }) {
-    if (initialContent != null) {
-      return initialContent(this);
+    if (partialContent != null) {
+      return partialContent(this);
     }
     return orElse();
   }
 }
 
-abstract class _ArtObjectDetailStateInitialContent
+abstract class _ArtObjectDetailStatePartialContent
     implements ArtObjectDetailState {
-  const factory _ArtObjectDetailStateInitialContent(ArtObject artObject) =
-      _$_ArtObjectDetailStateInitialContent;
+  const factory _ArtObjectDetailStatePartialContent(ArtObject artObject) =
+      _$_ArtObjectDetailStatePartialContent;
 
   ArtObject get artObject => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ArtObjectDetailStateInitialContentCopyWith<
-          _ArtObjectDetailStateInitialContent>
+  _$ArtObjectDetailStatePartialContentCopyWith<
+          _ArtObjectDetailStatePartialContent>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -329,7 +473,8 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ArtObject artObject) initialContent,
+    required TResult Function() initialLoading,
+    required TResult Function(ArtObject artObject) partialContent,
     required TResult Function(ArtObject artObject) fullContent,
     required TResult Function(String errorMessage) error,
   }) {
@@ -339,7 +484,8 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
   }) {
@@ -349,7 +495,8 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -363,8 +510,10 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ArtObjectDetailStateInitialContent value)
-        initialContent,
+    required TResult Function(_ArtObjectDetailStateInitialLoading value)
+        initialLoading,
+    required TResult Function(_ArtObjectDetailStatePartialContent value)
+        partialContent,
     required TResult Function(_ArtObjectDetailStateFullContent value)
         fullContent,
     required TResult Function(_ArtObjectDetailStateError value) error,
@@ -375,7 +524,8 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
   }) {
@@ -385,7 +535,8 @@ class _$_ArtObjectDetailStateFullContent
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
     required TResult orElse(),
@@ -477,7 +628,8 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ArtObject artObject) initialContent,
+    required TResult Function() initialLoading,
+    required TResult Function(ArtObject artObject) partialContent,
     required TResult Function(ArtObject artObject) fullContent,
     required TResult Function(String errorMessage) error,
   }) {
@@ -487,7 +639,8 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
   }) {
@@ -497,7 +650,8 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ArtObject artObject)? initialContent,
+    TResult Function()? initialLoading,
+    TResult Function(ArtObject artObject)? partialContent,
     TResult Function(ArtObject artObject)? fullContent,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
@@ -511,8 +665,10 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ArtObjectDetailStateInitialContent value)
-        initialContent,
+    required TResult Function(_ArtObjectDetailStateInitialLoading value)
+        initialLoading,
+    required TResult Function(_ArtObjectDetailStatePartialContent value)
+        partialContent,
     required TResult Function(_ArtObjectDetailStateFullContent value)
         fullContent,
     required TResult Function(_ArtObjectDetailStateError value) error,
@@ -523,7 +679,8 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
   }) {
@@ -533,7 +690,8 @@ class _$_ArtObjectDetailStateError implements _ArtObjectDetailStateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ArtObjectDetailStateInitialContent value)? initialContent,
+    TResult Function(_ArtObjectDetailStateInitialLoading value)? initialLoading,
+    TResult Function(_ArtObjectDetailStatePartialContent value)? partialContent,
     TResult Function(_ArtObjectDetailStateFullContent value)? fullContent,
     TResult Function(_ArtObjectDetailStateError value)? error,
     required TResult orElse(),
