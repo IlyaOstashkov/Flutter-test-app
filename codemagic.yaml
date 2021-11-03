@@ -19,6 +19,7 @@ workflows:
       tag_patterns:
         - pattern: '*'
           include: true
+      cancel_previous_builds: true
     scripts:
       - |
         # set up debug keystore

@@ -7,4 +7,4 @@ environment:
   sdk: ">=2.15.0-116.0.dev <3.0.0"
 
 dev_dependencies:
-  dart_code_metrics: 4.3.3
+  dart_code_metrics: ^4.6.0
