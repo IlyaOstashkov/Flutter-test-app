@@ -23,16 +23,11 @@ dependencies:
     path: packages/test_app_ui_kit
 
 dev_dependencies:
-  bloc_test: ^8.2.0
   build_runner: ^2.1.4
   dart_dot_reporter:
     path: packages/dart_dot_reporter
   flutter_lints: ^1.0.0
-  flutter_test:
-    sdk: flutter
   freezed: ^0.14.5
-  mockito: ^5.0.16
-  mocktail: ^0.1.4
   test: ^1.17.12
 
 flutter:

@@ -14,7 +14,7 @@ void main() {
     });
 
     test('map and get methods work as expected', () {
-      diContainer.map<_DummyService>(() => _DummyServiceImpl());
+      diContainer.map<_DummyService>(_DummyServiceImpl.new);
       final service = diContainer.get<_DummyService>();
       expect(service, isNotNull);
       expect(service, isA<_DummyServiceImpl>());
