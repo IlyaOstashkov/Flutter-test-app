@@ -71,10 +71,36 @@ workflows:
         - pattern: '*'
           include: true
     scripts:
-      - flutter packages pub get
-      - flutter analyze lib packages
-      - flutter test
-      - flutter test packages
+      - name: Flutter pub get for all packages
+        script: |
+          CWD=`pwd`
+          PACKAGES_RELATIVE_PATH="packages"
+          PACKAGES_DIR="$CWD/$PACKAGES_RELATIVE_PATH"
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          for d in $(ls $PACKAGES_DIR); do
+              PACKAGE_DIR="$PACKAGES_DIR/$d"
+              echo "Entering $PACKAGES_RELATIVE_PATH/$d"
+              cd $PACKAGE_DIR && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+          done
+      - flutter analyze
+      - name: Flutter test all packages
+        script: |
+          CURRENT_DIR=$(dirname "$0")
+          PACKAGES_DIR="packages"
+          TEST_DIR="test"
+          cd "$CURRENT_DIR/.."
+          echo "Testing the app"
+          flutter test
+          cd $PACKAGES_DIR
+          for d in $(ls); do
+              if [ -d "$d/$TEST_DIR" ]; then
+                  echo "Testing $d"
+                  cd $d
+                  flutter test
+                  cd ..
+              fi
+          done
     artifacts:
       - flutter_drive.log
     publishing:
