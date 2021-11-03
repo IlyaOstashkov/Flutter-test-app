@@ -36,9 +36,9 @@ workflows:
         # set up local properties
         echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
-      - flutter analyze
-      - flutter pub global run dart_code_metrics:metrics analyze lib
+      - flutter analyze lib packages
       - flutter test
+      - flutter test packages
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
@@ -73,7 +73,6 @@ workflows:
     scripts:
       - flutter packages pub get
       - flutter analyze lib packages
-      - flutter pub global run dart_code_metrics:metrics analyze lib
       - flutter test
       - flutter test packages
     artifacts:
