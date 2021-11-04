@@ -7,6 +7,8 @@ import 'package:test_app_shared/test_app_shared.dart';
 class BlocDIContainer extends DIContainer {
   static final instance = BlocDIContainer();
 
+  final _flag = false;
+
   void initialise() {
     _registerApiClient();
     _registerRepositories();
