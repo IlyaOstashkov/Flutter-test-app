@@ -7,9 +7,6 @@ workflows:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
-    cache:
-      cache_paths:
-        - $HOME/programs/flutter/.pub-cache/bin
     triggering:
       events:
         - pull_request
@@ -57,14 +54,11 @@ workflows:
         notify_on_build_start: false
   test:
     name: Test
-    max_build_duration: 10
+    max_build_duration: 20
     environment:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
-    cache:
-      cache_paths:
-        - $HOME/programs/flutter/.pub-cache/bin
     triggering:
       events:
         - push
@@ -75,6 +69,7 @@ workflows:
       tag_patterns:
         - pattern: '*'
           include: true
+      cancel_previous_builds: true
     scripts:
       - name: Flutter pub get
         script: |
@@ -128,6 +123,41 @@ workflows:
           mkdir -p metrics-results
           flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
         test_report: packages/test_app_ui_kit/metrics-results/dart_code_metrics.json
+      - name: Unit tests - lib
+        script: |
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: test-results/flutter.json
+      - name: Unit tests - packages/rijks_api
+        script: |
+          cd packages/rijks_api
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/rijks_api/test-results/flutter.json
+      - name: Unit tests - packages/test_app_blocs
+        script: |
+          cd packages/test_app_blocs
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_blocs/test-results/flutter.json
+      - name: Unit tests - packages/test_app_domain
+        script: |
+          cd packages/test_app_domain
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_domain/test-results/flutter.json
+      - name: Unit tests - packages/test_app_shared
+        script: |
+          cd packages/test_app_shared
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_shared/test-results/flutter.json
+      - name: Unit tests - packages/test_app_ui_kit
+        script: |
+          cd packages/test_app_ui_kit
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_ui_kit/test-results/flutter.json
     artifacts:
       - flutter_drive.log
     publishing:
