@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:pragmatic_navigation/pragmatic_navigation.dart';
-import 'dart:async';
 
 import 'navigation_stack_item.dart';
 

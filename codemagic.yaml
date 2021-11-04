@@ -99,10 +99,9 @@ workflows:
         test_report: metrics-results/dart_code_metrics.json
       - name: Dart Code Metrics - packages/rijks_api
         script: |
-          PACKAGE_RELATIVE_PATH="packages/rijks_api"
-          mkdir -p $PACKAGE_RELATIVE_PATH/metrics-results
-          flutter pub global run dart_code_metrics:metrics analyze $PACKAGE_RELATIVE_PATH/lib --reporter=json > $PACKAGE_RELATIVE_PATH/metrics-results/dart_code_metrics.json      
-        test_report: $PACKAGE_RELATIVE_PATH/metrics-results/dart_code_metrics.json
+          mkdir -p packages/rijks_api/metrics-results
+          flutter pub global run dart_code_metrics:metrics analyze packages/rijks_api/lib --reporter=json > packages/rijks_api/metrics-results/dart_code_metrics.json      
+        test_report: packages/rijks_api/metrics-results/dart_code_metrics.json
     artifacts:
       - flutter_drive.log
     publishing:
