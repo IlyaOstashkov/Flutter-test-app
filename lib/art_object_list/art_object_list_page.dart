@@ -9,8 +9,6 @@ class ArtObjectListPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final _flag = false;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
