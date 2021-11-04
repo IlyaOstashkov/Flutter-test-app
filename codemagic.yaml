@@ -82,6 +82,10 @@ workflows:
               echo "Entering $PACKAGES_RELATIVE_PATH/$d"
               cd $PACKAGE_DIR && flutter pub get
           done
+      - name: Static analysis - lib
+        script: |
+          flutter analyze --write=analyze_output.txt
+        test_report: analyze_output.txt
       - name: Dart Code Metrics - lib
         script: |
           flutter pub global activate dart_code_metrics
