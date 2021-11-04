@@ -55,7 +55,7 @@ void main() {
         build: () => artObjectListBloc,
         act: (bloc) => bloc.add(const ArtObjectListEvent.fetched()),
         expect: () => [
-          ArtObjectListBlocTestData.headerWithTwoItems(),
+          ArtObjectListBlocTestData.contentStateWithHeaderAnd2Items(),
         ],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
@@ -164,7 +164,7 @@ void main() {
         },
         skip: 3,
         expect: () => [
-          ArtObjectListBlocTestData.headerWithTwoItems(),
+          ArtObjectListBlocTestData.contentStateWithHeaderAnd2Items(),
         ],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(

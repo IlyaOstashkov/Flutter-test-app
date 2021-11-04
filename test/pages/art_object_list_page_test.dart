@@ -22,8 +22,6 @@ void main() {
     setUpAll(() {
       registerFallbackValue<ArtObjectListEvent>(ArtObjectListEventFake());
       artObjectListBloc = ArtObjectListBlocMock();
-      when(() => artObjectListBloc.state)
-          .thenReturn(ArtObjectListBlocTestData.headerWithTwoItems());
       BlocDIContainer.instance.map<ArtObjectListBloc>(() => artObjectListBloc);
     });
 
@@ -31,8 +29,23 @@ void main() {
       artObjectListBloc.close();
     });
 
-    testWidgets('page created with correct custom widgets',
-        (widgetTester) async {
+    testWidgets('page created with initialLoading state', (widgetTester) async {
+      when(() => artObjectListBloc.state)
+          .thenReturn(const ArtObjectListState.initialLoading());
+      await PageTester(
+        child: const ArtObjectListPage(),
+        blocs: [
+          BlocProvider<ArtObjectListBloc>(create: (_) => artObjectListBloc)
+        ],
+      ).testPageIsCreated(tester: widgetTester);
+      expect(find.byType(ArtObjectListView), findsOneWidget);
+      expect(find.byType(ArtObjectListHeader), findsNothing);
+      expect(find.byType(ArtObjectListTile), findsNothing);
+    });
+
+    testWidgets('page created with header and 2 items', (widgetTester) async {
+      when(() => artObjectListBloc.state).thenReturn(
+          ArtObjectListBlocTestData.contentStateWithHeaderAnd2Items());
       await PageTester(
         child: const ArtObjectListPage(),
         blocs: [

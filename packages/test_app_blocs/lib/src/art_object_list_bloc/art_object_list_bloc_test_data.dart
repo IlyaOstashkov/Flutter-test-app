@@ -35,7 +35,7 @@ class ArtObjectListBlocTestData {
         .toList();
   }
 
-  static ArtObjectListState headerWithTwoItems() {
+  static ArtObjectListState contentStateWithHeaderAnd2Items() {
     return ArtObjectListState.content([
       ArtObjectListBlocTestData.header(),
       ...listItems([
