@@ -1,6 +1,7 @@
 library test_app_blocs;
 
 export 'src/art_object_detail_bloc/art_object_detail_bloc.dart';
+export 'src/art_object_detail_bloc/art_object_detail_bloc_test_data.dart';
 export 'src/art_object_detail_bloc/art_object_detail_event.dart';
 export 'src/art_object_detail_bloc/art_object_detail_state.dart';
 export 'src/art_object_list_bloc/art_object_list_bloc.dart';
