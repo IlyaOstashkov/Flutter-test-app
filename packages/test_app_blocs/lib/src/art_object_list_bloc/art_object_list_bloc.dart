@@ -18,8 +18,6 @@ class ArtObjectListBloc extends Bloc<ArtObjectListEvent, ArtObjectListState> {
     on<ArtObjectListFullReloadEvent>(_onFullReloadEvent);
   }
 
-  final _flag = false;
-
   final IArtObjectRepository repository;
 
   static const _limit = 10;
