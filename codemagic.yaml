@@ -84,8 +84,7 @@ workflows:
           done
       - name: Static analysis - lib
         script: |
-          flutter analyze --write=analyze_output.txt
-        test_report: analyze_output.txt
+          flutter analyze --fatal-warnings
       - name: Dart Code Metrics - lib
         script: |
           flutter pub global activate dart_code_metrics
