@@ -1,5 +1,3 @@
-# Automatically generated on 2021-11-03 UTC from https://codemagic.io/app/61801c5bf780e4f64be7e6c7/settings
-# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
 
 workflows:
   test-+-ios/android-debug-build:
@@ -9,6 +7,11 @@ workflows:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.gradle/caches
+        - $HOME/Library/Caches/CocoaPods   
     triggering:
       events:
         - pull_request
@@ -61,6 +64,11 @@ workflows:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
+    cache:
+      cache_paths:
+        - $FLUTTER_ROOT/.pub-cache
+        - $HOME/.gradle/caches
+        - $HOME/Library/Caches/CocoaPods   
     triggering:
       events:
         - push
@@ -91,11 +99,10 @@ workflows:
         test_report: metrics-results/dart_code_metrics.json
       - name: Dart Code Metrics - packages/rijks_api
         script: |
-          cd packages/rijks_api
-          flutter pub global activate dart_code_metrics
-          mkdir -p metrics-results
-          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
-        test_report: metrics-results/dart_code_metrics.json
+          PACKAGE_RELATIVE_PATH="packages/rijks_api"
+          mkdir -p $PACKAGE_RELATIVE_PATH/metrics-results
+          flutter pub global run dart_code_metrics:metrics analyze $PACKAGE_RELATIVE_PATH/lib --reporter=json > $PACKAGE_RELATIVE_PATH/metrics-results/dart_code_metrics.json      
+        test_report: $PACKAGE_RELATIVE_PATH/metrics-results/dart_code_metrics.json
     artifacts:
       - flutter_drive.log
     publishing:
