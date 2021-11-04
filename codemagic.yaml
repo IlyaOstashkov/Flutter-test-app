@@ -86,16 +86,16 @@ workflows:
       - name: Dart Code Metrics - lib
         script: |
           flutter pub global activate dart_code_metrics
-          mkdir -p metrics_results
-          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics_results/result.json      
-        test_report: metrics_results/result.json
+          mkdir -p metrics-results
+          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
+        test_report: metrics-results/dart_code_metrics.json
       - name: Dart Code Metrics - packages/rijks_api
         script: |
           cd packages/rijks_api
           flutter pub global activate dart_code_metrics
-          mkdir -p metrics_results
-          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics_results/result.json      
-        test_report: metrics_results/result.json
+          mkdir -p metrics-results
+          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
+        test_report: metrics-results/dart_code_metrics.json
     artifacts:
       - flutter_drive.log
     publishing:
