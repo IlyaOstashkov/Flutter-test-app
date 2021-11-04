@@ -83,34 +83,19 @@ workflows:
               echo "Entering $PACKAGES_RELATIVE_PATH/$d"
               cd $PACKAGE_DIR && flutter pub get
           done
-      - name: Dart Code Metrics
+      - name: Dart Code Metrics - lib
         script: |
           flutter pub global activate dart_code_metrics
-          mkdir -p metrics-results
-          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
-        test_report: metrics-results/dart_code_metrics.json
-      - name: Flutter analyze
+          mkdir -p metrics_results
+          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics_results/lib.json      
+        test_report: metrics_results/dart_code_metrics.json
+      - name: Dart Code Metrics - packages/rijks_api
         script: |
-          CWD=`pwd`
-          PACKAGES_RELATIVE_PATH="packages"
-          PACKAGES_DIR="$CWD/$PACKAGES_RELATIVE_PATH"
-          flutter analyze
-          for d in $(ls $PACKAGES_DIR); do
-              PACKAGE_DIR="$PACKAGES_DIR/$d"
-              echo "Entering $PACKAGES_RELATIVE_PATH/$d"
-              cd $PACKAGE_DIR && flutter analyze
-          done
-      - name: Flutter test
-        script: |
-          CWD=`pwd`
-          PACKAGES_RELATIVE_PATH="packages"
-          PACKAGES_DIR="$CWD/$PACKAGES_RELATIVE_PATH"
-          flutter test
-          for d in $(ls $PACKAGES_DIR); do
-              PACKAGE_DIR="$PACKAGES_DIR/$d"
-              echo "Entering $PACKAGES_RELATIVE_PATH/$d"
-              cd $PACKAGE_DIR && flutter test
-          done
+          cd packages/rijks_api
+          flutter pub global activate dart_code_metrics
+          mkdir -p metrics_results
+          flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics_results/lib.json      
+        test_report: metrics_results/dart_code_metrics.json
     artifacts:
       - flutter_drive.log
     publishing:
