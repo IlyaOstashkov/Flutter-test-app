@@ -7,9 +7,12 @@ import 'navigation/navigation_router_delegate.dart';
 
 void main() {
   BlocDIContainer.instance.initialise();
-  runApp(MaterialApp.router(
-    routerDelegate:
-        NavigationRouterDelegate(stack: AppNavigationStack.instance),
-    routeInformationParser: NavigationRouteInformationParser(),
-  ));
+  runApp(
+    MaterialApp.router(
+      routerDelegate: NavigationRouterDelegate(
+        stack: AppNavigationStack.instance,
+      ),
+      routeInformationParser: NavigationRouteInformationParser(),
+    ),
+  );
 }

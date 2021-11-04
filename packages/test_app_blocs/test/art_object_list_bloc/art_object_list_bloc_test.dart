@@ -12,39 +12,7 @@ void main() {
     late domain.IArtObjectRepository artObjectRepository;
     late ArtObjectListBloc artObjectListBloc;
 
-    const limit = 10;
-    const century = 21;
-    const someHeader = '21 century';
     const _throttleTimeout = 500;
-
-    domain.ArtObject _artObject(int number) {
-      return domain.ArtObject(
-        objectNumber: number.toString(),
-        title: 'title ${number.toString()}',
-        imageUrl: null,
-        description: null,
-        principalOrFirstMaker: null,
-        presentingDate: null,
-      );
-    }
-
-    ArtObjectListViewModel _header() {
-      return const ArtObjectListViewModel(
-        isHeader: true,
-        headerTitle: someHeader,
-      );
-    }
-
-    List<ArtObjectListViewModel> _listItems(
-        List<domain.ArtObject?> artObjects) {
-      return artObjects
-          .map((e) => ArtObjectListViewModel(
-                artObject: e,
-                isHeader: false,
-                headerTitle: '',
-              ))
-          .toList();
-    }
 
     Future<void> _delayToWaitThrottleChecking() {
       return Future.delayed(
@@ -55,19 +23,19 @@ void main() {
       artObjectRepository = MockArtObjectRepository();
       when(artObjectRepository.getArtObjectList(
         page: 1,
-        limit: limit,
-        century: century,
+        limit: ArtObjectListBlocTestData.limit,
+        century: ArtObjectListBlocTestData.century,
       )).thenAnswer((_) async => [
-            _artObject(1),
-            _artObject(2),
+            ArtObjectListBlocTestData.artObject(1),
+            ArtObjectListBlocTestData.artObject(2),
           ]);
       when(artObjectRepository.getArtObjectList(
         page: 2,
-        limit: limit,
-        century: century,
+        limit: ArtObjectListBlocTestData.limit,
+        century: ArtObjectListBlocTestData.century,
       )).thenAnswer((_) async => [
-            _artObject(3),
-            _artObject(4),
+            ArtObjectListBlocTestData.artObject(3),
+            ArtObjectListBlocTestData.artObject(4),
           ]);
       artObjectListBloc = ArtObjectListBloc(repository: artObjectRepository);
     });
@@ -87,19 +55,13 @@ void main() {
         build: () => artObjectListBloc,
         act: (bloc) => bloc.add(const ArtObjectListEvent.fetched()),
         expect: () => [
-          ArtObjectListState.content([
-            _header(),
-            ..._listItems([
-              _artObject(1),
-              _artObject(2),
-            ])
-          ], false, century, 1),
+          ArtObjectListBlocTestData.headerWithTwoItems(),
         ],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verifyNoMoreInteractions(artObjectRepository);
         },
@@ -118,8 +80,8 @@ void main() {
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verifyNoMoreInteractions(artObjectRepository);
         },
@@ -136,25 +98,25 @@ void main() {
         skip: 1,
         expect: () => [
           ArtObjectListState.content([
-            _header(),
-            ..._listItems([
-              _artObject(1),
-              _artObject(2),
-              _artObject(3),
-              _artObject(4),
+            ArtObjectListBlocTestData.header(),
+            ...ArtObjectListBlocTestData.listItems([
+              ArtObjectListBlocTestData.artObject(1),
+              ArtObjectListBlocTestData.artObject(2),
+              ArtObjectListBlocTestData.artObject(3),
+              ArtObjectListBlocTestData.artObject(4),
             ])
-          ], false, century, 2),
+          ], false, ArtObjectListBlocTestData.century, 2),
         ],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verify(artObjectRepository.getArtObjectList(
             page: 2,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verifyNoMoreInteractions(artObjectRepository);
         },
@@ -177,13 +139,13 @@ void main() {
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verify(artObjectRepository.getArtObjectList(
             page: 2,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verifyNoMoreInteractions(artObjectRepository);
         },
@@ -202,24 +164,18 @@ void main() {
         },
         skip: 3,
         expect: () => [
-          ArtObjectListState.content([
-            _header(),
-            ..._listItems([
-              _artObject(1),
-              _artObject(2),
-            ])
-          ], false, century, 1),
+          ArtObjectListBlocTestData.headerWithTwoItems(),
         ],
         verify: (_) {
           verify(artObjectRepository.getArtObjectList(
             page: 1,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(2);
           verify(artObjectRepository.getArtObjectList(
             page: 2,
-            limit: limit,
-            century: century,
+            limit: ArtObjectListBlocTestData.limit,
+            century: ArtObjectListBlocTestData.century,
           )).called(1);
           verifyNoMoreInteractions(artObjectRepository);
         },
