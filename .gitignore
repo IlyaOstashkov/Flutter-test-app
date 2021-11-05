@@ -33,3 +33,6 @@ lcov.info
 machine.log
 coverage.xml
 coverage/
+
+# don't check in golden failure output
+**/failures/*.png

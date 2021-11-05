@@ -30,8 +30,18 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^0.14.5
+  golden_toolkit: ^0.11.0
   mocktail: ^0.1.4
   test: ^1.17.12
 
+# for material Icons
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: .SF UI Display
+      fonts:
+        - asset: packages/test_app_ui_kit/assets/fonts/SFUIDisplay-Semibold.otf
+    - family: .SF UI Text
+      fonts:
+        - asset: packages/test_app_ui_kit/assets/fonts/SFUIText-Regular.ttf
