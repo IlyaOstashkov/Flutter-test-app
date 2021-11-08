@@ -31,8 +31,8 @@ runTests () {
     echo "Check if test $1 - in folder $2 - handles - $3"
     # Moved horizon_blocs to goldens, since Mac's are more powerful.
     if [[ -z $3 ]] || 
-      ( [[ $3 == "golden" ]] && ( [[ $1 == "./packages/horizon_ui_kit" ]] || [[ $1 == "./packages/horizon_test_data" ]] || [[ $1 == "." ]] ) ) || 
-      ( [[ $3 == "non-golden" ]] && [[ $1 != "./packages/horizon_ui_kit" ]] && [[ $1 != "./packages/horizon_test_data" ]] && [[ $1 != "." ]] ); then      
+      ( [[ $3 == "golden" ]] && ( [[ $1 == "./packages/test_app_ui_kit" ]] || [[ $1 == "." ]] ) ) || 
+      ( [[ $3 == "non-golden" ]] && [[ $1 != "./packages/test_app_ui_kit" ]] && [[ $1 != "." ]] ); then      
       echo "Running tests in $1"
       escapedPath="$(echo $1 | sed 's/\//\\\//g')"
       # run tests with coverage
