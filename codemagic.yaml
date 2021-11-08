@@ -166,7 +166,7 @@ workflows:
       - name: Coverall coverage
         script: |
           set -e
-          echo "repo_token: $COVERALLS_TOKEN"
+          echo "repo_token: $COVERALLS_REPO_TOKEN"
           gem install coveralls-lcov
           coveralls-lcov lcov.info
     artifacts:
