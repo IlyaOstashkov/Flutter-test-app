@@ -13,6 +13,10 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.1.4
+  dart_dot_reporter:
+    path: ../dart_dot_reporter
+  flutter_test:
+    sdk: flutter
   mocktail: ^0.1.4
   rijks_api:
     path: ../rijks_api
