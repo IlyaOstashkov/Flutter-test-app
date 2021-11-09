@@ -1,38 +1,14 @@
-import 'package:flutter_test_app/navigation/app_navigation_stack.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test_app/navigation/navigation_route_information_parser.dart';
 import 'package:flutter_test_app/navigation/navigation_stack_item.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
-import 'package:test_app_blocs/test_app_blocs.dart';
+
+class MockRouteInformation extends Mock implements RouteInformation {}
 
 void main() {
   const artObjectListSegment = 'artObjectList';
   const errorPathSegment = 'errorPathSegment';
-
-  group('AppNavigationStack -', () {
-    test('instance is initialized and have items', () async {
-      expect(AppNavigationStack.instance, isNotNull);
-      expect(AppNavigationStack.instance.items.length, isPositive);
-    });
-  });
-
-  group('NavigationStackItem -', () {
-    test('all type are not null', () async {
-      const artObjectListStackItem = NavigationStackItem.artObjectList();
-      const someImageUrl = 'some-image-url';
-      final fullContentArtObject =
-          ArtObjectDetailBlocTestData.artObjectFullContent();
-      final artObjectDetailStackItem =
-          NavigationStackItem.artObjectDetail(artObject: fullContentArtObject);
-      const fullScreenStackItem =
-          NavigationStackItem.fullScreenImage(imageUrls: [someImageUrl]);
-      const notFoundStackItem =
-          NavigationStackItem.notFound(pathSegments: [artObjectListSegment]);
-      expect(artObjectListStackItem, isNotNull);
-      expect(artObjectDetailStackItem, isNotNull);
-      expect(fullScreenStackItem, isNotNull);
-      expect(notFoundStackItem, isNotNull);
-    });
-  });
 
   group('NavigationRouteInformationParser -', () {
     late NavigationRouteInformationParser parser;
@@ -66,6 +42,19 @@ void main() {
         const NavigationStackItem.notFound(pathSegments: [errorPathSegment]),
       );
       expect(notFoundSegments, equals([errorPathSegment]));
+    });
+
+    test('itemsForRouteInformation return correct navigation stack items',
+        () async {
+      const artObjectList = 'artObjectList';
+      final mockRouteInformation = MockRouteInformation();
+      when(() => mockRouteInformation.location).thenReturn(artObjectList);
+      final navigationStackItems =
+          await parser.itemsForRouteInformation(mockRouteInformation);
+      expect(navigationStackItems, isList);
+      expect(navigationStackItems.length, 1);
+      expect(
+          navigationStackItems.first, isA<NavigationStackItemArtObjectList>());
     });
   });
 }
