@@ -5,6 +5,8 @@
 
 [![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/status_badge.svg)](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/latest_build)
 
+[![Coverage Status](https://coveralls.io/repos/github/IlyaOstashkov/Flutter_test_app/badge.svg?branch=main)](https://coveralls.io/github/IlyaOstashkov/Flutter_test_app?branch=main)
+
 ## Main checkpoints
 
 ### ✅ API
@@ -51,17 +53,18 @@ Request failure handling is implemented. If an error occurs, a corresponding pop
 
 ### ✅ Unit tests
 
-Unit tests are written for:
-- api (`/test/packages/rijks_api/`)
-- domain (`/test/packages/test_app_domain/`)
-- presentation BLoC (`/test/packages/test_app_blocs/`)
-- shared utils (`/test/packages/test_app_shared/`)
+You can find Unit tests here:
+- navigation (`/test/navigation/`)
+- api (`/packages/rijks_api/test/`)
+- domain (`/packages/test_app_domain/test/`)
+- presentation BLoC (`/packages/test_app_blocs/test/`)
+- shared utils (`/packages/test_app_shared/test/`)
 
 <img width="505" alt="Снимок экрана 2021-11-02 в 13 17 58" src="https://user-images.githubusercontent.com/8611478/139828682-d8de55d9-38f7-4452-a8e5-c2abdc9c483f.png">
 
-### 📌 Widget tests
+### 📌 Golden and widget tests
 
-Widget tests are written only for common widgets (`/test/packages/test_app_ui_kit`). In the future, I will add the widget tests for pages.
+There are golden and widget tests in `test/pages` folder and in `test_app_ui_kit` package. 
 
 ### 📌 CI/CD
 
@@ -77,6 +80,6 @@ https://user-images.githubusercontent.com/8611478/133458463-cdf6e1b5-0cb0-418e-b
 
 ## Before build
 
-You need to run it at first for code generating.
+You need to run it at first to get dependencies and for code generating.
 
-`fvm flutter pub run build_runner build --delete-conflicting-outputs`
+`./scripts/get_all.sh`

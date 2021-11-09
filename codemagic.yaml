@@ -7,6 +7,8 @@ workflows:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
+      groups:
+        - coverall
     triggering:
       events:
         - push
@@ -109,6 +111,15 @@ workflows:
           mkdir -p test-results
           flutter test --machine > test-results/flutter.json      
         test_report: packages/test_app_ui_kit/test-results/flutter.json
+      - name: Generate lcov.info
+        script: |
+          ./scripts/coverage.sh
+      - name: Coverage badge
+        script: |
+          set -e
+          echo "repo_token: $COVERALLS_TOKEN" > .coveralls.yml
+          gem install coveralls-lcov
+          coveralls-lcov coverage/lcov.info
     artifacts:
       - flutter_drive.log
     publishing:
