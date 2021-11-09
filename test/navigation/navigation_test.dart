@@ -2,8 +2,12 @@ import 'package:flutter_test_app/navigation/app_navigation_stack.dart';
 import 'package:flutter_test_app/navigation/navigation_route_information_parser.dart';
 import 'package:flutter_test_app/navigation/navigation_stack_item.dart';
 import 'package:test/test.dart';
+import 'package:test_app_blocs/test_app_blocs.dart';
 
 void main() {
+  const artObjectListSegment = 'artObjectList';
+  const errorPathSegment = 'errorPathSegment';
+
   group('AppNavigationStack -', () {
     test('instance is initialized and have items', () async {
       expect(AppNavigationStack.instance, isNotNull);
@@ -11,10 +15,26 @@ void main() {
     });
   });
 
-  group('NavigationRouteInformationParser -', () {
-    const artObjectListSegment = 'artObjectList';
-    const errorPathSegment = 'errorPathSegment';
+  group('NavigationStackItem -', () {
+    test('all type are not null', () async {
+      const artObjectListStackItem = NavigationStackItem.artObjectList();
+      const someImageUrl = 'some-image-url';
+      final fullContentArtObject =
+          ArtObjectDetailBlocTestData.artObjectFullContent();
+      final artObjectDetailStackItem =
+          NavigationStackItem.artObjectDetail(artObject: fullContentArtObject);
+      const fullScreenStackItem =
+          NavigationStackItem.fullScreenImage(imageUrls: [someImageUrl]);
+      const notFoundStackItem =
+          NavigationStackItem.notFound(pathSegments: [artObjectListSegment]);
+      expect(artObjectListStackItem, isNotNull);
+      expect(artObjectDetailStackItem, isNotNull);
+      expect(fullScreenStackItem, isNotNull);
+      expect(notFoundStackItem, isNotNull);
+    });
+  });
 
+  group('NavigationRouteInformationParser -', () {
     late NavigationRouteInformationParser parser;
 
     setUp(() {
