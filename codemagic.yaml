@@ -111,15 +111,6 @@ workflows:
           mkdir -p test-results
           flutter test --machine > test-results/flutter.json      
         test_report: packages/test_app_ui_kit/test-results/flutter.json
-      - name: Generate lcov.info
-        script: |
-          ./scripts/coverage.sh
-      - name: Coverage badge
-        script: |
-          set -e
-          echo "repo_token: $COVERALLS_TOKEN" > .coveralls.yml
-          gem install coveralls-lcov
-          coveralls-lcov coverage/lcov.info
     artifacts:
       - flutter_drive.log
     publishing:
@@ -167,6 +158,15 @@ workflows:
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
+      - name: Generate lcov.info
+        script: |
+          ./scripts/coverage.sh
+      - name: Coverage badge
+        script: |
+          set -e
+          echo "repo_token: $COVERALLS_TOKEN" > .coveralls.yml
+          gem install coveralls-lcov
+          coveralls-lcov coverage/lcov.info
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
