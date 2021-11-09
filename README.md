@@ -3,6 +3,8 @@
 * Author: Ilia Ostashkov
 * Flutter version: 2.6.0
 
+[![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/status_badge.svg)](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/latest_build)
+
 ## Main checkpoints
 
 ### ✅ API
@@ -63,9 +65,7 @@ Widget tests are written only for common widgets (`/test/packages/test_app_ui_ki
 
 ### 📌 CI/CD
 
-I use CodeMagic.io for CI/CD.
-
-[![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/61801c5bf780e4f64be7e6c6/status_badge.svg)](https://codemagic.io/apps/61801c5bf780e4f64be7e6c7/61801c5bf780e4f64be7e6c6/latest_build)
+I use CodeMagic.io for CI/CD. You can look at codemagic.yaml config in the root folder.
 
 ## Video
 

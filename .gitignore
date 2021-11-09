@@ -30,7 +30,6 @@ doc/api/
 
 # Created by ./scripts/coverage.sh
 machine.log
-coverage.xml
 coverage/
 
 # don't check in golden failure output

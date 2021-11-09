@@ -1,66 +1,12 @@
 
 workflows:
-  test-+-ios/android-debug-build:
-    name: Test + iOS/android debug build
-    max_build_duration: 60
-    environment:
-      flutter: 2.6.0-11.0.pre
-      xcode: latest
-      cocoapods: default
-    triggering:
-      events:
-        - pull_request
-      branch_patterns:
-        - pattern: '*'
-          include: true
-          source: true
-      tag_patterns:
-        - pattern: '*'
-          include: true
-      cancel_previous_builds: true
-    scripts:
-      - |
-        # set up debug keystore
-        rm -f ~/.android/debug.keystore
-        keytool -genkeypair \
-          -alias androiddebugkey \
-          -keypass android \
-          -keystore ~/.android/debug.keystore \
-          -storepass android \
-          -dname 'CN=Android Debug,O=Android,C=US' \
-          -keyalg 'RSA' \
-          -keysize 2048 \
-          -validity 10000
-      - |
-        # set up local properties
-        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
-      - flutter packages pub get
-      - flutter analyze lib packages
-      - flutter test
-      - flutter test packages
-      - flutter build appbundle --debug
-      - find . -name "Podfile" -execdir pod install \;
-      - flutter build ios --debug --no-codesign
-    artifacts:
-      - build/**/outputs/apk/**/*.apk
-      - build/**/outputs/bundle/**/*.aab
-      - build/**/outputs/**/mapping.txt
-      - build/ios/ipa/*.ipa
-      - /tmp/xcodebuild_logs/*.log
-      - flutter_drive.log
-    publishing:
-      slack:
-        channel: '#ci'
-        notify_on_build_start: false
-  test:
+  test-flow:
     name: Test
     max_build_duration: 20
     environment:
       flutter: 2.6.0-11.0.pre
       xcode: latest
       cocoapods: default
-      groups:
-        - sonar_credentials
     triggering:
       events:
         - push
@@ -163,13 +109,59 @@ workflows:
           mkdir -p test-results
           flutter test --machine > test-results/flutter.json      
         test_report: packages/test_app_ui_kit/test-results/flutter.json
-      - name: Coverall coverage
-        script: |
-          set -e
-          echo "repo_token: $COVERALLS_REPO_TOKEN"
-          gem install coveralls-lcov
-          coveralls-lcov lcov.info
     artifacts:
+      - flutter_drive.log
+    publishing:
+      slack:
+        channel: '#ci'
+        notify_on_build_start: false
+  test-+-ios/android-debug-build:
+    name: Test + iOS/android debug build
+    max_build_duration: 60
+    environment:
+      flutter: 2.6.0-11.0.pre
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - pull_request
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+      tag_patterns:
+        - pattern: '*'
+          include: true
+      cancel_previous_builds: true
+    scripts:
+      - |
+        # set up debug keystore
+        rm -f ~/.android/debug.keystore
+        keytool -genkeypair \
+          -alias androiddebugkey \
+          -keypass android \
+          -keystore ~/.android/debug.keystore \
+          -storepass android \
+          -dname 'CN=Android Debug,O=Android,C=US' \
+          -keyalg 'RSA' \
+          -keysize 2048 \
+          -validity 10000
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - flutter packages pub get
+      - flutter analyze lib packages
+      - flutter test
+      - flutter test packages
+      - flutter build appbundle --debug
+      - find . -name "Podfile" -execdir pod install \;
+      - flutter build ios --debug --no-codesign
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
       - flutter_drive.log
     publishing:
       slack:
