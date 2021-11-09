@@ -11,11 +11,9 @@ Tool for running all unit and widget tests with code coverage.
 (run from root of repo)
 where:
     <path to package>
-        run tests for package at path only
-        (otherwise runs all tests)
-    --report
-        run a coverage report
-        (requires lcov installed)
+        run tests without FVM
+    --useFvm
+        run tests with FVM
     --help
         print this message
 requires code_coverage package
