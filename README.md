@@ -61,15 +61,15 @@ You can find Unit tests here:
 
 <img width="505" alt="Снимок экрана 2021-11-02 в 13 17 58" src="https://user-images.githubusercontent.com/8611478/139828682-d8de55d9-38f7-4452-a8e5-c2abdc9c483f.png">
 
-### 📌 Golden and widget tests
+### ✅ Golden and widget tests
 
 There are golden and widget tests in `test/pages` folder and in `test_app_ui_kit` package. 
 
-### 📌 CI/CD
+### ✅ CI/CD
 
 I use CodeMagic.io for CI/CD. You can look at codemagic.yaml config in the root folder.
 
-## Video
+## 📌 Video
 
 https://user-images.githubusercontent.com/8611478/133456754-e35a3aea-9f5c-46c4-be2a-74d14a16b442.MOV
 
@@ -77,7 +77,7 @@ https://user-images.githubusercontent.com/8611478/133454564-70659cae-25cc-4d51-8
 
 https://user-images.githubusercontent.com/8611478/133458463-cdf6e1b5-0cb0-418e-b8ca-3231ac47b0e9.MOV
 
-## Before build
+## 📌 Before build
 
 You need to run it at first to get dependencies and for code generating.
 
