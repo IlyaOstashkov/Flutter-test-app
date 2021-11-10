@@ -4,7 +4,7 @@
 * Flutter version: 2.6.0
 
 [![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/status_badge.svg)](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/latest_build)
-[![Coverage Status](https://coveralls.io/repos/github/IlyaOstashkov/Flutter_test_app/badge.png?branch=main)](https://coveralls.io/github/IlyaOstashkov/Flutter_test_app?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/IlyaOstashkov/Flutter_test_app/badge.svg?branch=main)](https://coveralls.io/github/IlyaOstashkov/Flutter_test_app?branch=main)
 
 ## Main checkpoints
 
