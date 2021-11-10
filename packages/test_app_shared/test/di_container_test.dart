@@ -10,7 +10,7 @@ void main() {
     });
 
     test('container is initialized', () {
-      expect(diContainer, isNotNull);
+      expect(diContainer, isNull);
     });
 
     test('map and get methods work as expected', () {
