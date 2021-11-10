@@ -43,8 +43,8 @@ runAllTests() {
 }
 
 removeGeneratedFilesFromLcov() {
-    dart pub global activate remove_from_coverage
-    pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '\.g\.dart$'
+    $fvm flutter pub global activate remove_from_coverage
+    $fvm flutter pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '\.g\.dart$'
 }
 
 # run unit and widget tests
