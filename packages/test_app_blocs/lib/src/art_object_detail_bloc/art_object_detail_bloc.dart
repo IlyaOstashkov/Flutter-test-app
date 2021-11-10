@@ -5,6 +5,7 @@ import 'package:test_app_domain/test_app_domain.dart';
 
 import 'art_object_detail_event.dart';
 import 'art_object_detail_state.dart';
+import 'art_object_detail_state.dart';
 
 class ArtObjectDetailBloc
     extends Bloc<ArtObjectDetailEvent, ArtObjectDetailState> {
