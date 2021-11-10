@@ -1,10 +1,10 @@
 # Flutter test app
 
-* Author: Ilia Ostashkov
-* Flutter version: 2.6.0
-
-[![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/status_badge.svg)](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/latest_build)
-[![Coverage Status](https://coveralls.io/repos/github/IlyaOstashkov/Flutter_test_app/badge.svg?branch=main)](https://coveralls.io/github/IlyaOstashkov/Flutter_test_app?branch=main)
+[![Author](https://badgen.net/badge/author/Ilya_Ostashkov/blue)](https://github.com/IlyaOstashkov)
+[![Flutter](https://badgen.net/badge/flutter/2.6.0/blue)](https://flutter.dev/docs/development/tools/sdk/releases)
+[![Github Releases](https://badgen.net/github/releases/IlyaOstashkov/Flutter_test_app)](https://github.com/IlyaOstashkov/Flutter_test_app/releases)
+[![Codemagic build status](https://api.codemagic.io/apps/61801c5bf780e4f64be7e6c7/test-flow/status_badge.svg)](https://codemagic.io/builds)
+[![Coverage Status](https://badgen.net/coveralls/c/github/IlyaOstashkov/Flutter_test_app/main)](https://coveralls.io/github/IlyaOstashkov/Flutter_test_app)
 
 ## Main checkpoints
 
