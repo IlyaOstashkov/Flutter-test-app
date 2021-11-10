@@ -20,12 +20,15 @@ class SimpleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text ?? '',
-      textAlign: textAlign,
-      style: textStyle,
-      maxLines: maxLines,
-      overflow: TextOverflow.ellipsis, // dots at the end
+    return Container(
+      color: Colors.red,
+      child: Text(
+        text ?? '',
+        textAlign: textAlign,
+        style: textStyle,
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis, // dots at the end
+      ),
     );
   }
 }
