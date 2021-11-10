@@ -39,6 +39,12 @@ runAllTests() {
             show_help
         fi
     fi
+    removeGeneratedFilesFromLcov
+}
+
+removeGeneratedFilesFromLcov() {
+    dart pub global activate remove_from_coverage
+    pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '\.g\.dart$'
 }
 
 # run unit and widget tests
