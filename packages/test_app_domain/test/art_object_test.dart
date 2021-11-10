@@ -24,7 +24,7 @@ void main() {
 
     test('art object initialized', () {
       final object = _artObject();
-      expect(object, isNotNull);
+      expect(object, isNull);
     });
 
     test('art object has correct fields values after initialization', () {

@@ -76,41 +76,6 @@ workflows:
           mkdir -p metrics-results
           flutter pub global run dart_code_metrics:metrics analyze lib --reporter=json > metrics-results/dart_code_metrics.json      
         test_report: packages/test_app_ui_kit/metrics-results/dart_code_metrics.json
-      - name: Unit tests - lib
-        script: |
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: test-results/flutter.json
-      - name: Unit tests - packages/rijks_api
-        script: |
-          cd packages/rijks_api
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: packages/rijks_api/test-results/flutter.json
-      - name: Unit tests - packages/test_app_blocs
-        script: |
-          cd packages/test_app_blocs
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: packages/test_app_blocs/test-results/flutter.json
-      - name: Unit tests - packages/test_app_domain
-        script: |
-          cd packages/test_app_domain
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: packages/test_app_domain/test-results/flutter.json
-      - name: Unit tests - packages/test_app_shared
-        script: |
-          cd packages/test_app_shared
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: packages/test_app_shared/test-results/flutter.json
-      - name: Unit tests - packages/test_app_ui_kit
-        script: |
-          cd packages/test_app_ui_kit
-          mkdir -p test-results
-          flutter test --machine > test-results/flutter.json      
-        test_report: packages/test_app_ui_kit/test-results/flutter.json
       - name: Generate lcov.info
         script: |
           ./scripts/coverage.sh
@@ -167,6 +132,41 @@ workflows:
       - flutter build appbundle --debug
       - find . -name "Podfile" -execdir pod install \;
       - flutter build ios --debug --no-codesign
+      - name: Unit tests - lib
+        script: |
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: test-results/flutter.json
+      - name: Unit tests - packages/rijks_api
+        script: |
+          cd packages/rijks_api
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/rijks_api/test-results/flutter.json
+      - name: Unit tests - packages/test_app_blocs
+        script: |
+          cd packages/test_app_blocs
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_blocs/test-results/flutter.json
+      - name: Unit tests - packages/test_app_domain
+        script: |
+          cd packages/test_app_domain
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_domain/test-results/flutter.json
+      - name: Unit tests - packages/test_app_shared
+        script: |
+          cd packages/test_app_shared
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_shared/test-results/flutter.json
+      - name: Unit tests - packages/test_app_ui_kit
+        script: |
+          cd packages/test_app_ui_kit
+          mkdir -p test-results
+          flutter test --machine > test-results/flutter.json      
+        test_report: packages/test_app_ui_kit/test-results/flutter.json
     artifacts:
       - build/**/outputs/apk/**/*.apk
       - build/**/outputs/bundle/**/*.aab
