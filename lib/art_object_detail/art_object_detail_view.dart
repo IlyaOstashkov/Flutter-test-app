@@ -168,12 +168,10 @@ class _TopViews extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TransparentButton(
+            _Image(
+              imageRadius: 100.0,
+              imageUrl: artObject.imageUrl,
               onTap: onImageTap,
-              child: _Image(
-                imageRadius: 100.0,
-                imageUrl: artObject.imageUrl,
-              ),
             ),
           ],
         ),
@@ -252,11 +250,13 @@ class _Image extends StatelessWidget {
   const _Image({
     required this.imageRadius,
     required this.imageUrl,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
   final double imageRadius;
   final String? imageUrl;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -269,6 +269,7 @@ class _Image extends StatelessWidget {
         color: Colors.black12,
         size: 100.0,
       ),
+      onTap: onTap,
     );
   }
 }

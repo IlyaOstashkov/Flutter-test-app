@@ -12,10 +12,12 @@ class PageTester {
   final Widget child;
   final List<BlocProvider> blocs;
 
-  Widget get widgetWithBlocs => MultiBlocProvider(
-        providers: blocs,
-        child: widget,
-      );
+  Widget get widgetWithBlocs {
+    return MultiBlocProvider(
+      providers: blocs,
+      child: widget,
+    );
+  }
 
   Widget get widget {
     return Material(
@@ -28,8 +30,12 @@ class PageTester {
     );
   }
 
-  Future<void> testPageIsCreated({required WidgetTester tester}) async {
-    await tester.pumpWidget(blocs.isNotEmpty ? widgetWithBlocs : widget);
+  Widget get pageWidget {
+    return blocs.isNotEmpty ? widgetWithBlocs : widget;
+  }
+
+  Future<void> pumpAndFindPage({required WidgetTester tester}) async {
+    await tester.pumpWidget(pageWidget);
     await tester.pump();
     expect(find.byType(child.runtimeType), findsOneWidget);
   }
