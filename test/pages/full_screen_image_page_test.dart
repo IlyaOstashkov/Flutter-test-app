@@ -7,7 +7,11 @@ import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 void main() {
   group('FullScreenImagePage -', () {
     GoldenRunner.executePage(
-        pageWidget: const FullScreenImagePage(imageUrls: <String>[]),
+        widgetType: FullScreenImagePage,
+        scenario: const GoldenRunnerScenario(
+          name: 'empty image urls',
+          child: FullScreenImagePage(imageUrls: <String>[]),
+        ),
         test: (tester) async {
           expect(find.byType(FullScreenImageView), findsOneWidget);
           expect(find.byType(PhotoViewGallery), findsOneWidget);

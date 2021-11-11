@@ -4,6 +4,7 @@ import 'package:flutter_test_app/art_object_detail/art_object_detail_page.dart';
 import 'package:flutter_test_app/art_object_detail/art_object_detail_view.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test_app_blocs/test_app_blocs.dart';
+import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 import 'mock_bloc.dart';
 import 'page_tester.dart';
 
@@ -28,46 +29,74 @@ void main() {
       artObjectDetailBloc.close();
     });
 
-    testWidgets('page created with initialLoading state', (widgetTester) async {
-      when(() => artObjectDetailBloc.state)
-          .thenReturn(const ArtObjectDetailState.initialLoading());
-      await PageTester(
-        child: ArtObjectDetailPage(
-          artObject: ArtObjectDetailBlocTestData.artObjectPartialContent(true),
+    GoldenRunner.executePage(
+        widgetType: ArtObjectDetailPage,
+        setupFunction: () {
+          when(() => artObjectDetailBloc.state)
+              .thenReturn(const ArtObjectDetailState.initialLoading());
+        },
+        scenario: GoldenRunnerScenario(
+          name: 'initial loading state',
+          child: PageTester(
+            child: ArtObjectDetailPage(
+              artObject:
+                  ArtObjectDetailBlocTestData.artObjectPartialContent(true),
+            ),
+            blocs: [
+              BlocProvider<ArtObjectDetailBloc>(
+                  create: (_) => artObjectDetailBloc)
+            ],
+          ).pageWidget,
         ),
-        blocs: [
-          BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
-        ],
-      ).pumpAndFindPage(tester: widgetTester);
-      expect(find.byType(ArtObjectDetailView), findsOneWidget);
-    });
+        test: (tester) async {
+          expect(find.byType(ArtObjectDetailView), findsOneWidget);
+        });
 
-    testWidgets('page created with partialContent state', (widgetTester) async {
-      final partialContentArtObject =
-          ArtObjectDetailBlocTestData.artObjectPartialContent(true);
-      when(() => artObjectDetailBloc.state).thenReturn(
-          ArtObjectDetailState.partialContent(partialContentArtObject));
-      await PageTester(
-        child: ArtObjectDetailPage(artObject: partialContentArtObject),
-        blocs: [
-          BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
-        ],
-      ).pumpAndFindPage(tester: widgetTester);
-      expect(find.byType(ArtObjectDetailView), findsOneWidget);
-    });
+    GoldenRunner.executePage(
+        widgetType: ArtObjectDetailPage,
+        setupFunction: () {
+          final partialContentArtObject =
+              ArtObjectDetailBlocTestData.artObjectPartialContent(true);
+          when(() => artObjectDetailBloc.state).thenReturn(
+              ArtObjectDetailState.partialContent(partialContentArtObject));
+        },
+        scenario: GoldenRunnerScenario(
+          name: 'partial content state',
+          child: PageTester(
+            child: ArtObjectDetailPage(
+              artObject:
+                  ArtObjectDetailBlocTestData.artObjectPartialContent(true),
+            ),
+            blocs: [
+              BlocProvider<ArtObjectDetailBloc>(
+                  create: (_) => artObjectDetailBloc)
+            ],
+          ).pageWidget,
+        ),
+        test: (tester) async {
+          expect(find.byType(ArtObjectDetailView), findsOneWidget);
+        });
 
-    testWidgets('page created with fullContent state', (widgetTester) async {
-      final fullContentArtObject =
-          ArtObjectDetailBlocTestData.artObjectFullContent();
-      when(() => artObjectDetailBloc.state)
-          .thenReturn(ArtObjectDetailState.fullContent(fullContentArtObject));
-      await PageTester(
-        child: ArtObjectDetailPage(artObject: fullContentArtObject),
-        blocs: [
-          BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
-        ],
-      ).pumpAndFindPage(tester: widgetTester);
-      expect(find.byType(ArtObjectDetailView), findsOneWidget);
-    });
+    GoldenRunner.executePage(
+        widgetType: ArtObjectDetailPage,
+        setupFunction: () {
+          when(() => artObjectDetailBloc.state).thenReturn(
+              ArtObjectDetailState.fullContent(
+                  ArtObjectDetailBlocTestData.artObjectFullContent()));
+        },
+        scenario: GoldenRunnerScenario(
+          name: 'full content state',
+          child: PageTester(
+            child: ArtObjectDetailPage(
+                artObject: ArtObjectDetailBlocTestData.artObjectFullContent()),
+            blocs: [
+              BlocProvider<ArtObjectDetailBloc>(
+                  create: (_) => artObjectDetailBloc)
+            ],
+          ).pageWidget,
+        ),
+        test: (tester) async {
+          expect(find.byType(ArtObjectDetailView), findsOneWidget);
+        });
   });
 }

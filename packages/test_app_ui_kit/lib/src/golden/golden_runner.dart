@@ -31,22 +31,27 @@ class GoldenRunner {
   }
 
   static void executePage({
-    required Widget pageWidget,
+    required Type widgetType,
+    required GoldenRunnerScenario scenario,
+    Function? setupFunction,
     Size? size,
     Future<void> Function(WidgetTester widgetTester)? test,
   }) {
-    final description =
-        '${pageWidget.runtimeType.toString()} golden + widget tests';
+    final description = '${scenario.name} - golden + widget tests';
     testGoldens(description, (tester) async {
+      if (setupFunction != null) {
+        setupFunction.call();
+      }
       await tester.pumpWidgetBuilder(
-        MaterialAppAppWidget(child: pageWidget),
+        MaterialAppAppWidget(child: scenario.child),
         surfaceSize: size ?? _defaultSize,
       );
       await test?.call(tester);
-      final fileName = _camelCaseToSnake(pageWidget.runtimeType.toString());
+      final snakeFileName =
+          '${_camelCaseToSnake(widgetType.toString())}_${scenario.name.replaceAll(' ', '_')}';
       await expectLater(
-        find.byType(pageWidget.runtimeType),
-        matchesGoldenFile('goldens/$fileName.png'),
+        find.byType(scenario.child.runtimeType),
+        matchesGoldenFile('goldens/$snakeFileName.png'),
       );
     });
   }
