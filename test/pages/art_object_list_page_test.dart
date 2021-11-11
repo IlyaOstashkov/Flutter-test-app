@@ -37,7 +37,7 @@ void main() {
         blocs: [
           BlocProvider<ArtObjectListBloc>(create: (_) => artObjectListBloc)
         ],
-      ).testPageIsCreated(tester: widgetTester);
+      ).pumpAndFindPage(tester: widgetTester);
       expect(find.byType(ArtObjectListView), findsOneWidget);
       expect(find.byType(ArtObjectListHeader), findsNothing);
       expect(find.byType(ArtObjectListTile), findsNothing);
@@ -51,7 +51,7 @@ void main() {
         blocs: [
           BlocProvider<ArtObjectListBloc>(create: (_) => artObjectListBloc)
         ],
-      ).testPageIsCreated(tester: widgetTester);
+      ).pumpAndFindPage(tester: widgetTester);
       expect(find.byType(ArtObjectListView), findsOneWidget);
       expect(find.byType(ArtObjectListHeader), findsOneWidget);
       expect(find.byType(ArtObjectListTile), findsNWidgets(2));

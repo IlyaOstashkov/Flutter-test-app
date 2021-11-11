@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
@@ -6,6 +7,7 @@ import 'golden_runner_scenario.dart';
 import 'golden_runner_scenario_list_widget.dart';
 
 class GoldenRunner {
+  static const _defaultSize = Size(360.0, 720.0);
   static void execute({
     required Type widgetType,
     required List<GoldenRunnerScenario> scenarios,
@@ -17,11 +19,33 @@ class GoldenRunner {
       await tester.pumpWidgetBuilder(
         GoldenRunnerScenarioListWidget(scenarios: scenarios),
         wrapper: (child) => MaterialAppAppWidget(child: child),
+        surfaceSize: _defaultSize,
       );
       await test?.call(tester);
       final fileName = _camelCaseToSnake(widgetType.toString());
       await expectLater(
         find.byType(GoldenRunnerScenarioListWidget),
+        matchesGoldenFile('goldens/$fileName.png'),
+      );
+    });
+  }
+
+  static void executePage({
+    required Widget pageWidget,
+    Size? size,
+    Future<void> Function(WidgetTester widgetTester)? test,
+  }) {
+    final description =
+        '${pageWidget.runtimeType.toString()} golden + widget tests';
+    testGoldens(description, (tester) async {
+      await tester.pumpWidgetBuilder(
+        MaterialAppAppWidget(child: pageWidget),
+        surfaceSize: size ?? _defaultSize,
+      );
+      await test?.call(tester);
+      final fileName = _camelCaseToSnake(pageWidget.runtimeType.toString());
+      await expectLater(
+        find.byType(pageWidget.runtimeType),
         matchesGoldenFile('goldens/$fileName.png'),
       );
     });

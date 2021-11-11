@@ -38,7 +38,7 @@ void main() {
         blocs: [
           BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
         ],
-      ).testPageIsCreated(tester: widgetTester);
+      ).pumpAndFindPage(tester: widgetTester);
       expect(find.byType(ArtObjectDetailView), findsOneWidget);
     });
 
@@ -52,7 +52,7 @@ void main() {
         blocs: [
           BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
         ],
-      ).testPageIsCreated(tester: widgetTester);
+      ).pumpAndFindPage(tester: widgetTester);
       expect(find.byType(ArtObjectDetailView), findsOneWidget);
     });
 
@@ -66,7 +66,7 @@ void main() {
         blocs: [
           BlocProvider<ArtObjectDetailBloc>(create: (_) => artObjectDetailBloc)
         ],
-      ).testPageIsCreated(tester: widgetTester);
+      ).pumpAndFindPage(tester: widgetTester);
       expect(find.byType(ArtObjectDetailView), findsOneWidget);
     });
   });
