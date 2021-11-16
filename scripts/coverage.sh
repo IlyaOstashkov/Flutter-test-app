@@ -52,7 +52,6 @@ runTests () {
     cd $1 ;
     if [ -f "pubspec.yaml" ] && [ -d "test" ]; then
         echo "Check if test $1 - in folder $2 - handles - $3"
-        # Moved horizon_blocs to goldens, since Mac's are more powerful.
         if [[ -z $3 ]]; then      
             echo "Running tests in $1"
             escapedPath="$(echo $1 | sed 's/\//\\\//g')"
