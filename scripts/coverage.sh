@@ -81,10 +81,10 @@ case $1 in
         ;;
     --useFvm)
         fvm='fvm'
-        # runAllTests
+        runAllTests
         ;;
     *)
-        # runAllTests
+        runAllTests
         ;;
 esac
 
