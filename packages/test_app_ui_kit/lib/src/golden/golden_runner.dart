@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
-import 'golden_runner_scenario.dart';
 import 'golden_runner_scenario_list_widget.dart';
 
 class GoldenRunner {
@@ -47,8 +46,7 @@ class GoldenRunner {
         surfaceSize: size ?? _defaultSize,
       );
       await test?.call(tester);
-      final snakeFileName =
-          '${_camelCaseToSnake(widgetType.toString())}_${scenario.name.replaceAll(' ', '_')}';
+      final snakeFileName = '${_camelCaseToSnake(widgetType.toString())}_${scenario.name.replaceAll(' ', '_')}';
       await expectLater(
         find.byType(scenario.child.runtimeType),
         matchesGoldenFile('goldens/$snakeFileName.png'),
@@ -59,8 +57,7 @@ class GoldenRunner {
   static String _camelCaseToSnake(String camelCase) {
     // ignore: unnecessary_raw_strings
     final exp = RegExp(r'(?<=[a-z])[A-Z]');
-    final result =
-        camelCase.replaceAllMapped(exp, (m) => '_${m.group(0)}').toLowerCase();
+    final result = camelCase.replaceAllMapped(exp, (m) => '_${m.group(0)}').toLowerCase();
     return result;
   }
 }

@@ -2,15 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:optimized_cached_image/optimized_cached_image.dart';
-import 'package:test_app_ui_kit/src/golden/golden_runner_scenario.dart';
 import 'package:test_app_ui_kit/test_app_ui_kit.dart';
 
 void main() {
   const someText = 'some text';
   const someVeryLongText =
       'fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd fdsf df sdf sdf sdf sdf sdf sdf sdf sdf sd';
-  const someImageUrl =
-      'https://flutter.dev/assets/images/shared/brand/flutter/logo/flutter-lockup.png';
+  const someImageUrl = 'https://flutter.dev/assets/images/shared/brand/flutter/logo/flutter-lockup.png';
   const someRadius = 16.0;
 
   group('UI Kit tests -', () {
@@ -187,8 +185,7 @@ void main() {
           expect(find.byType(LoadableImage), findsWidgets);
         });
 
-    testWidgets(
-        'SnackBarWidget (Inherited widget) can be received from context. "Show" method is not crashed',
+    testWidgets('SnackBarWidget (Inherited widget) can be received from context. "Show" method is not crashed',
         (tester) async {
       var widgetFound = false;
       SnackBarWidget? snack;

@@ -58,7 +58,6 @@ analyzer:
     invalid_use_of_visible_for_template_member: warning
     invalid_use_of_visible_for_testing_member: warning
     invalid_visibility_annotation: warning
-    missing_js_lib_annotation: warning
     missing_required_param: warning
     missing_return: warning
     mixin_on_sealed_class: warning
